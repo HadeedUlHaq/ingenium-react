@@ -26,9 +26,7 @@ export function Navigation() {
   return (
     <header
       className={`fixed z-50 transition-all duration-500 ${
-        isScrolled
-          ? "top-4 left-4 right-4"
-          : "top-0 left-0 right-0"
+        isScrolled ? "top-4 left-4 right-4" : "top-0 left-0 right-0"
       }`}
     >
       <nav
@@ -43,7 +41,6 @@ export function Navigation() {
             isScrolled ? "h-14" : "h-20"
           }`}
         >
-          {/* Logo */}
           <Link href="/" className="flex items-center group">
             <Image
               src="/ingenium-software-logo.png"
@@ -55,7 +52,6 @@ export function Navigation() {
             />
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-12">
             {navLinks.map((link) => (
               <Link
@@ -69,7 +65,6 @@ export function Navigation() {
             ))}
           </div>
 
-          {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
             <a
               href="https://calendly.com/ingeniumsoftware"
@@ -83,7 +78,6 @@ export function Navigation() {
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2"
@@ -94,7 +88,6 @@ export function Navigation() {
         </div>
       </nav>
 
-      {/* Mobile Menu - Full Screen Overlay */}
       <div
         className={`md:hidden fixed inset-0 bg-background z-40 transition-all duration-500 ${
           isMobileMenuOpen
@@ -113,7 +106,6 @@ export function Navigation() {
         </button>
 
         <div className="flex flex-col h-full px-8 pt-28 pb-8">
-          {/* Navigation Links */}
           <div className="flex-1 flex flex-col justify-center gap-8">
             {navLinks.map((link, i) => (
               <Link
@@ -132,7 +124,6 @@ export function Navigation() {
             ))}
           </div>
 
-          {/* Bottom CTAs */}
           <div
             className={`flex gap-4 pt-8 border-t border-foreground/10 transition-all duration-500 ${
               isMobileMenuOpen

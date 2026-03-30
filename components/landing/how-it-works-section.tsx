@@ -23,14 +23,14 @@ const solutions = [
     align: "left",
     title: "Lessons learned",
     description:
-      "Apply lessons learned from previous projects to new designs — embedding real construction judgement into every review. Stop making the same mistakes twice.",
+      "Apply lessons learned from previous projects to new designs - embedding real construction judgement into every review. Stop making the same mistakes twice.",
   },
   {
     number: "IV",
     align: "right",
     title: "Compile evidence",
     description:
-      "View retrieved source documents to check findings and compile design packs — whether for Gateway 2, tender submissions, or technical workshops.",
+      "View retrieved source documents to check findings and compile design packs - whether for Gateway 2, tender submissions, or technical workshops.",
   },
 ];
 
@@ -109,7 +109,6 @@ export function HowItWorksSection() {
       className="relative py-24 lg:py-32 overflow-hidden"
       style={{ background: "linear-gradient(135deg, #001820 0%, #019DBF 100%)" }}
     >
-      {/* Diagonal lines pattern */}
       <div
         className="absolute inset-0 opacity-[0.04] pointer-events-none"
         style={{
@@ -124,7 +123,6 @@ export function HowItWorksSection() {
       />
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
-        {/* Header */}
         <div className="mb-16 lg:mb-24">
           <span className="inline-flex items-center gap-3 text-sm font-display text-white mb-6">
             <span className="w-8 h-px bg-white/30" />
@@ -141,14 +139,12 @@ export function HowItWorksSection() {
           </h2>
         </div>
 
-        {/* Staggered solution cards */}
         <div className="space-y-0">
           {solutions.map((solution, index) => (
             <SolutionCard key={solution.number} solution={solution} index={index} />
           ))}
         </div>
 
-        {/* Closing line */}
         <p
           className={`mt-16 text-xl lg:text-2xl font-display text-white transition-all duration-700 delay-400 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
@@ -160,7 +156,6 @@ export function HowItWorksSection() {
           </span>
         </p>
 
-        {/* CTA */}
         <div
           className={`mt-10 transition-all duration-700 delay-500 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"

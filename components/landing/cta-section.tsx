@@ -36,7 +36,6 @@ export function CtaSection() {
           }`}
           onMouseMove={handleMouseMove}
         >
-          {/* Spotlight effect */}
           <div
             className="absolute inset-0 opacity-10 pointer-events-none transition-opacity duration-300"
             style={{
@@ -82,7 +81,6 @@ export function CtaSection() {
             </div>
           </div>
 
-          {/* Decorative corners */}
           <div className="absolute top-0 right-0 w-32 h-32 border-b border-l border-foreground/10" />
           <div className="absolute bottom-0 left-0 w-32 h-32 border-t border-r border-foreground/10" />
         </div>

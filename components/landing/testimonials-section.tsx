@@ -12,7 +12,6 @@ export function TestimonialsSection() {
   return (
     <section className="relative py-32 lg:py-40 border-t border-foreground/10">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        {/* Section Label */}
         <div className="flex items-center gap-4 mb-16">
           <span className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
             From the field
@@ -20,7 +19,6 @@ export function TestimonialsSection() {
           <div className="flex-1 h-px bg-foreground/10" />
         </div>
 
-        {/* Main Quote */}
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
           <div className="lg:col-span-8">
             <blockquote
@@ -33,7 +31,6 @@ export function TestimonialsSection() {
               </p>
             </blockquote>
 
-            {/* Author */}
             <div
               className={`mt-12 flex items-center gap-6 transition-all duration-700 delay-200 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
@@ -49,7 +46,6 @@ export function TestimonialsSection() {
             </div>
           </div>
 
-          {/* Key Result */}
           <div className="lg:col-span-4 flex flex-col justify-center">
             <div
               className={`p-8 border border-foreground/10 transition-all duration-700 delay-300 ${

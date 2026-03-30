@@ -16,7 +16,7 @@ const examples = [
     title: "Window Height Discrepancy",
     risk: "Rework and coordination disputes.",
     description:
-      "Height variances between architect and specialist contractor drawings — such as shims not being accounted for behind fixing brackets — are identified across related documents to prevent downstream installation conflict.",
+      "Height variances between architect and specialist contractor drawings - such as shims not being accounted for behind fixing brackets - are identified across related documents to prevent downstream installation conflict.",
   },
   {
     id: "dpc-parapet",

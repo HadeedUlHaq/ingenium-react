@@ -12,7 +12,6 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-background">
-      {/* Subtle grid lines */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
         {[...Array(8)].map((_, i) => (
           <div
@@ -31,7 +30,6 @@ export function HeroSection() {
       </div>
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 py-32 lg:py-40">
-        {/* Eyebrow */}
         <div
           className={`mb-8 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
@@ -43,7 +41,6 @@ export function HeroSection() {
           </span>
         </div>
 
-        {/* Main headline */}
         <div className="mb-10">
           <h1
             className={`text-[clamp(2.5rem,8vw,7rem)] font-display font-bold leading-[1.04] tracking-tight transition-all duration-1000 ${
@@ -55,7 +52,6 @@ export function HeroSection() {
           </h1>
         </div>
 
-        {/* Description + CTAs */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-end">
           <div
             className={`transition-all duration-700 delay-200 ${
@@ -66,11 +62,10 @@ export function HeroSection() {
               Eliminate time wasted locating the right drawings, doing repetitive checks, and fixing preventable mistakes on-site.
             </p>
             <p className="text-base text-muted-foreground/80 leading-relaxed max-w-xl">
-              Ingenium reviews your design information like an experienced project team — embedding years of construction judgement into every review, reducing costly design issues, programme delays, RFIs and change orders.
+              Ingenium reviews your design information like an experienced project team - embedding years of construction judgement into every review, reducing costly design issues, programme delays, RFIs and change orders.
             </p>
           </div>
 
-          {/* CTAs */}
           <div
             className={`flex flex-col sm:flex-row items-start gap-4 transition-all duration-700 delay-300 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"

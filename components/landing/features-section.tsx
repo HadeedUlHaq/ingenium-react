@@ -11,15 +11,15 @@ const stats = [
   },
   {
     number: "02",
-    value: "10–25%",
+    value: "10-25%",
     title: "Of project costs lost to building errors annually in the UK",
-    description: "Errors that, in most cases, stem from information that was always there — just never connected.",
+    description: "Errors that, in most cases, stem from information that was always there - just never connected.",
   },
   {
     number: "03",
-    value: "30–50%",
+    value: "30-50%",
     title: "Of defects are repeat mistakes we already know how to prevent",
-    description: "The industry keeps making the same errors. Not because people aren't skilled — but because the information system fails them.",
+    description: "The industry keeps making the same errors. Not because people aren't skilled - but because the information system fails them.",
   },
 ];
 
@@ -82,7 +82,6 @@ export function FeaturesSection() {
   return (
     <section id="problem" ref={sectionRef} className="relative py-24 lg:py-32">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-        {/* Header */}
         <div className="mb-16 lg:mb-24">
           <span className="inline-flex items-center gap-3 text-sm font-display text-muted-foreground mb-6">
             <span className="w-8 h-px bg-foreground/30" />
@@ -102,11 +101,10 @@ export function FeaturesSection() {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            Teams are expected to review impossible volumes of ever-evolving information — where a small change in one drawing can quietly affect many others. The numbers tell the story.
+            Teams are expected to review impossible volumes of ever-evolving information - where a small change in one drawing can quietly affect many others. The numbers tell the story.
           </p>
         </div>
 
-        {/* Stats list */}
         <div>
           {stats.map((stat, index) => (
             <StatCard key={stat.number} stat={stat} index={index} />

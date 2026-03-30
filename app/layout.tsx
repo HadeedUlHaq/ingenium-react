@@ -1,46 +1,99 @@
-import type { Metadata } from 'next'
-import type { ReactNode } from "react"
-import { Instrument_Sans, Instrument_Serif, JetBrains_Mono } from 'next/font/google'
-import { StickyBookDemoButton } from "@/components/landing/sticky-book-demo-button"
-import './globals.css'
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import { Instrument_Sans, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { OrganizationJsonLd } from "@/components/seo/json-ld";
+import { StickyBookDemoButton } from "@/components/landing/sticky-book-demo-button";
+import { siteConfig } from "@/lib/site";
+import "./globals.css";
 
-const instrumentSans = Instrument_Sans({ 
+const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
-  variable: '--font-instrument'
+  variable: "--font-instrument",
+  display: "swap",
 });
 
-const instrumentSerif = Instrument_Serif({ 
+const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
   weight: "400",
-  variable: '--font-instrument-serif'
+  variable: "--font-instrument-serif",
+  display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({ 
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: '--font-jetbrains'
+  variable: "--font-jetbrains",
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
-  title: 'Ingenium - AI Design Manager for Construction',
-  description: 'Eliminate time wasted locating drawings, doing repetitive checks, and fixing preventable mistakes on-site. Ingenium reviews your design information like an experienced project team.',
-  icons: {
-    icon: '/cropped-site-icon.png',
-    shortcut: '/cropped-site-icon.png',
-    apple: '/cropped-site-icon.png',
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: "Construction Design Review Software | Ingenium",
+    template: `%s | ${siteConfig.legalName}`,
   },
-}
+  description: siteConfig.description,
+  applicationName: siteConfig.legalName,
+  referrer: "origin-when-cross-origin",
+  keywords: [...siteConfig.homepageKeywords],
+  authors: [{ name: siteConfig.legalName }],
+  creator: siteConfig.legalName,
+  publisher: siteConfig.legalName,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: "/",
+    title: "Construction Design Review Software | Ingenium",
+    description: siteConfig.description,
+    siteName: siteConfig.legalName,
+    locale: siteConfig.locale,
+    images: [
+      {
+        url: siteConfig.logoPath,
+        alt: `${siteConfig.legalName} logo`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Construction Design Review Software | Ingenium",
+    description: siteConfig.description,
+    images: [siteConfig.logoPath],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  icons: {
+    icon: "/cropped-site-icon.png",
+    shortcut: "/cropped-site-icon.png",
+    apple: "/cropped-site-icon.png",
+  },
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: ReactNode
+  children: ReactNode;
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body className={`${instrumentSans.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+      <body
+        className={`${instrumentSans.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} font-sans antialiased`}
+      >
+        <OrganizationJsonLd />
         {children}
         <StickyBookDemoButton />
       </body>
     </html>
-  )
+  );
 }

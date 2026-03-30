@@ -57,7 +57,6 @@ export function AboutSection() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-          {/* Team photos */}
           <div
             className={`flex gap-6 transition-all duration-700 delay-200 ${
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
@@ -65,13 +64,11 @@ export function AboutSection() {
           >
             {team.map((member, index) => (
               <div key={index} className="flex-1 flex flex-col items-center gap-4">
-                {/* Photo placeholder */}
                 <div className="w-full aspect-[3/4] bg-foreground/5 border border-foreground/10 flex items-center justify-center group hover:bg-foreground/10 transition-colors duration-300">
                   <span className="font-display text-4xl text-foreground/20 group-hover:text-foreground/40 transition-colors duration-300">
                     {member.initial}
                   </span>
                 </div>
-                {/* Role + LinkedIn */}
                 <div className="text-center">
                   <p className="text-base font-medium text-foreground">{member.name}</p>
                   <p className="text-sm text-muted-foreground mb-2">{member.role}</p>
@@ -89,7 +86,6 @@ export function AboutSection() {
             ))}
           </div>
 
-          {/* Text content */}
           <div
             className={`transition-all duration-700 delay-300 ${
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
@@ -99,7 +95,7 @@ export function AboutSection() {
               Construction Delivery + AI Engineering.
             </p>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Two worlds that rarely overlap — building the intelligence layer construction has been missing.
+              Two worlds that rarely overlap - building the intelligence layer construction has been missing.
             </p>
           </div>
         </div>
