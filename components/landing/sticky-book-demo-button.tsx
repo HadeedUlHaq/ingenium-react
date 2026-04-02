@@ -7,7 +7,6 @@ export function StickyBookDemoButton() {
   const pathname = usePathname();
 
   if (
-    pathname === "/" ||
     pathname === "/contact" ||
     pathname.startsWith("/contact/")
   ) {

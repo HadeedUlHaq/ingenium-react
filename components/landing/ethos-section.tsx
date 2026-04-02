@@ -20,36 +20,36 @@ export function EthosSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 lg:py-32 overflow-hidden"
+      className="site-section overflow-hidden border-t border-foreground/12 bg-foreground/[0.026]"
     >
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div className="site-shell">
         <div
-          className={`transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          className={`site-intro max-w-4xl transition-all duration-700 ${
+            isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
           }`}
         >
-          <span className="inline-flex items-center gap-3 text-sm font-display text-muted-foreground mb-6">
-            <span className="w-8 h-px bg-foreground/30" />
+          <span className="site-kicker">
             Our Ethos
           </span>
-          <h2 className="text-4xl lg:text-6xl font-display tracking-tight mb-12">
-            <span className="text-gradient-heading font-bold">Restore clarity.</span>
-            <br />
-            <span className="text-muted-foreground font-normal">Keep building simple.</span>
+          <h2 className="max-w-4xl text-3xl font-display leading-[1.02] tracking-tight lg:text-5xl">
+            <span className="font-semibold text-gradient-heading">Keep building simple.</span>
           </h2>
-        </div>
-
-        <div
-          className={`max-w-4xl transition-all duration-700 delay-200 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          <p className="text-xl lg:text-2xl text-muted-foreground leading-relaxed mb-8">
-            We have deep respect for the people who get the job done. Construction takes intelligence, creativity, and grit. But too often, that talent is buried under a lack of clear and practical design information.
-          </p>
-          <p className="text-xl lg:text-2xl font-display text-gradient-heading leading-relaxed">
-            Ingenium exists to fix that. To restore clarity. To keep building simple.
-          </p>
+          <div
+            className={`site-copy max-w-4xl space-y-5 text-base leading-relaxed text-muted-foreground transition-all duration-700 delay-150 lg:text-lg ${
+              isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+            }`}
+          >
+            <p>
+              We have deep respect for the people who get the job done.
+              Construction takes intelligence, creativity, and grit. But too
+              often, that talent is buried under a lack of clear and practical
+              design information.
+            </p>
+            <p className="font-medium text-foreground">
+              Ingenium was built to change that - bringing clarity to design
+              information so teams can focus on actually getting the job built.
+            </p>
+          </div>
         </div>
       </div>
     </section>

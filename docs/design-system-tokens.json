@@ -1,0 +1,333 @@
+{
+  "meta": {
+    "generatedAt": "2026-04-02",
+    "framework": "Next.js 16 App Router",
+    "reactVersion": "19.2.0",
+    "tailwindVersion": "4.1.9",
+    "primarySources": [
+      "app/globals.css",
+      "app/layout.tsx",
+      "app/page.tsx",
+      "app/about/page.tsx",
+      "app/contact/page.tsx",
+      "app/faq/page.tsx",
+      "app/solution/page.tsx",
+      "components/landing/*",
+      "components/ui/alert.tsx",
+      "components/ui/button.tsx",
+      "components/ui/dotted-map.tsx",
+      "components/ui/form.tsx",
+      "components/ui/input.tsx",
+      "components/ui/spinner.tsx",
+      "components/ui/textarea.tsx",
+      "lib/site.ts",
+      "lib/seo.ts"
+    ]
+  },
+  "colors": {
+    "themeVariables": {
+      "--background": {
+        "value": "oklch(0.985 0.002 90)",
+        "role": "site background"
+      },
+      "--foreground": {
+        "value": "oklch(0.12 0.01 60)",
+        "role": "primary ink"
+      },
+      "--card": {
+        "value": "oklch(1 0 0)",
+        "role": "base card surface"
+      },
+      "--muted": {
+        "value": "oklch(0.94 0.005 90)",
+        "role": "muted surface"
+      },
+      "--muted-foreground": {
+        "value": "oklch(0.45 0.02 60)",
+        "role": "secondary copy"
+      },
+      "--border": {
+        "value": "oklch(0.88 0.01 90)",
+        "role": "neutral border token"
+      },
+      "--input": {
+        "value": "oklch(0.92 0.01 90)",
+        "role": "input token"
+      },
+      "--destructive": {
+        "value": "oklch(0.577 0.245 27.325)",
+        "role": "error and destructive state"
+      }
+    },
+    "brandPalette": {
+      "ink": "#001820",
+      "tonalDark": "#163843",
+      "blue": "#019DBF",
+      "green": "#01D480",
+      "teal": "#48DEDC",
+      "white": "#FFFFFF",
+      "testimonialSurface": "#071820",
+      "testimonialBorder": "#0f2d37"
+    },
+    "activeGradients": {
+      "sectionHeading": "linear-gradient(180deg, #001820 0%, #163843 100%)",
+      "heroHeading": "linear-gradient(135deg, #001820 0%, #019DBF 100%)",
+      "primaryButton": "linear-gradient(135deg, #01D480 0%, #48DEDC 100%)",
+      "primaryButtonHover": "linear-gradient(135deg, #001820 0%, #019DBF 100%)",
+      "footerTint": "linear-gradient(135deg, rgba(1,212,128,0.025) 0%, rgba(72,222,220,0.035) 100%)",
+      "ctaShellOverlay": "radial-gradient(circle_at_top_right,rgba(72,222,220,0.18),transparent_28%)"
+    },
+    "surfacePatterns": {
+      "sitePanel": "bg-background/75 backdrop-blur-sm",
+      "tintedSections": [
+        "bg-foreground/[0.022]",
+        "bg-foreground/[0.026]",
+        "bg-foreground/[0.028]",
+        "bg-foreground/[0.03]"
+      ],
+      "footerDots": [
+        "rgba(1,212,128,0.18)",
+        "rgba(72,222,220,0.18)"
+      ]
+    }
+  },
+  "typography": {
+    "fontFamilies": {
+      "sans": "var(--font-instrument), 'Instrument Sans', system-ui, sans-serif",
+      "display": "var(--font-instrument), 'Instrument Sans', system-ui, sans-serif",
+      "mono": "var(--font-jetbrains), 'JetBrains Mono', monospace"
+    },
+    "activeUtilities": {
+      "siteKicker": {
+        "classes": "text-[0.72rem] font-semibold uppercase text-foreground/58",
+        "letterSpacing": "0.16em"
+      },
+      "siteLabel": {
+        "classes": "text-[0.72rem] font-semibold uppercase text-foreground/58",
+        "letterSpacing": "0.16em"
+      },
+      "sectionHeading": {
+        "classes": "text-3xl font-display leading-[1.02] tracking-tight lg:text-5xl"
+      },
+      "sectionHeadingPrimaryLine": {
+        "classes": "font-semibold text-gradient-heading"
+      },
+      "sectionHeadingSecondaryLine": {
+        "classes": "block font-medium text-muted-foreground"
+      },
+      "heroTitle": {
+        "classes": "text-[clamp(3.35rem,6.2vw,5.8rem)] font-display font-semibold leading-[1.02] tracking-tight"
+      },
+      "heroSubtitle": {
+        "classes": "text-[clamp(1.3rem,2.2vw,1.95rem)] font-medium leading-[1.12] tracking-tight text-foreground/70"
+      },
+      "bodyLarge": {
+        "classes": "text-base leading-relaxed lg:text-lg"
+      },
+      "cardTitle": {
+        "classes": "text-xl font-medium tracking-tight lg:text-2xl"
+      },
+      "problemStat": {
+        "classes": "text-2xl font-normal leading-[1.05] tracking-tight lg:text-[1.95rem]"
+      },
+      "testimonialQuote": {
+        "classes": "text-[1.65rem] font-display leading-[1.22] lg:text-[1.85rem]"
+      },
+      "testimonialMetric": {
+        "classes": "text-[2.25rem] font-display leading-[1.08] lg:text-[2.65rem]"
+      },
+      "stickyTab": {
+        "classes": "text-[0.65rem] font-semibold uppercase tracking-[0.22em]"
+      }
+    },
+    "activeMonoUsage": {
+      "usedOnActiveRoutes": false,
+      "dormantFiles": [
+        "components/landing/developers-section.tsx",
+        "components/landing/integrations-section.tsx",
+        "components/landing/metrics-section.tsx",
+        "components/landing/pricing-section.tsx"
+      ]
+    }
+  },
+  "spacing": {
+    "containers": {
+      "siteShell": "mx-auto max-w-[1400px] px-6 lg:px-12",
+      "contactShellMaxWidth": "max-w-6xl",
+      "footerBrandMaxWidth": "max-w-sm",
+      "standardContentMaxWidth": "max-w-4xl"
+    },
+    "sectionRhythm": {
+      "siteSection": "py-16 lg:py-20",
+      "sitePageOffset": "pt-16 lg:pt-20",
+      "siteIntro": "mb-10 lg:mb-14",
+      "siteCopy": "mt-5",
+      "siteFollowup": "mt-6",
+      "siteGrid": "gap-5",
+      "siteOutro": "mt-8"
+    },
+    "activeExceptions": {
+      "heroInnerPadding": "py-14 lg:py-[4.5rem]",
+      "featuresSectionPadding": "pt-12 pb-12 lg:pt-14 lg:pb-14",
+      "testimonialsTopPadding": "pt-12 lg:pt-14",
+      "footerUpperPadding": "py-14 lg:py-16",
+      "footerLowerPadding": "py-5",
+      "contactPanelPadding": "px-5 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-8 xl:px-10 xl:py-10",
+      "cardPadding": "px-6 py-6 lg:px-7 lg:py-7"
+    }
+  },
+  "radii": {
+    "themeBase": "0.25rem",
+    "active": {
+      "pill": "rounded-full",
+      "sitePanel": "rounded-[1.75rem]",
+      "marketingShell": "rounded-[2rem]",
+      "innerPanel": "rounded-[1.5rem]",
+      "navScrolled": "rounded-2xl",
+      "bookDemoTab": "rounded-l-2xl rounded-r-none"
+    }
+  },
+  "shadows": {
+    "active": {
+      "navScrolled": "shadow-lg",
+      "bookDemoTab": "shadow-lg",
+      "marketingButtons": "shadow-none",
+      "contentCards": "no explicit shadow"
+    }
+  },
+  "borders": {
+    "activePatterns": {
+      "sectionDivider": "border-t border-foreground/12",
+      "footerDivider": "border-t border-foreground/10",
+      "sitePanel": "border border-foreground/10",
+      "secondaryPill": "border border-foreground/20",
+      "formFields": "border-foreground/12",
+      "testimonialMetricCard": "border border-[#0f2d37]"
+    }
+  },
+  "breakpoints": {
+    "tailwindDefaults": {
+      "sm": "640px",
+      "md": "768px",
+      "lg": "1024px",
+      "xl": "1280px",
+      "2xl": "1536px"
+    },
+    "usedPrefixes": [
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
+    "activePatterns": {
+      "navigationDesktop": "md",
+      "featuresGrid": "lg",
+      "solutionGrid": [
+        "md",
+        "xl"
+      ],
+      "securityGrid": "md",
+      "testimonialsSplit": "lg",
+      "aboutGrid": "md",
+      "contactTwoColumn": "xl",
+      "contactFieldGrid": "md",
+      "footerGrid": "lg"
+    }
+  },
+  "transitions": {
+    "durationsMs": [
+      300,
+      500,
+      700,
+      1000
+    ],
+    "activePatterns": {
+      "buttonGradient": "transition: all 0.3s ease",
+      "navScroll": "transition-all duration-500",
+      "sectionReveal": "transition-all duration-700 or duration-1000 with translate-y and opacity",
+      "collapsible": "transition-all duration-500 ease-in-out",
+      "stickyTab": "transition-[opacity,transform,background] duration-300",
+      "mobileNavStagger": "index * 70ms",
+      "cardHoverShift": "transition-transform duration-300"
+    }
+  },
+  "componentVariants": {
+    "pageShell": {
+      "classes": "relative min-h-screen overflow-x-hidden noise-overlay"
+    },
+    "navigationShell": {
+      "default": "max-w-[1400px] bg-transparent",
+      "scrolled": "max-w-[1200px] rounded-2xl border border-foreground/10 bg-background/82 shadow-lg backdrop-blur-xl"
+    },
+    "sectionIntro": {
+      "wrapper": "site-intro",
+      "kicker": "site-kicker",
+      "heading": "text-3xl font-display leading-[1.02] tracking-tight lg:text-5xl"
+    },
+    "gradientButton": {
+      "base": "btn-gradient inline-flex items-center justify-center gap-2 rounded-full font-semibold",
+      "sizes": {
+        "sectionCta": "h-12 px-7 text-sm",
+        "faqCta": "h-12 px-8 text-sm",
+        "navDefault": "h-10 px-6 text-sm",
+        "navScrolled": "h-9 px-4 text-xs"
+      }
+    },
+    "secondaryPill": {
+      "base": "inline-flex h-12 items-center justify-center rounded-full border border-foreground/20 px-7 text-sm font-medium transition-colors hover:bg-foreground/5"
+    },
+    "sitePanel": {
+      "classes": "rounded-[1.75rem] border border-foreground/10 bg-background/75 backdrop-blur-sm"
+    },
+    "collapsibleListItem": {
+      "row": "border-b border-foreground/10",
+      "trigger": "group flex w-full items-center justify-between gap-6 py-8 text-left",
+      "title": "text-xl font-medium tracking-tight transition-all duration-300 group-hover:text-gradient-heading lg:text-2xl",
+      "content": "overflow-hidden transition-all duration-500 ease-in-out"
+    },
+    "contactShell": {
+      "outer": "relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-foreground/12",
+      "grid": "grid gap-8 xl:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)]",
+      "formPanel": "rounded-[1.5rem] border border-foreground/10 bg-background/75"
+    },
+    "contactField": {
+      "input": "h-12 w-full rounded-2xl border-foreground/12 bg-background/80 px-4 text-sm leading-6 sm:text-[0.95rem]",
+      "textarea": "min-h-[150px] w-full rounded-2xl border-foreground/12 bg-background/80 px-4 py-3 text-sm leading-6 sm:min-h-[170px] sm:text-[0.95rem]"
+    },
+    "footerBackground": {
+      "base": "bg-white",
+      "tint": "linear-gradient(135deg, rgba(1,212,128,0.025) 0%, rgba(72,222,220,0.035) 100%)",
+      "dottedMap": "two masked DottedMap layers aligned to the right"
+    },
+    "stickyBookDemoTab": {
+      "classes": "fixed right-0 bottom-8 z-30 rounded-l-2xl rounded-r-none bg-[linear-gradient(135deg,#01D480_0%,#48DEDC_100%)] px-2 py-4 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-white shadow-lg"
+    }
+  },
+  "dormantInventory": {
+    "landingComponents": [
+      "components/landing/developers-section.tsx",
+      "components/landing/integrations-section.tsx",
+      "components/landing/metrics-section.tsx",
+      "components/landing/pricing-section.tsx"
+    ],
+    "globalUtilities": [
+      "text-stroke",
+      "marquee",
+      "marquee-reverse",
+      "line-reveal",
+      "hover-lift",
+      "letter-spin",
+      "animate-char-in",
+      "border-sketch"
+    ],
+    "duplicateHooks": [
+      "hooks/use-mobile.ts",
+      "components/ui/use-mobile.tsx",
+      "hooks/use-toast.ts",
+      "components/ui/use-toast.ts"
+    ],
+    "deadContentExports": [
+      "lib/site.ts -> pageKeywordMap"
+    ]
+  }
+}

@@ -2,87 +2,74 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { siteConfig } from "@/lib/site";
 
 export function CtaSection() {
   const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true);
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
       },
       { threshold: 0.2 }
     );
-    if (sectionRef.current) observer.observe(sectionRef.current);
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
     return () => observer.disconnect();
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMousePosition({
-      x: ((e.clientX - rect.left) / rect.width) * 100,
-      y: ((e.clientY - rect.top) / rect.height) * 100,
-    });
-  };
-
   return (
-    <section id="book-demo" ref={sectionRef} className="relative py-24 lg:py-32 overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+    <section id="book-demo" ref={sectionRef} className="site-section overflow-hidden border-t border-foreground/12 bg-[linear-gradient(180deg,rgba(0,24,32,0.014),rgba(0,24,32,0)_46%)]">
+      <div className="site-shell">
         <div
-          className={`relative border border-foreground transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          className={`relative overflow-hidden rounded-[2rem] border border-foreground/12 bg-[linear-gradient(145deg,rgba(255,255,255,0.92),rgba(235,244,245,0.9))] transition-all duration-1000 ${
+            isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
           }`}
-          onMouseMove={handleMouseMove}
         >
-          <div
-            className="absolute inset-0 opacity-10 pointer-events-none transition-opacity duration-300"
-            style={{
-              background: `radial-gradient(600px circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(0,0,0,0.15), transparent 40%)`,
-            }}
-          />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(72,222,220,0.18),transparent_28%),linear-gradient(135deg,transparent_0%,transparent_58%,rgba(0,24,32,0.04)_58.2%,transparent_58.8%)]" />
 
-          <div className="relative z-10 px-8 lg:px-16 py-16 lg:py-24">
-            <div className="flex flex-col items-start gap-12">
-              <div className="flex-1">
-                <h2 className="text-4xl lg:text-7xl font-display tracking-tight mb-8 leading-[0.95]">
-                  <span className="text-gradient-heading font-bold">Let&apos;s fix the design problem.</span>
-                  <br />
-                  <span className="text-muted-foreground font-normal">Together.</span>
-                </h2>
+          <div className="relative z-10 px-6 py-8 lg:px-10 lg:py-10">
+            <div className="max-w-3xl">
+              <h2 className="max-w-4xl text-3xl font-display leading-[1.02] tracking-tight lg:text-5xl">
+                <span className="font-semibold text-gradient-heading">
+                  Let&apos;s fix the design problem.
+                </span>
+                <span className="block font-medium text-muted-foreground">
+                  Together.
+                </span>
+              </h2>
 
-                <p className="text-xl text-muted-foreground mb-12 leading-relaxed max-w-xl">
-                  Now onboarding live project partners. If improving design quality is a focus for your team this year, we&apos;d love to chat.
-                </p>
+              <p className="site-copy max-w-2xl text-base leading-relaxed text-muted-foreground lg:text-lg">
+                Now onboarding live project partners. If improving design
+                quality is a focus for your team this year, let&apos;s look at
+                where the review effort is getting stuck.
+              </p>
 
-                <div className="flex flex-col sm:flex-row items-start gap-4">
-                  <a
-                    href="https://calendly.com/ingeniumsoftware"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-gradient inline-flex items-center justify-center gap-2 px-8 h-14 text-base font-semibold rounded-full group"
-                  >
-                    Book a Demo
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </a>
-                  <a
-                    href="mailto:hello@ingeniumsoftware.ai"
-                    className="inline-flex items-center justify-center px-8 h-14 text-base font-medium rounded-full border border-foreground/20 hover:bg-foreground/5 transition-colors"
-                  >
-                    Contact Us
-                  </a>
-                </div>
-
-                <p className="text-sm text-muted-foreground mt-8 font-display">
-                  For all other inquiries, please contact us via email or use the form.
-                </p>
+              <div className="mt-7 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+                <Link
+                  href="/contact"
+                  className="btn-gradient inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold"
+                >
+                  Book a Demo
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="inline-flex h-12 items-center justify-center rounded-full border border-foreground/20 px-7 text-sm font-medium transition-colors hover:bg-foreground/5"
+                >
+                  Contact Us
+                </a>
               </div>
             </div>
           </div>
-
-          <div className="absolute top-0 right-0 w-32 h-32 border-b border-l border-foreground/10" />
-          <div className="absolute bottom-0 left-0 w-32 h-32 border-t border-r border-foreground/10" />
         </div>
       </div>
     </section>

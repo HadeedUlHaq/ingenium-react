@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 type CollapsibleListItemProps = {
   index: number;
   title: string;
-  description: string;
+  description: ReactNode;
   meta?: ReactNode;
   initiallyOpen?: boolean;
   animateIn?: boolean;
@@ -58,11 +58,11 @@ export function CollapsibleListItem({
         aria-expanded={isOpen}
       >
         <div className="flex items-start gap-6">
-          <span className="mt-1 shrink-0 font-mono text-sm text-muted-foreground">
+          <span className="mt-1 shrink-0 text-sm font-medium text-muted-foreground">
             {String(index + 1).padStart(2, "0")}
           </span>
           <div>
-            <h3 className="text-xl font-display transition-all duration-300 group-hover:text-gradient-heading lg:text-2xl">
+            <h3 className="text-xl font-medium tracking-tight transition-all duration-300 group-hover:text-gradient-heading lg:text-2xl">
               {title}
             </h3>
             {meta ? <div className="mt-1 text-sm text-muted-foreground">{meta}</div> : null}
@@ -79,12 +79,12 @@ export function CollapsibleListItem({
       <div
         className={cn(
           "overflow-hidden transition-all duration-500 ease-in-out",
-          isOpen ? "max-h-[28rem] pb-8 opacity-100" : "max-h-0 pb-0 opacity-0"
+          isOpen ? "max-h-[40rem] pb-8 opacity-100" : "max-h-0 pb-0 opacity-0"
         )}
       >
-        <p className="pl-12 text-lg leading-relaxed text-muted-foreground">
+        <div className="pl-12 text-lg leading-relaxed text-muted-foreground">
           {description}
-        </p>
+        </div>
       </div>
     </div>
   );

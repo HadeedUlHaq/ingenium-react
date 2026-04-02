@@ -3,6 +3,7 @@ import { CtaSection } from "@/components/landing/cta-section";
 import { EthosSection } from "@/components/landing/ethos-section";
 import { FooterSection } from "@/components/landing/footer-section";
 import { Navigation } from "@/components/landing/navigation";
+import { VisionSection } from "@/components/landing/vision-section";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
@@ -21,8 +22,9 @@ export default function AboutPage() {
   return (
     <main className="relative min-h-screen overflow-x-hidden noise-overlay">
       <Navigation />
-      <div className="pt-20">
+      <div className="site-page-offset">
         <AboutSection />
+        <VisionSection />
         <EthosSection />
         <CtaSection />
       </div>

@@ -40,7 +40,7 @@
 @theme inline {
   --font-sans: var(--font-instrument), 'Instrument Sans', system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), 'JetBrains Mono', monospace;
-  --font-display: var(--font-instrument-serif), 'Instrument Serif', Georgia, serif;
+  --font-display: var(--font-instrument), 'Instrument Sans', system-ui, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -83,6 +83,9 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    scroll-padding-top: 6rem;
+  }
   body {
     @apply bg-background text-foreground;
   }
@@ -93,9 +96,64 @@
   .font-display {
     font-family: var(--font-display);
   }
+
+  .site-shell {
+    @apply mx-auto max-w-[1400px] px-6 lg:px-12;
+  }
+
+  .site-section {
+    @apply relative py-16 lg:py-20;
+  }
+
+  .site-page-offset {
+    @apply pt-16 lg:pt-20;
+  }
+
+  .site-intro {
+    @apply mb-10 lg:mb-14;
+  }
+
+  .site-copy {
+    @apply mt-5;
+  }
+
+  .site-followup {
+    @apply mt-6;
+  }
+
+  .site-grid {
+    @apply gap-5;
+  }
+
+  .site-outro {
+    @apply mt-8;
+  }
+
+  .site-kicker {
+    @apply mb-5 inline-flex items-center gap-3 text-[0.72rem] font-semibold uppercase text-foreground/58;
+    letter-spacing: 0.16em;
+  }
+
+  .site-label {
+    @apply text-[0.72rem] font-semibold uppercase text-foreground/58;
+    letter-spacing: 0.16em;
+  }
+
+  .site-panel {
+    @apply rounded-[1.75rem] border border-foreground/10 bg-background/75 backdrop-blur-sm;
+  }
   
   /* Ingenium brand gradients */
   .text-gradient-heading {
+    color: #001820;
+    background: linear-gradient(180deg, #001820 0%, #163843 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-hero {
+    color: #001820;
     background: linear-gradient(135deg, #001820 0%, #019DBF 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

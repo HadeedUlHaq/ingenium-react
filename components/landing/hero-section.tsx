@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,81 +12,69 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-background">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
-        {[...Array(8)].map((_, i) => (
+    <section className="site-page-offset relative flex min-h-[76vh] items-center overflow-hidden bg-background">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-30">
+        {[...Array(8)].map((_, index) => (
           <div
-            key={`h-${i}`}
+            key={`hero-h-${index}`}
             className="absolute h-px bg-foreground/10"
-            style={{ top: `${12.5 * (i + 1)}%`, left: 0, right: 0 }}
+            style={{ top: `${12.5 * (index + 1)}%`, left: 0, right: 0 }}
           />
         ))}
-        {[...Array(12)].map((_, i) => (
+        {[...Array(12)].map((_, index) => (
           <div
-            key={`v-${i}`}
+            key={`hero-v-${index}`}
             className="absolute w-px bg-foreground/10"
-            style={{ left: `${8.33 * (i + 1)}%`, top: 0, bottom: 0 }}
+            style={{ left: `${8.33 * (index + 1)}%`, top: 0, bottom: 0 }}
           />
         ))}
       </div>
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 py-32 lg:py-40">
-        <div
-          className={`mb-8 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
-        >
-          <span className="inline-flex items-center gap-3 text-sm font-display text-muted-foreground">
-            <span className="w-8 h-px bg-foreground/30" />
-            Keep building simple.
-          </span>
-        </div>
-
-        <div className="mb-10">
+      <div className="site-shell relative z-10 w-full py-14 lg:py-[4.5rem]">
+        <div className="site-intro mb-0 max-w-5xl text-left">
           <h1
-            className={`text-[clamp(2.5rem,8vw,7rem)] font-display font-bold leading-[1.04] tracking-tight transition-all duration-1000 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            className={`block max-w-5xl text-[clamp(3.35rem,6.2vw,5.8rem)] font-display font-semibold leading-[1.02] tracking-tight transition-all duration-1000 ${
+              isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
             }`}
           >
-            <span className="block pb-[0.08em] text-gradient-heading">Your AI Design Manager</span>
-            <span className="block pb-[0.08em] text-gradient-heading">for Construction</span>
+            <span className="block pb-[0.12em] text-gradient-hero">
+              Keep building simple.
+            </span>
           </h1>
-        </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-end">
-          <div
-            className={`transition-all duration-700 delay-200 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          <p
+            className={`mt-4 max-w-4xl text-[clamp(1.3rem,2.2vw,1.95rem)] font-medium leading-[1.12] tracking-tight text-foreground/70 transition-all duration-700 lg:whitespace-nowrap ${
+              isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
             }`}
           >
-            <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-xl mb-3">
-              Eliminate time wasted locating the right drawings, doing repetitive checks, and fixing preventable mistakes on-site.
-            </p>
-            <p className="text-base text-muted-foreground/80 leading-relaxed max-w-xl">
-              Ingenium reviews your design information like an experienced project team - embedding years of construction judgement into every review, reducing costly design issues, programme delays, RFIs and change orders.
-            </p>
-          </div>
+            AI Design Review for Construction Teams
+          </p>
 
           <div
-            className={`flex flex-col sm:flex-row items-start gap-4 transition-all duration-700 delay-300 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            className={`mt-7 max-w-5xl transition-all duration-700 delay-200 ${
+              isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
             }`}
           >
-            <a
-              href="https://calendly.com/ingeniumsoftware"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-gradient inline-flex items-center justify-center gap-2 px-8 h-14 text-base font-semibold rounded-full group"
-            >
-              Book a Demo
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </a>
-            <a
-              href="mailto:hello@ingeniumsoftware.ai"
-              className="inline-flex items-center justify-center px-8 h-14 text-base font-medium rounded-full border border-foreground/20 hover:bg-foreground/5 transition-colors"
-            >
-              Contact Us
-            </a>
+            <p className="text-lg leading-relaxed text-muted-foreground lg:whitespace-nowrap lg:text-[1.28rem]">
+              Free your teams from wasted time searching drawings and fixing
+              costly site mistakes.
+            </p>
+            <p className="site-copy max-w-3xl text-base leading-relaxed text-muted-foreground lg:text-lg">
+              Ingenium reviews your design information like an experienced
+              project team - identifying clashes, compliance gaps and
+              buildability risks early to reduce RFIs, change orders and
+              construction risk.
+            </p>
+
+            <div className="mt-9">
+              <Link
+                href="/contact"
+                className="btn-gradient inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold"
+              >
+                Contact Us
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

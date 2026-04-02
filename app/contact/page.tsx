@@ -6,7 +6,7 @@ import { createMetadata } from "@/lib/seo";
 export const metadata = createMetadata({
   title: "Book a Construction Design Review Demo",
   description:
-    "Book a demo with Ingenium to see AI construction design review software in action and discuss your current design coordination workflow.",
+    "See what to expect from an Ingenium demo and share your current design workflow, delivery bottlenecks, and review priorities.",
   path: "/contact",
   keywords: [
     "book construction design review demo",
@@ -19,7 +19,7 @@ export default function ContactPage() {
   return (
     <main className="relative min-h-screen overflow-x-hidden noise-overlay">
       <Navigation />
-      <div className="pt-20">
+      <div className="site-page-offset">
         <ContactSection />
       </div>
       <FooterSection />

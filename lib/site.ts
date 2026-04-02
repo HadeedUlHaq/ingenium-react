@@ -4,7 +4,6 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://ingeniumsoftware.ai",
   locale: "en_GB",
   email: "hello@ingeniumsoftware.ai",
-  calendlyUrl: "https://calendly.com/ingeniumsoftware",
   logoPath: "/ingenium-software-logo.png",
   description:
     "Ingenium is AI construction design review software that helps contractors, consultants, and developers review drawings faster, reduce RFIs, track revisions, and catch design coordination issues before they reach site.",
@@ -18,6 +17,27 @@ export const siteConfig = {
     "design coordination software for contractors",
     "drawing revision tracking software",
     "construction document review AI",
+  ],
+} as const;
+
+export const primaryNavLinks = [
+  { name: "About Us", href: "/about" },
+  { name: "FAQ's", href: "/faq" },
+] as const;
+
+export const footerLinkGroups = {
+  Product: [
+    { name: "Problem", href: "/#problem" },
+    { name: "Solution", href: "/#solution" },
+    { name: "Security", href: "/#security" },
+  ],
+  Company: [
+    { name: "About Us", href: "/about" },
+    { name: "Book a Demo", href: "/contact" },
+  ],
+  Resources: [
+    { name: "FAQ's", href: "/faq" },
+    { name: "Contact", href: "/contact" },
   ],
 } as const;
 
@@ -35,7 +55,7 @@ export const faqItems = [
   {
     question: "What training and support do you provide?",
     answer:
-      "Ingenium is designed to be intuitive, but we take a hands-on approach to onboarding. Founders lead initial setup and training, followed by ongoing engagement sessions to ensure maximum value. We provide support both in person and remotely, with rapid response to technical queries.",
+      "Ingenium is designed to be intuitive, with hands-on onboarding and ongoing engagement sessions to ensure maximum value. We provide support both in person and remotely, with rapid response to technical queries.",
   },
   {
     question: "Can other disciplines such as Operations or Commercial benefit?",
@@ -57,16 +77,6 @@ export const pageKeywordMap = [
       "AI construction design review software",
       "AI design coordination software",
       "construction drawing review software",
-    ],
-    intent: "Commercial",
-  },
-  {
-    page: "/solution",
-    primaryKeyword: "AI design coordination software",
-    secondaryKeywords: [
-      "construction drawing review workflow",
-      "drawing revision tracking software",
-      "design review automation for construction",
     ],
     intent: "Commercial",
   },

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Instrument_Sans, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import { OrganizationJsonLd } from "@/components/seo/json-ld";
 import { StickyBookDemoButton } from "@/components/landing/sticky-book-demo-button";
 import { siteConfig } from "@/lib/site";
@@ -9,13 +9,6 @@ import "./globals.css";
 const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
   variable: "--font-instrument",
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-instrument-serif",
   display: "swap",
 });
 
@@ -88,7 +81,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body
-        className={`${instrumentSans.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} font-sans antialiased`}
+        className={`${instrumentSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >
         <OrganizationJsonLd />
         {children}
