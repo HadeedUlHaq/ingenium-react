@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { primaryNavLinks } from "@/lib/site";
+import { primaryNavLinks, siteConfig } from "@/lib/site";
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -39,7 +39,7 @@ export function Navigation() {
         >
           <Link href="/" className="flex items-center">
             <Image
-              src="/ingenium-software-logo.png"
+              src={siteConfig.logoPath}
               alt="Ingenium Software"
               width={195}
               height={40}

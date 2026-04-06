@@ -34,7 +34,7 @@ export function FooterSection() {
           <div className="max-w-sm">
             <Link href="/" className="inline-flex items-center">
               <Image
-                src="/ingenium-software-logo.png"
+                src={siteConfig.logoPath}
                 alt="Ingenium Software"
                 width={195}
                 height={40}
