@@ -27,6 +27,14 @@ yarn-error.log*
 # vercel
 .vercel
 
+# claude code local settings
+.claude/settings.local.json
+
+# impeccable ephemeral session state
+.impeccable/questions/
+.impeccable/review/
+.impeccable/mocks/
+
 # editor files
 .idea/
 .vscode/
