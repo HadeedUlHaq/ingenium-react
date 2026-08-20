@@ -1,31 +1,25 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { RotateCcw } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Lock, RotateCcw } from "lucide-react";
 import { useOrders } from "@/hooks/use-orders";
 import { useClockTick } from "@/hooks/use-clock-tick";
-import { markReady, resetEvent } from "@/lib/orders";
-import { PasscodeGate } from "@/components/gate/passcode-gate";
+import { markReady } from "@/lib/orders";
 import { OrderCard } from "@/components/ticket/order-card";
+import { ConnectionBadge } from "@/components/ticket/connection-badge";
+import { ResetDialog } from "@/components/gate/reset-dialog";
 import { cn } from "@/lib/utils";
 
 type Tab = "active" | "ready";
 
 export default function KitchenDisplayPage() {
-  return (
-    <PasscodeGate label="Kitchen Display">
-      <KitchenDisplayScreen />
-    </PasscodeGate>
-  );
-}
-
-function KitchenDisplayScreen() {
-  const { orders, loading, error, refetch } = useOrders();
+  const router = useRouter();
+  const { orders, loading, error, connected, refetch } = useOrders();
   const now = useClockTick();
   const [tab, setTab] = useState<Tab>("active");
   const [markingId, setMarkingId] = useState<string | null>(null);
-  const [confirmReset, setConfirmReset] = useState(false);
-  const [resetting, setResetting] = useState(false);
+  const [resetOpen, setResetOpen] = useState(false);
 
   const active = useMemo(
     () => orders.filter((o) => o.status === "COOKING"),
@@ -46,26 +40,16 @@ function KitchenDisplayScreen() {
     }
   }
 
-  async function handleReset() {
-    if (!confirmReset) {
-      setConfirmReset(true);
-      return;
-    }
-    setResetting(true);
-    try {
-      await resetEvent();
-      await refetch();
-    } finally {
-      setResetting(false);
-      setConfirmReset(false);
-    }
+  async function handleLock() {
+    await fetch("/api/staff/logout", { method: "POST" });
+    router.replace("/staff");
   }
 
   const list = tab === "active" ? active : ready;
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-md flex-col px-4 py-6">
-      <header className="mb-5 flex items-center justify-between">
+      <header className="mb-3 flex items-center justify-between">
         <div>
           <p className="font-dotmatrix text-base tracking-[0.3em] text-ink-soft uppercase">
             Hadeed Smash Burgers
@@ -74,19 +58,25 @@ function KitchenDisplayScreen() {
         </div>
         <button
           type="button"
-          onClick={handleReset}
-          disabled={resetting}
-          className={cn(
-            "stepped flex items-center gap-1.5 border-2 px-3 py-2 font-dotmatrix text-sm tracking-[0.1em] uppercase disabled:opacity-40",
-            confirmReset
-              ? "border-stamp-red bg-stamp-red text-paper"
-              : "border-ink/40 text-ink-soft",
-          )}
+          onClick={handleLock}
+          aria-label="Lock screen"
+          className="stepped flex items-center gap-1.5 border-2 border-ink/40 px-3 py-2 font-dotmatrix text-sm tracking-[0.1em] text-ink-soft uppercase"
         >
-          <RotateCcw className="size-4" />
-          {confirmReset ? "Confirm?" : "New event"}
+          <Lock className="size-4" />
         </button>
       </header>
+
+      <div className="mb-5 flex items-center justify-between">
+        <ConnectionBadge connected={connected} />
+        <button
+          type="button"
+          onClick={() => setResetOpen(true)}
+          className="stepped flex items-center gap-1.5 border-2 border-ink/40 px-3 py-2 font-dotmatrix text-sm tracking-[0.1em] text-ink-soft uppercase"
+        >
+          <RotateCcw className="size-4" />
+          New event
+        </button>
+      </div>
 
       <div className="stepped mb-4 flex border-2 border-ink">
         <button
@@ -136,6 +126,8 @@ function KitchenDisplayScreen() {
           ))}
         </ul>
       )}
+
+      <ResetDialog open={resetOpen} onOpenChange={setResetOpen} onReset={refetch} />
     </main>
   );
 }

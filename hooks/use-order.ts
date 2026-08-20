@@ -4,18 +4,17 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { supabase } from "@/lib/supabase/client";
 import { getOrder, type Order } from "@/lib/orders";
 
-/** Per the spec: poll every 5s as a fallback alongside the realtime subscription. */
-const POLL_MS = 5_000;
-
 /**
- * Drives the customer status page for a single order: realtime updates
- * plus 5s polling, so the page updates without a manual refresh even on
- * flaky event Wi-Fi.
+ * Drives the customer status page for a single order via Supabase
+ * Realtime, no polling. The realtime payload is applied directly to
+ * state; a refetch only runs on mount, the channel (re)subscribing, and
+ * the tab waking up.
  */
 export function useOrder(orderId: string) {
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
+  const [connected, setConnected] = useState(false);
   const mounted = useRef(true);
 
   const refetch = useCallback(async () => {
@@ -29,7 +28,7 @@ export function useOrder(orderId: string) {
         setNotFound(false);
       }
     } catch {
-      // keep the last known state; the next poll or realtime event retries
+      // keep the last known state; the next realtime event or reconnect retries
     } finally {
       if (mounted.current) setLoading(false);
     }
@@ -43,24 +42,42 @@ export function useOrder(orderId: string) {
       .channel(`order-status-${orderId}`)
       .on(
         "postgres_changes",
-        {
-          event: "*",
-          schema: "public",
-          table: "orders",
-          filter: `id=eq.${orderId}`,
+        { event: "UPDATE", schema: "public", table: "orders", filter: `id=eq.${orderId}` },
+        (payload) => {
+          setOrder(payload.new as Order);
+          setNotFound(false);
         },
-        () => refetch(),
       )
-      .subscribe();
+      .on(
+        "postgres_changes",
+        { event: "DELETE", schema: "public", table: "orders", filter: `id=eq.${orderId}` },
+        () => {
+          setNotFound(true);
+        },
+      )
+      .subscribe((status) => {
+        if (!mounted.current) return;
+        if (status === "SUBSCRIBED") {
+          setConnected(true);
+          refetch();
+        } else if (status === "CLOSED" || status === "CHANNEL_ERROR" || status === "TIMED_OUT") {
+          setConnected(false);
+        }
+      });
 
-    const interval = setInterval(refetch, POLL_MS);
+    function handleWake() {
+      if (document.visibilityState === "visible") refetch();
+    }
+    window.addEventListener("online", refetch);
+    document.addEventListener("visibilitychange", handleWake);
 
     return () => {
       mounted.current = false;
-      clearInterval(interval);
+      window.removeEventListener("online", refetch);
+      document.removeEventListener("visibilitychange", handleWake);
       supabase.removeChannel(channel);
     };
   }, [orderId, refetch]);
 
-  return { order, loading, notFound };
+  return { order, loading, notFound, connected };
 }

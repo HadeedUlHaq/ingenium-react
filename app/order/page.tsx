@@ -1,32 +1,26 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ChefHat, Printer } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { ChefHat, Lock, Printer } from "lucide-react";
 import { createOrder, markCollected, type Order } from "@/lib/orders";
 import { useOrders } from "@/hooks/use-orders";
-import { PasscodeGate } from "@/components/gate/passcode-gate";
 import { QuantityStepper } from "@/components/ticket/quantity-stepper";
 import { StampButton } from "@/components/ticket/stamp-button";
 import { TornTicketOverlay } from "@/components/ticket/torn-ticket-overlay";
 import { ReadyPickupRow } from "@/components/ticket/ready-pickup-row";
 import { PerfSeam } from "@/components/ticket/ticket-frame";
+import { ConnectionBadge } from "@/components/ticket/connection-badge";
 
 export default function OrderTakerPage() {
-  return (
-    <PasscodeGate label="Order Taker">
-      <OrderTakerScreen />
-    </PasscodeGate>
-  );
-}
-
-function OrderTakerScreen() {
+  const router = useRouter();
   const [quantity, setQuantity] = useState(1);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [newOrder, setNewOrder] = useState<Order | null>(null);
   const [collectingId, setCollectingId] = useState<string | null>(null);
 
-  const { orders, refetch } = useOrders();
+  const { orders, connected, refetch } = useOrders();
   const ready = useMemo(
     () => orders.filter((o) => o.status === "READY").reverse(),
     [orders],
@@ -57,6 +51,11 @@ function OrderTakerScreen() {
     }
   }
 
+  async function handleLock() {
+    await fetch("/api/staff/logout", { method: "POST" });
+    router.replace("/staff");
+  }
+
   const statusUrl =
     newOrder && typeof window !== "undefined"
       ? `${window.location.origin}/status/${newOrder.id}`
@@ -64,12 +63,24 @@ function OrderTakerScreen() {
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-md flex-col px-5 py-8">
-      <header className="mb-8 text-center">
+      <header className="mb-4 text-center">
         <p className="font-dotmatrix text-lg tracking-[0.3em] text-ink-soft uppercase">
           Hadeed Smash Burgers
         </p>
         <h1 className="mt-1 font-stamp text-3xl uppercase">Order Taker</h1>
       </header>
+
+      <div className="mb-6 flex items-center justify-between">
+        <ConnectionBadge connected={connected} />
+        <button
+          type="button"
+          onClick={handleLock}
+          className="stepped flex items-center gap-1.5 border-2 border-ink/40 px-3 py-2 font-dotmatrix text-sm tracking-[0.1em] text-ink-soft uppercase"
+        >
+          <Lock className="size-4" />
+          Lock
+        </button>
+      </div>
 
       <form
         className="ticket-shadow border-2 border-ink bg-paper p-6"

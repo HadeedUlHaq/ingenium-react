@@ -20,6 +20,10 @@ export function formatTicket(ticketNumber: number) {
   return `#${String(ticketNumber).padStart(3, "0")}`;
 }
 
+// Reads stay on the anon client (RLS allows SELECT) so every screen's
+// Supabase Realtime subscription keeps working. Writes go through
+// server-side API routes that require a valid staff session.
+
 export async function listOrders(): Promise<Order[]> {
   const { data, error } = await supabase
     .from("orders")
@@ -41,40 +45,37 @@ export async function getOrder(id: string): Promise<Order | null> {
   return data;
 }
 
-export async function createOrder(input: { quantity: number }): Promise<Order> {
-  const { data, error } = await supabase
-    .from("orders")
-    .insert({
-      quantity: input.quantity,
-    })
-    .select("*")
-    .single();
+async function apiRequest<T>(
+  url: string,
+  method: "POST" | "PATCH",
+  body: unknown,
+): Promise<T> {
+  const res = await fetch(url, {
+    method,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const payload = await res.json().catch(() => null);
+    throw new Error(payload?.error ?? `Request failed (${res.status})`);
+  }
+  return res.json();
+}
 
-  if (error) throw error;
-  return data;
+export async function createOrder(input: { quantity: number }): Promise<Order> {
+  return apiRequest<Order>("/api/orders", "POST", input);
 }
 
 export async function markReady(id: string): Promise<void> {
-  const { error } = await supabase
-    .from("orders")
-    .update({ status: "READY", ready_at: new Date().toISOString() })
-    .eq("id", id);
-
-  if (error) throw error;
+  await apiRequest(`/api/orders/${id}`, "PATCH", { status: "READY" });
 }
 
 /** The order taker hands the ticket over: clears it from both live lists. */
 export async function markCollected(id: string): Promise<void> {
-  const { error } = await supabase
-    .from("orders")
-    .update({ status: "COLLECTED", collected_at: new Date().toISOString() })
-    .eq("id", id);
-
-  if (error) throw error;
+  await apiRequest(`/api/orders/${id}`, "PATCH", { status: "COLLECTED" });
 }
 
 /** Clears the queue and restarts ticket numbers at #001 for a new event. */
-export async function resetEvent(): Promise<void> {
-  const { error } = await supabase.rpc("reset_event");
-  if (error) throw error;
+export async function resetEvent(code: string): Promise<void> {
+  await apiRequest("/api/staff/reset", "POST", { code });
 }

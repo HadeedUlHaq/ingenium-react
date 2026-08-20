@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
 
 const SIZES = {
-  md: "text-3xl",
-  lg: "text-4xl",
+  md: "text-xl",
+  lg: "text-2xl",
 } as const;
 
 type Props = {

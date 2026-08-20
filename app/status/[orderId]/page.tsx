@@ -57,6 +57,7 @@ export default function CustomerStatusPage({
 
   const isCollected = order.status === "COLLECTED";
   const isReady = order.status === "READY" || isCollected;
+  const stateWord = isCollected ? "Collected" : isReady ? "Ready" : "Preparing";
 
   return (
     <main
@@ -73,15 +74,17 @@ export default function CustomerStatusPage({
         <Flame className="size-16 animate-pulse" strokeWidth={2} />
       )}
 
+      <p className="font-stamp text-5xl leading-none uppercase">{stateWord}</p>
+
       <TicketNumber ticketNumber={order.ticket_number} size="xl" />
       <BurgerCount quantity={order.quantity} size="lg" className="opacity-80" />
 
-      <p className="max-w-xs font-stamp text-2xl leading-tight uppercase">
+      <p className="max-w-xs font-stamp text-xl leading-tight uppercase opacity-90">
         {isCollected
           ? "Enjoy your burgers!"
           : isReady
-            ? "Order ready for pickup! Please show this screen at the counter."
-            : "Your order is being smashed! Please keep this page open."}
+            ? "Please show this screen at the counter."
+            : "Please keep this page open — we'll alert you the moment it's ready."}
       </p>
 
       {!soundReady ? (
