@@ -50,19 +50,26 @@ export default function KitchenDisplayPage() {
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-md flex-col px-4 py-6">
-      <header className="mb-3 flex items-center justify-between">
-        <div className="flex items-center gap-2.5">
-          <Image src="/logo.png" alt="Hadeed Smash Burgers" width={1254} height={1254} className="h-9 w-9" />
+      <header className="mb-4">
+        <Image
+          src="/logo-plate.png"
+          alt="Hadeed Smash Burgers"
+          width={2172}
+          height={724}
+          priority
+          className="h-auto w-full"
+        />
+        <div className="mt-3 flex items-center justify-between">
           <h1 className="font-stamp text-2xl uppercase">Kitchen Display</h1>
+          <button
+            type="button"
+            onClick={handleLock}
+            aria-label="Lock screen"
+            className="stepped flex items-center gap-1.5 border-2 border-ink/40 px-3 py-2 font-dotmatrix text-sm tracking-[0.1em] text-ink-soft uppercase"
+          >
+            <Lock className="size-4" />
+          </button>
         </div>
-        <button
-          type="button"
-          onClick={handleLock}
-          aria-label="Lock screen"
-          className="stepped flex items-center gap-1.5 border-2 border-ink/40 px-3 py-2 font-dotmatrix text-sm tracking-[0.1em] text-ink-soft uppercase"
-        >
-          <Lock className="size-4" />
-        </button>
       </header>
 
       <div className="mb-5 flex items-center justify-between">

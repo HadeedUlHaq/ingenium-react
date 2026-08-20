@@ -70,12 +70,12 @@ export default function CustomerStatusPage({
       onClick={!soundReady ? handleUnlock : undefined}
     >
       <Image
-        src="/logo.png"
+        src="/logo-plate.png"
         alt="Hadeed Smash Burgers"
-        width={1254}
-        height={1254}
+        width={2172}
+        height={724}
         priority
-        className="h-16 w-16"
+        className="h-auto w-full max-w-sm"
       />
 
       {isReady ? (
