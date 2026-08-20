@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Lock, RotateCcw } from "lucide-react";
 import { useOrders } from "@/hooks/use-orders";
@@ -50,10 +51,8 @@ export default function KitchenDisplayPage() {
   return (
     <main className="mx-auto flex min-h-dvh max-w-md flex-col px-4 py-6">
       <header className="mb-3 flex items-center justify-between">
-        <div>
-          <p className="font-dotmatrix text-base tracking-[0.3em] text-ink-soft uppercase">
-            Hadeed Smash Burgers
-          </p>
+        <div className="flex items-center gap-2.5">
+          <Image src="/logo.png" alt="Hadeed Smash Burgers" width={1254} height={1254} className="h-9 w-9" />
           <h1 className="font-stamp text-2xl uppercase">Kitchen Display</h1>
         </div>
         <button

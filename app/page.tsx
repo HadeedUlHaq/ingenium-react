@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ChefHat, ClipboardList } from "lucide-react";
 import { PerfSeam } from "@/components/ticket/ticket-frame";
@@ -5,12 +6,14 @@ import { PerfSeam } from "@/components/ticket/ticket-frame";
 export default function Home() {
   return (
     <main className="mx-auto flex min-h-dvh max-w-md flex-col items-center justify-center gap-8 px-6 py-10 text-center text-ink">
-      <div>
-        <p className="font-dotmatrix text-lg tracking-[0.3em] text-ink-soft uppercase">
-          Welcome to
-        </p>
-        <h1 className="mt-1 font-stamp text-4xl uppercase">Hadeed Smash Burgers</h1>
-      </div>
+      <Image
+        src="/logo.png"
+        alt="Hadeed Smash Burgers"
+        width={1254}
+        height={1254}
+        priority
+        className="h-32 w-32 drop-shadow-[0_6px_16px_oklch(0.19_0.015_55/0.25)]"
+      />
 
       <PerfSeam className="w-full max-w-[16rem]" />
 

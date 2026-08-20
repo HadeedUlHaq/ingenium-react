@@ -1,8 +1,8 @@
 "use client";
 
 import { Suspense, useCallback } from "react";
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Lock } from "lucide-react";
 import { CodePad } from "@/components/gate/code-pad";
 
 const ALLOWED_NEXT = new Set(["/order", "/kds"]);
@@ -35,8 +35,8 @@ function StaffLoginScreen() {
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-sm flex-col items-center justify-center gap-8 px-6 py-10 text-center text-ink">
-      <div>
-        <Lock className="mx-auto size-8" strokeWidth={2.5} />
+      <div className="flex flex-col items-center">
+        <Image src="/logo.png" alt="Hadeed Smash Burgers" width={1254} height={1254} className="h-12 w-12" priority />
         <p className="mt-3 font-dotmatrix text-lg tracking-[0.3em] text-ink-soft uppercase">
           Staff only
         </p>

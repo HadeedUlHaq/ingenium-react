@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChefHat, Lock, Printer } from "lucide-react";
 import { createOrder, markCollected, type Order } from "@/lib/orders";
@@ -63,11 +64,9 @@ export default function OrderTakerPage() {
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-md flex-col px-5 py-8">
-      <header className="mb-4 text-center">
-        <p className="font-dotmatrix text-lg tracking-[0.3em] text-ink-soft uppercase">
-          Hadeed Smash Burgers
-        </p>
-        <h1 className="mt-1 font-stamp text-3xl uppercase">Order Taker</h1>
+      <header className="mb-4 flex flex-col items-center text-center">
+        <Image src="/logo.png" alt="Hadeed Smash Burgers" width={1254} height={1254} className="h-10 w-10" />
+        <h1 className="mt-2 font-stamp text-3xl uppercase">Order Taker</h1>
       </header>
 
       <div className="mb-6 flex items-center justify-between">

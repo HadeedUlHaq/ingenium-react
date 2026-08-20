@@ -1,6 +1,7 @@
 "use client";
 
 import { use, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { Flame, PartyPopper, Volume2 } from "lucide-react";
 import { useOrder } from "@/hooks/use-order";
 import { unlockChime, isChimeUnlocked, playReadyChime } from "@/lib/chime";
@@ -68,6 +69,15 @@ export default function CustomerStatusPage({
       }
       onClick={!soundReady ? handleUnlock : undefined}
     >
+      <Image
+        src="/logo.png"
+        alt="Hadeed Smash Burgers"
+        width={1254}
+        height={1254}
+        priority
+        className="h-16 w-16"
+      />
+
       {isReady ? (
         <PartyPopper className="size-16" strokeWidth={2} />
       ) : (
