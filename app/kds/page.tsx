@@ -5,12 +5,21 @@ import { RotateCcw } from "lucide-react";
 import { useOrders } from "@/hooks/use-orders";
 import { useClockTick } from "@/hooks/use-clock-tick";
 import { markReady, resetEvent } from "@/lib/orders";
+import { PasscodeGate } from "@/components/gate/passcode-gate";
 import { OrderCard } from "@/components/ticket/order-card";
 import { cn } from "@/lib/utils";
 
 type Tab = "active" | "ready";
 
 export default function KitchenDisplayPage() {
+  return (
+    <PasscodeGate label="Kitchen Display">
+      <KitchenDisplayScreen />
+    </PasscodeGate>
+  );
+}
+
+function KitchenDisplayScreen() {
   const { orders, loading, error, refetch } = useOrders();
   const now = useClockTick();
   const [tab, setTab] = useState<Tab>("active");

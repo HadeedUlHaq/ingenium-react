@@ -5,6 +5,7 @@ import { Flame, PartyPopper, Volume2 } from "lucide-react";
 import { useOrder } from "@/hooks/use-order";
 import { unlockChime, isChimeUnlocked, playReadyChime } from "@/lib/chime";
 import { TicketNumber } from "@/components/ticket/ticket-number";
+import { BurgerCount } from "@/components/ticket/burger-count";
 
 export default function CustomerStatusPage({
   params,
@@ -54,7 +55,8 @@ export default function CustomerStatusPage({
     );
   }
 
-  const isReady = order.status === "READY";
+  const isCollected = order.status === "COLLECTED";
+  const isReady = order.status === "READY" || isCollected;
 
   return (
     <main
@@ -72,15 +74,14 @@ export default function CustomerStatusPage({
       )}
 
       <TicketNumber ticketNumber={order.ticket_number} size="xl" />
-      <p className="font-stamp text-3xl uppercase">{order.customer_name}</p>
-      <p className="font-dotmatrix text-lg tracking-[0.15em] uppercase opacity-80">
-        {order.quantity} {order.quantity === 1 ? "burger" : "burgers"}
-      </p>
+      <BurgerCount quantity={order.quantity} size="lg" className="opacity-80" />
 
       <p className="max-w-xs font-stamp text-2xl leading-tight uppercase">
-        {isReady
-          ? "Order ready for pickup! Please show this screen at the counter."
-          : "Your order is being smashed! Please keep this page open."}
+        {isCollected
+          ? "Enjoy your burgers!"
+          : isReady
+            ? "Order ready for pickup! Please show this screen at the counter."
+            : "Your order is being smashed! Please keep this page open."}
       </p>
 
       {!soundReady ? (

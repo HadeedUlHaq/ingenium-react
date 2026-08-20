@@ -1,55 +1,65 @@
 "use client";
 
-import { useState } from "react";
-import { ChefHat, QrCode, Zap } from "lucide-react";
-import { createOrder, type Order } from "@/lib/orders";
+import { useMemo, useState } from "react";
+import { ChefHat, Printer } from "lucide-react";
+import { createOrder, markCollected, type Order } from "@/lib/orders";
+import { useOrders } from "@/hooks/use-orders";
+import { PasscodeGate } from "@/components/gate/passcode-gate";
 import { QuantityStepper } from "@/components/ticket/quantity-stepper";
 import { StampButton } from "@/components/ticket/stamp-button";
 import { TornTicketOverlay } from "@/components/ticket/torn-ticket-overlay";
-import { QrTicketDialog } from "@/components/ticket/qr-ticket-dialog";
+import { ReadyPickupRow } from "@/components/ticket/ready-pickup-row";
 import { PerfSeam } from "@/components/ticket/ticket-frame";
 
 export default function OrderTakerPage() {
-  const [customerName, setCustomerName] = useState("");
+  return (
+    <PasscodeGate label="Order Taker">
+      <OrderTakerScreen />
+    </PasscodeGate>
+  );
+}
+
+function OrderTakerScreen() {
   const [quantity, setQuantity] = useState(1);
-  const [submitting, setSubmitting] = useState<"quick" | "large" | null>(null);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [newOrder, setNewOrder] = useState<Order | null>(null);
+  const [collectingId, setCollectingId] = useState<string | null>(null);
 
-  const [quickOrder, setQuickOrder] = useState<Order | null>(null);
-  const [largeOrder, setLargeOrder] = useState<Order | null>(null);
+  const { orders, refetch } = useOrders();
+  const ready = useMemo(
+    () => orders.filter((o) => o.status === "READY").reverse(),
+    [orders],
+  );
 
-  const canSubmit = customerName.trim().length > 0 && !submitting;
-
-  function resetForm() {
-    setCustomerName("");
-    setQuantity(1);
-  }
-
-  async function handleSubmit(kind: "quick" | "large") {
-    if (!canSubmit) return;
-    setSubmitting(kind);
+  async function handleSubmit() {
+    if (submitting) return;
+    setSubmitting(true);
     setError(null);
     try {
-      const order = await createOrder({
-        customerName: customerName.trim(),
-        quantity,
-      });
-      if (kind === "quick") {
-        setQuickOrder(order);
-        resetForm();
-      } else {
-        setLargeOrder(order);
-      }
+      const order = await createOrder({ quantity });
+      setNewOrder(order);
+      setQuantity(1);
     } catch {
       setError("Couldn't send that order — check the connection and try again.");
     } finally {
-      setSubmitting(null);
+      setSubmitting(false);
+    }
+  }
+
+  async function handleCollect(id: string) {
+    setCollectingId(id);
+    try {
+      await markCollected(id);
+      await refetch();
+    } finally {
+      setCollectingId(null);
     }
   }
 
   const statusUrl =
-    largeOrder && typeof window !== "undefined"
-      ? `${window.location.origin}/status/${largeOrder.id}`
+    newOrder && typeof window !== "undefined"
+      ? `${window.location.origin}/status/${newOrder.id}`
       : "";
 
   return (
@@ -65,21 +75,6 @@ export default function OrderTakerPage() {
         className="ticket-shadow border-2 border-ink bg-paper p-6"
         onSubmit={(e) => e.preventDefault()}
       >
-        <label className="block">
-          <span className="font-dotmatrix text-sm tracking-[0.2em] text-ink-soft uppercase">
-            Customer name
-          </span>
-          <input
-            value={customerName}
-            onChange={(e) => setCustomerName(e.target.value)}
-            placeholder="Name for the ticket"
-            autoComplete="off"
-            className="stepped mt-2 w-full border-2 border-ink bg-paper-dim px-4 py-4 font-stamp text-2xl text-ink uppercase placeholder:font-sans placeholder:text-base placeholder:normal-case placeholder:text-ink-soft focus:outline-none"
-          />
-        </label>
-
-        <PerfSeam className="my-6" />
-
         <span className="block font-dotmatrix text-sm tracking-[0.2em] text-ink-soft uppercase">
           Burgers
         </span>
@@ -91,63 +86,55 @@ export default function OrderTakerPage() {
           </p>
         ) : null}
 
-        <div className="mt-8 flex flex-col gap-3">
-          <StampButton
-            variant="primary"
-            disabled={!canSubmit}
-            onClick={() => handleSubmit("quick")}
-          >
-            <Zap className="size-5" strokeWidth={2.5} />
-            Quick order
-          </StampButton>
-          <StampButton
-            variant="outline"
-            disabled={!canSubmit}
-            onClick={() => handleSubmit("large")}
-          >
-            <QrCode className="size-5" strokeWidth={2.5} />
-            Large / complex order
-          </StampButton>
-        </div>
+        <StampButton
+          variant="primary"
+          className="mt-8"
+          disabled={submitting}
+          onClick={handleSubmit}
+        >
+          <Printer className="size-5" strokeWidth={2.5} />
+          Print ticket
+        </StampButton>
         <p className="mt-4 text-center font-dotmatrix text-sm tracking-[0.15em] text-ink-soft uppercase">
-          Quick order for 1&ndash;3 burgers &middot; large order prints a QR code
+          Every ticket gets a QR code for the customer to scan
         </p>
       </form>
 
+      {ready.length > 0 ? (
+        <section className="mt-8">
+          <div className="mb-3 flex items-center gap-2">
+            <h2 className="font-stamp text-xl uppercase">Ready for pickup</h2>
+            <span className="font-dotmatrix text-base text-ink-soft">({ready.length})</span>
+          </div>
+          <ul className="flex flex-col gap-3">
+            {ready.map((order) => (
+              <ReadyPickupRow
+                key={order.id}
+                order={order}
+                onCollect={handleCollect}
+                collecting={collectingId === order.id}
+              />
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      <PerfSeam className="my-8" />
+
       <a
         href="/kds"
-        className="mt-6 flex items-center justify-center gap-2 font-dotmatrix text-sm tracking-[0.2em] text-ink-soft uppercase underline underline-offset-4"
+        className="flex items-center justify-center gap-2 font-dotmatrix text-sm tracking-[0.2em] text-ink-soft uppercase underline underline-offset-4"
       >
         <ChefHat className="size-4" />
         Open kitchen display
       </a>
 
-      {quickOrder ? (
+      {newOrder ? (
         <TornTicketOverlay
-          ticketNumber={quickOrder.ticket_number}
-          customerName={quickOrder.customer_name}
-          quantity={quickOrder.quantity}
-          onDismiss={() => setQuickOrder(null)}
-        />
-      ) : null}
-
-      {largeOrder ? (
-        <QrTicketDialog
-          open={Boolean(largeOrder)}
-          onOpenChange={(open) => {
-            if (!open) {
-              setLargeOrder(null);
-              resetForm();
-            }
-          }}
-          ticketNumber={largeOrder.ticket_number}
-          customerName={largeOrder.customer_name}
-          quantity={largeOrder.quantity}
+          ticketNumber={newOrder.ticket_number}
+          quantity={newOrder.quantity}
           statusUrl={statusUrl}
-          onDone={() => {
-            setLargeOrder(null);
-            resetForm();
-          }}
+          onNext={() => setNewOrder(null)}
         />
       ) : null}
     </main>

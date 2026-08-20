@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { LATE_THRESHOLD_MS, type Order } from "@/lib/orders";
 import { formatElapsed } from "@/hooks/use-clock-tick";
 import { TicketNumber } from "@/components/ticket/ticket-number";
+import { BurgerCount } from "@/components/ticket/burger-count";
 import { StampButton } from "@/components/ticket/stamp-button";
 
 type Props = {
@@ -26,17 +27,14 @@ export function OrderCard({ order, now, onMarkReady, marking }: Props) {
     >
       <TicketNumber ticketNumber={order.ticket_number} size="md" />
       <div className="min-w-0 flex-1">
-        <p className="truncate font-stamp text-xl uppercase">{order.customer_name}</p>
-        <p className="font-dotmatrix text-base tracking-[0.15em] text-ink-soft uppercase">
-          {order.quantity} {order.quantity === 1 ? "burger" : "burgers"}
-        </p>
+        <BurgerCount quantity={order.quantity} size="lg" />
         <p
           className={cn(
             "font-dotmatrix text-lg tabular-nums tracking-[0.1em]",
             isLate ? "font-bold text-stamp-red uppercase" : "text-ink-soft",
           )}
         >
-          {isReady ? "Picked up" : formatElapsed(elapsedMs)}
+          {isReady ? "Awaiting pickup" : formatElapsed(elapsedMs)}
           {isLate ? " · LATE" : ""}
         </p>
       </div>

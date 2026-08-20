@@ -1,15 +1,15 @@
 import { supabase } from "@/lib/supabase/client";
 
-export type OrderStatus = "COOKING" | "READY";
+export type OrderStatus = "COOKING" | "READY" | "COLLECTED";
 
 export type Order = {
   id: string;
   ticket_number: number;
-  customer_name: string;
   quantity: number;
   status: OrderStatus;
   created_at: string;
   ready_at: string | null;
+  collected_at: string | null;
 };
 
 /** Orders waiting longer than this are flagged LATE on the kitchen display. */
@@ -41,14 +41,10 @@ export async function getOrder(id: string): Promise<Order | null> {
   return data;
 }
 
-export async function createOrder(input: {
-  customerName: string;
-  quantity: number;
-}): Promise<Order> {
+export async function createOrder(input: { quantity: number }): Promise<Order> {
   const { data, error } = await supabase
     .from("orders")
     .insert({
-      customer_name: input.customerName,
       quantity: input.quantity,
     })
     .select("*")
@@ -62,6 +58,16 @@ export async function markReady(id: string): Promise<void> {
   const { error } = await supabase
     .from("orders")
     .update({ status: "READY", ready_at: new Date().toISOString() })
+    .eq("id", id);
+
+  if (error) throw error;
+}
+
+/** The order taker hands the ticket over: clears it from both live lists. */
+export async function markCollected(id: string): Promise<void> {
+  const { error } = await supabase
+    .from("orders")
+    .update({ status: "COLLECTED", collected_at: new Date().toISOString() })
     .eq("id", id);
 
   if (error) throw error;
