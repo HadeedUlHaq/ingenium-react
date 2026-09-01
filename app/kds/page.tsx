@@ -57,6 +57,7 @@ export default function KitchenDisplayPage() {
           width={2172}
           height={724}
           priority
+          sizes="(max-width: 448px) 100vw, 448px"
           className="h-auto w-full"
         />
         <div className="mt-3 flex items-center justify-between">

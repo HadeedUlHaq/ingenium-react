@@ -17,6 +17,18 @@
   --cooking-yellow: oklch(0.83 0.15 92);
   --cooking-yellow-deep: oklch(0.4 0.09 75);
 
+  /* The Bolted Steel Plate — public catering site (marketing surface only) */
+  --gunmetal: oklch(0.19 0.008 250);
+  --gunmetal-deep: oklch(0.14 0.008 250);
+  --plate: oklch(0.26 0.007 250);
+  --plate-hi: oklch(0.34 0.006 250);
+  --steel: oklch(0.85 0.005 250);
+  --steel-mid: oklch(0.66 0.007 250);
+  /* Ember sits at L=0.56 so white CTA text clears 4.5:1 (measures 5.13:1);
+     ember-hot is text/icon-only on dark plate, where it clears comfortably. */
+  --ember: oklch(0.56 0.2 32);
+  --ember-hot: oklch(0.72 0.19 45);
+
   --background: var(--paper);
   --foreground: var(--ink);
   --card: var(--paper);
@@ -49,6 +61,15 @@
   --color-pass-green-bright: var(--pass-green-bright);
   --color-cooking-yellow: var(--cooking-yellow);
   --color-cooking-yellow-deep: var(--cooking-yellow-deep);
+  --font-plate: var(--font-plate), 'Arial Narrow', sans-serif;
+  --color-gunmetal: var(--gunmetal);
+  --color-gunmetal-deep: var(--gunmetal-deep);
+  --color-plate: var(--plate);
+  --color-plate-hi: var(--plate-hi);
+  --color-steel: var(--steel);
+  --color-steel-mid: var(--steel-mid);
+  --color-ember: var(--ember);
+  --color-ember-hot: var(--ember-hot);
   --radius-sm: calc(var(--radius) - 2px);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 4px);
@@ -152,6 +173,120 @@
 
   .animate-blink {
     animation: blink 700ms steps(1, jump-start) infinite;
+  }
+
+  /* ---- The Bolted Steel Plate (public site only) ---- */
+
+  /* Brushed metal: fine vertical grain over a raked light gradient */
+  .brushed {
+    background-color: var(--plate);
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        oklch(1 0 0 / 0.035) 0px,
+        oklch(1 0 0 / 0.035) 1px,
+        transparent 1px,
+        transparent 3px
+      ),
+      linear-gradient(
+        168deg,
+        var(--plate-hi) 0%,
+        var(--plate) 42%,
+        var(--gunmetal) 100%
+      );
+  }
+
+  /* A machined plate: brushed face, bevelled edge, seated shadow */
+  .plate-panel {
+    position: relative;
+    border: 1px solid oklch(1 0 0 / 0.09);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 0.11),
+      inset 0 -1px 0 oklch(0 0 0 / 0.5),
+      0 14px 34px -14px oklch(0 0 0 / 0.75);
+  }
+
+  /* Headlines cut into the steel rather than printed on it */
+  .engraved {
+    color: var(--steel);
+    text-shadow:
+      0 1px 0 oklch(0 0 0 / 0.75),
+      0 -1px 0 oklch(1 0 0 / 0.16);
+  }
+
+  /* The seam where two plates meet - structure, not whitespace */
+  .plate-seam {
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      oklch(0 0 0 / 0.6) 12%,
+      oklch(0 0 0 / 0.6) 88%,
+      transparent
+    );
+    box-shadow: 0 1px 0 oklch(1 0 0 / 0.07);
+  }
+
+  /* Steel buttons seat into the plate when pressed */
+  .plate-press {
+    transition:
+      transform 120ms cubic-bezier(0.2, 0, 0, 1),
+      box-shadow 120ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .plate-press:active {
+    transform: translateY(2px);
+    box-shadow:
+      inset 0 2px 6px oklch(0 0 0 / 0.6),
+      0 1px 0 oklch(1 0 0 / 0.06);
+  }
+
+  /* The one authored moment: heat sweeping across the hero plate on load.
+     A translated band rather than an animated background-position - the
+     latter leaves a residual warm cast on the plate once it settles. */
+  .ember-sweep {
+    isolation: isolate;
+  }
+  .ember-sweep::after {
+    content: '';
+    position: absolute;
+    top: -10%;
+    bottom: -10%;
+    left: 0;
+    width: 55%;
+    pointer-events: none;
+    background: linear-gradient(
+      104deg,
+      transparent 0%,
+      oklch(0.72 0.19 45 / 0.2) 42%,
+      oklch(0.84 0.15 62 / 0.3) 52%,
+      transparent 100%
+    );
+    mix-blend-mode: screen;
+    animation: ember-sweep 2200ms cubic-bezier(0.22, 1, 0.36, 1) 240ms both;
+  }
+}
+
+@keyframes ember-sweep {
+  from {
+    transform: translateX(-110%);
+    opacity: 0;
+  }
+  22% {
+    opacity: 1;
+  }
+  to {
+    transform: translateX(290%);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ember-sweep::after {
+    animation: none;
+    opacity: 0;
+  }
+  .plate-press {
+    transition: none;
   }
 }
 

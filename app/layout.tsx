@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import { Anton, Libre_Franklin, VT323 } from "next/font/google";
+import { Anton, Big_Shoulders, Libre_Franklin, VT323 } from "next/font/google";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -24,6 +24,20 @@ FORM: The Docket Rail, user-locked pick card, seed key 0e1cb27e.
 FINISH: unreviewed and undocumented is unfinished; this build ends
 with the finish review, the verdict, DESIGN.md, and every shipping
 raster carrying its provenance.
+
+PUBLIC SITE (/) - a second surface, its own world:
+THESIS: the catering site is machined from the logo's own material -
+Hadeed means steel - refusing the dark-photo-hero template every
+caterer ships, and needing no food photography that does not exist.
+OWN-WORLD: gunmetal ground, brushed-steel plates fastened with real
+screw heads, engraved headlines, one seared ember accent; Big
+Shoulders machined caps over Libre Franklin body; welded seams as
+the only section divider.
+STORY: an event organizer lands, reads capacity and halal proof as
+stamped data plates, and books a date in one form.
+FIRST VIEWPORT: the plate logo full-bleed on a screwed steel panel,
+engraved headline beneath, ember CTA, three riveted trust badges.
+FORM: The Bolted Steel Plate, delegated pick card, seed key 5e350b57.
 -->`;
 
 const stamp = Anton({
@@ -46,10 +60,33 @@ const body = Libre_Franklin({
   display: "swap",
 });
 
+const plate = Big_Shoulders({
+  subsets: ["latin"],
+  variable: "--font-plate",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: siteConfig.legalName,
+  title: {
+    default: "Live Smash Burger Catering in Watford | Hadeed Ul Haq",
+    template: `%s | ${siteConfig.name}`,
+  },
   description: siteConfig.description,
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    siteName: siteConfig.legalName,
+    title: "Live Smash Burger Catering in Watford | Hadeed Ul Haq",
+    description: siteConfig.description,
+    images: [{ url: "/logo-plate.png", width: 2172, height: 724, alt: siteConfig.legalName }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Live Smash Burger Catering in Watford | Hadeed Ul Haq",
+    description: siteConfig.description,
+    images: ["/logo-plate.png"],
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -60,7 +97,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1c1a17",
+  themeColor: "#15171a",
 };
 
 export default function RootLayout({
@@ -71,7 +108,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${stamp.variable} ${dotMatrix.variable} ${body.variable} font-body antialiased`}
+        className={`${stamp.variable} ${dotMatrix.variable} ${body.variable} ${plate.variable} font-body antialiased`}
       >
         <div
           style={{ display: "none" }}

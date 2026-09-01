@@ -75,6 +75,7 @@ export default function CustomerStatusPage({
         width={2172}
         height={724}
         priority
+        sizes="(max-width: 384px) 100vw, 384px"
         className="h-auto w-full max-w-sm"
       />
 
