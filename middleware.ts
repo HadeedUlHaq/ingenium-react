@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { COOKIE_NAME, verifySessionToken } from "@/lib/auth/session";
 
 export const config = {
-  matcher: ["/order/:path*", "/kds/:path*"],
+  matcher: ["/order/:path*", "/kds/:path*", "/inquiries/:path*"],
 };
 
 /** The real gate: /order and /kds never render without a valid staff session. */

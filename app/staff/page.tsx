@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { CodePad } from "@/components/gate/code-pad";
 
-const ALLOWED_NEXT = new Set(["/order", "/kds"]);
+const ALLOWED_NEXT = new Set(["/order", "/kds", "/inquiries"]);
 
 function StaffLoginScreen() {
   const router = useRouter();
