@@ -86,7 +86,7 @@ export function CodePad({ onSubmit, maxLength = 8 }: Props) {
             }
             className={cn(
               "stepped ticket-shadow flex min-h-16 items-center justify-center border-2 border-ink font-stamp text-2xl uppercase active:scale-[0.95] disabled:opacity-40",
-              key === "enter" ? "bg-ink text-paper" : "bg-paper text-ink",
+              key === "enter" ? "gilded text-iron-black" : "badge-face text-chrome",
             )}
           >
             {key === "del" ? (

@@ -28,13 +28,13 @@ export function Faq() {
                       aria-controls={`faq-panel-${i}`}
                       className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-6"
                     >
-                      <span className="engraved font-plate text-xl leading-tight tracking-wide uppercase sm:text-2xl">
+                      <span className="engraved font-display text-xl leading-tight tracking-wide uppercase sm:text-2xl">
                         {item.q}
                       </span>
                       <Plus
                         aria-hidden="true"
                         className={cn(
-                          "size-5 shrink-0 text-ember-hot transition-transform duration-200",
+                          "size-5 shrink-0 text-signal-red-bright transition-transform duration-200",
                           isOpen && "rotate-45",
                         )}
                       />
@@ -42,7 +42,7 @@ export function Faq() {
                   </h3>
                   {isOpen ? (
                     <div id={`faq-panel-${i}`} className="px-5 pb-5 sm:px-6">
-                      <p className="border-t border-white/10 pt-4 text-base leading-relaxed text-steel-mid">
+                      <p className="border-t border-white/10 pt-4 text-base leading-relaxed text-chrome-mid">
                         {item.a}
                       </p>
                     </div>

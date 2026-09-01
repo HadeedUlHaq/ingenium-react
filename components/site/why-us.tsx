@@ -34,13 +34,13 @@ export function WhyUs() {
                 <DataPlate
                   value={reason.spec}
                   label={reason.specLabel}
-                  className="self-start !bg-none bg-gunmetal-deep"
+                  className="self-start"
                 />
                 <div>
-                  <h3 className="engraved font-plate text-2xl tracking-wide uppercase">
+                  <h3 className="engraved font-display text-2xl tracking-wide uppercase">
                     {reason.title}
                   </h3>
-                  <p className="mt-3 text-base leading-relaxed text-steel-mid">{reason.body}</p>
+                  <p className="mt-3 text-base leading-relaxed text-chrome-mid">{reason.body}</p>
                 </div>
               </Plate>
             </li>

@@ -1,53 +1,101 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+/* ============================================================
+   IRON BURGER — the design system
+   One palette for every surface: the marketing site and the
+   event screens (/order, /kds, /status, /staff).
+   Derived from the brand badge: gold bun, chrome IRON letters,
+   charcoal core, deep-red ground.
+   Every pair below was contrast-checked before use; the rules
+   that keep it accessible live in DESIGN.md.
+   ============================================================ */
+
 :root {
-  /* The Docket Rail — carbon-copy kitchen ticket world */
-  --paper: oklch(0.96 0.02 92);
-  --paper-dim: oklch(0.92 0.025 90);
-  --ink: oklch(0.19 0.015 55);
-  --ink-soft: oklch(0.19 0.015 55 / 0.62);
-  --carbon-blue: oklch(0.48 0.19 265);
-  --carbon-blue-dim: oklch(0.48 0.19 265 / 0.12);
-  --stamp-red: oklch(0.52 0.19 25);
-  --stamp-red-dim: oklch(0.52 0.19 25 / 0.14);
-  --pass-green: oklch(0.55 0.15 150);
-  --pass-green-deep: oklch(0.32 0.1 150);
-  --pass-green-bright: oklch(0.72 0.19 148);
-  --cooking-yellow: oklch(0.83 0.15 92);
-  --cooking-yellow-deep: oklch(0.4 0.09 75);
+  /* --- Ground: the badge's charcoal core --- */
+  --iron-black: oklch(0.15 0.012 60);
+  --charcoal: oklch(0.21 0.01 60);
+  --charcoal-hi: oklch(0.3 0.01 60);
 
-  /* The Bolted Steel Plate — public catering site (marketing surface only) */
-  --gunmetal: oklch(0.19 0.008 250);
-  --gunmetal-deep: oklch(0.14 0.008 250);
-  --plate: oklch(0.26 0.007 250);
-  --plate-hi: oklch(0.34 0.006 250);
-  --steel: oklch(0.85 0.005 250);
-  --steel-mid: oklch(0.66 0.007 250);
-  /* Ember sits at L=0.56 so white CTA text clears 4.5:1 (measures 5.13:1);
-     ember-hot is text/icon-only on dark plate, where it clears comfortably. */
-  --ember: oklch(0.56 0.2 32);
-  --ember-hot: oklch(0.72 0.19 45);
+  /* --- Gold: carries the brand (the bun) --- */
+  --gold-bright: oklch(0.85 0.13 88);
+  --gold: oklch(0.74 0.145 84);
+  --gold-deep: oklch(0.52 0.11 72);
+  --gold-soft: oklch(0.74 0.145 84 / 0.18);
 
-  --background: var(--paper);
-  --foreground: var(--ink);
-  --card: var(--paper);
-  --card-foreground: var(--ink);
-  --border: var(--ink-soft);
-  --ring: var(--carbon-blue);
-  --radius: 0.125rem;
+  /* --- Chrome: the voice (the IRON letterforms) --- */
+  --chrome: oklch(0.9 0.006 250);
+  --chrome-mid: oklch(0.66 0.008 250);
+
+  /* --- Signal red: CTAs and heat ONLY. L=0.54 keeps white
+         text at 5.57:1; never set gold on it (2.39:1). --- */
+  --signal-red: oklch(0.54 0.19 28);
+  --signal-red-bright: oklch(0.68 0.19 30);
+  --signal-red-soft: oklch(0.54 0.19 28 / 0.16);
+
+  /* --- Functional status colours. These mean something to a
+         customer or a cook, so brand never overrides them. --- */
+  --cooking-yellow: oklch(0.84 0.16 88);
+  --cooking-yellow-deep: oklch(0.26 0.07 60);
+  --pass-green: oklch(0.6 0.16 150);
+  --pass-green-bright: oklch(0.74 0.19 148);
+  --pass-green-deep: oklch(0.24 0.08 150);
+
+  /* --- Semantic aliases. The event screens are written
+         against these names, so re-pointing them here re-skins
+         those screens without touching their markup. --- */
+  --paper: var(--charcoal);
+  --paper-dim: var(--iron-black);
+  --ink: var(--chrome);
+  --ink-soft: oklch(0.66 0.008 250);
+  --carbon-blue: var(--gold);
+  --carbon-blue-dim: var(--gold-soft);
+  --stamp-red: var(--signal-red-bright);
+  --stamp-red-dim: var(--signal-red-soft);
+
+  --background: var(--iron-black);
+  --foreground: var(--chrome);
+  --card: var(--charcoal);
+  --card-foreground: var(--chrome);
+  --border: oklch(0.74 0.145 84 / 0.22);
+  --ring: var(--gold);
+  --radius: 0.25rem;
 }
 
 @theme inline {
   --font-sans: var(--font-body), 'Libre Franklin', system-ui, sans-serif;
-  --font-stamp: var(--font-stamp), 'Arial Narrow', sans-serif;
-  --font-dotmatrix: var(--font-dotmatrix), monospace;
+  --font-display: var(--font-display), 'Arial Narrow', sans-serif;
+  /* Legacy aliases: the event screens use these class names. */
+  --font-stamp: var(--font-display), 'Arial Narrow', sans-serif;
+  --font-dotmatrix: var(--font-body), system-ui, sans-serif;
+  --font-plate: var(--font-display), 'Arial Narrow', sans-serif;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-border: var(--border);
   --color-ring: var(--ring);
+
+  --color-iron-black: var(--iron-black);
+  --color-charcoal: var(--charcoal);
+  --color-charcoal-hi: var(--charcoal-hi);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-deep: var(--gold-deep);
+  --color-gold-soft: var(--gold-soft);
+  --color-chrome: var(--chrome);
+  --color-chrome-mid: var(--chrome-mid);
+  --color-signal-red: var(--signal-red);
+  --color-signal-red-bright: var(--signal-red-bright);
+
+  --color-cooking-yellow: var(--cooking-yellow);
+  --color-cooking-yellow-deep: var(--cooking-yellow-deep);
+  --color-pass-green: var(--pass-green);
+  --color-pass-green-bright: var(--pass-green-bright);
+  --color-pass-green-deep: var(--pass-green-deep);
+
+  /* Legacy colour aliases so the event screens keep compiling. */
   --color-paper: var(--paper);
   --color-paper-dim: var(--paper-dim);
   --color-ink: var(--ink);
@@ -56,20 +104,7 @@
   --color-carbon-blue-dim: var(--carbon-blue-dim);
   --color-stamp-red: var(--stamp-red);
   --color-stamp-red-dim: var(--stamp-red-dim);
-  --color-pass-green: var(--pass-green);
-  --color-pass-green-deep: var(--pass-green-deep);
-  --color-pass-green-bright: var(--pass-green-bright);
-  --color-cooking-yellow: var(--cooking-yellow);
-  --color-cooking-yellow-deep: var(--cooking-yellow-deep);
-  --font-plate: var(--font-plate), 'Arial Narrow', sans-serif;
-  --color-gunmetal: var(--gunmetal);
-  --color-gunmetal-deep: var(--gunmetal-deep);
-  --color-plate: var(--plate);
-  --color-plate-hi: var(--plate-hi);
-  --color-steel: var(--steel);
-  --color-steel-mid: var(--steel-mid);
-  --color-ember: var(--ember);
-  --color-ember-hot: var(--ember-hot);
+
   --radius-sm: calc(var(--radius) - 2px);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 4px);
@@ -84,150 +119,177 @@
   }
   body {
     @apply bg-background text-foreground font-sans;
-    background-image:
-      radial-gradient(oklch(0.19 0.015 55 / 0.05) 0.5px, transparent 0.5px);
-    background-size: 6px 6px;
   }
+  /* Browser surfaces carry the brand too. */
   ::selection {
-    background: var(--carbon-blue);
-    color: var(--paper);
+    background: var(--gold);
+    color: var(--iron-black);
   }
   :focus-visible {
-    outline: 2px solid var(--carbon-blue);
+    outline: 2px solid var(--gold);
     outline-offset: 2px;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--iron-black);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--gold-deep);
+    border: 2px solid var(--iron-black);
+    border-radius: 6px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--gold);
   }
 }
 
 @layer utilities {
-  /* Perforated seam: a dotted tear-line, the docket world's recurring seam */
-  .perf-seam {
-    background-image: radial-gradient(
-      circle,
-      var(--ink) 1.4px,
-      transparent 1.6px
+  /* ---- Materials ---- */
+
+  /* The badge core: charcoal with a raked sheen, like the
+     logo's centre panel behind the IRON letters. */
+  .badge-face {
+    background-color: var(--charcoal);
+    background-image: linear-gradient(
+      165deg,
+      var(--charcoal-hi) 0%,
+      var(--charcoal) 46%,
+      var(--iron-black) 100%
     );
-    background-size: 11px 11px;
-    background-repeat: repeat-x;
-    background-position: center;
-    height: 2px;
-    opacity: 0.28;
   }
 
-  .perf-seam-v {
-    background-image: radial-gradient(
-      circle,
-      var(--ink) 1.4px,
-      transparent 1.6px
-    );
-    background-size: 11px 11px;
-    background-repeat: repeat-y;
-    background-position: center;
-    width: 2px;
-    opacity: 0.28;
+  /* A panel rimmed in gold the way the badge is rimmed. */
+  .badge-panel {
+    position: relative;
+    border: 1px solid var(--gold-soft);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 0.07),
+      inset 0 -1px 0 oklch(0 0 0 / 0.55),
+      0 16px 38px -16px oklch(0 0 0 / 0.8);
   }
 
-  /* Stamped numerals: uneven double-impression ink, slight tilt */
-  .stamp-digits {
-    font-family: var(--font-stamp);
-    letter-spacing: 0.01em;
+  /* The bun: a gold gradient face for brand moments. The range stops
+     at --gold rather than --gold-deep because these surfaces carry
+     dark text: gold-deep would put the bottom of every gold button
+     and data plate at 3.49:1. Held here, the worst case is 8.44:1. */
+  .gilded {
+    background-image: linear-gradient(
+      168deg,
+      var(--gold-bright) 0%,
+      oklch(0.79 0.14 86) 52%,
+      var(--gold) 100%
+    );
+  }
+
+  /* The deeper bun gradient, for surfaces that carry NO text. */
+  .gilded-deep {
+    background-image: linear-gradient(
+      168deg,
+      var(--gold-bright) 0%,
+      var(--gold) 44%,
+      var(--gold-deep) 100%
+    );
+  }
+
+  /* Brand lettering is SOLID gold, never a gradient: the gradient's
+     dark end measures 3.15:1 on charcoal (fails), and gradient text
+     is a decorative tell. The logo image carries the real bevel. */
+  .brand-gold {
+    color: var(--gold);
+    text-shadow: 0 1px 0 oklch(0 0 0 / 0.7);
+  }
+
+  /* Chrome headlines, cut rather than printed - the IRON voice. */
+  .engraved {
+    color: var(--chrome);
     text-shadow:
-      0.5px 0.5px 0 var(--stamp-red-dim, transparent),
-      -0.5px 0 0 currentColor;
+      0 1px 0 oklch(0 0 0 / 0.8),
+      0 -1px 0 oklch(1 0 0 / 0.14);
   }
 
+  /* Numerals on the event screens: same chrome cut, tabular. */
+  .stamp-digits {
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+    color: var(--chrome);
+    text-shadow:
+      0 1px 0 oklch(0 0 0 / 0.8),
+      0 -1px 0 oklch(1 0 0 / 0.14);
+  }
+
+  /* Legacy alias used across the event screens. */
   .ticket-shadow {
     box-shadow:
-      0 1px 0 oklch(1 0 0 / 0.6) inset,
-      0 10px 24px -8px oklch(0.19 0.015 55 / 0.35),
-      0 2px 0 oklch(0.19 0.015 55 / 0.08);
+      inset 0 1px 0 oklch(1 0 0 / 0.07),
+      inset 0 -1px 0 oklch(0 0 0 / 0.55),
+      0 16px 38px -16px oklch(0 0 0 / 0.8);
   }
 
-  /* Jagged torn edge, bottom of a full-bleed printed ticket */
-  .torn-edge-bottom {
-    clip-path: polygon(
-      0% 0%, 100% 0%, 100% 100%,
-      97% 92%, 94% 100%, 91% 92%, 88% 100%, 85% 92%, 82% 100%, 79% 92%,
-      76% 100%, 73% 92%, 70% 100%, 67% 92%, 64% 100%, 61% 92%, 58% 100%,
-      55% 92%, 52% 100%, 49% 92%, 46% 100%, 43% 92%, 40% 100%, 37% 92%,
-      34% 100%, 31% 92%, 28% 100%, 25% 92%, 22% 100%, 19% 92%, 16% 100%,
-      13% 92%, 10% 100%, 7% 92%, 4% 100%, 1% 92%, 0% 100%
-    );
-  }
+  /* ---- Dividers ---- */
 
-  /* Every state change slaps into place - nothing eases in this world */
-  .stepped {
-    transition-timing-function: steps(2, jump-start);
-  }
-
-  .animate-stamp-thunk {
-    animation: stamp-thunk 220ms steps(4, jump-start);
-  }
-
-  .animate-tear-in {
-    animation: tear-in 260ms steps(3, jump-end) forwards;
-  }
-
-  .animate-flash-late {
-    animation: flash-late 900ms steps(2, jump-start) infinite;
-  }
-
-  .animate-blink {
-    animation: blink 700ms steps(1, jump-start) infinite;
-  }
-
-  /* ---- The Bolted Steel Plate (public site only) ---- */
-
-  /* Brushed metal: fine vertical grain over a raked light gradient */
-  .brushed {
-    background-color: var(--plate);
-    background-image:
-      repeating-linear-gradient(
-        90deg,
-        oklch(1 0 0 / 0.035) 0px,
-        oklch(1 0 0 / 0.035) 1px,
-        transparent 1px,
-        transparent 3px
-      ),
-      linear-gradient(
-        168deg,
-        var(--plate-hi) 0%,
-        var(--plate) 42%,
-        var(--gunmetal) 100%
-      );
-  }
-
-  /* A machined plate: brushed face, bevelled edge, seated shadow */
-  .plate-panel {
-    position: relative;
-    border: 1px solid oklch(1 0 0 / 0.09);
-    box-shadow:
-      inset 0 1px 0 oklch(1 0 0 / 0.11),
-      inset 0 -1px 0 oklch(0 0 0 / 0.5),
-      0 14px 34px -14px oklch(0 0 0 / 0.75);
-  }
-
-  /* Headlines cut into the steel rather than printed on it */
-  .engraved {
-    color: var(--steel);
-    text-shadow:
-      0 1px 0 oklch(0 0 0 / 0.75),
-      0 -1px 0 oklch(1 0 0 / 0.16);
-  }
-
-  /* The seam where two plates meet - structure, not whitespace */
-  .plate-seam {
-    height: 2px;
+  /* A thin gold rule: the badge's rim, used as the only
+     section divider on every surface. */
+  .gold-seam {
+    height: 1px;
     background: linear-gradient(
       90deg,
       transparent,
-      oklch(0 0 0 / 0.6) 12%,
-      oklch(0 0 0 / 0.6) 88%,
+      var(--gold-soft) 10%,
+      var(--gold) 50%,
+      var(--gold-soft) 90%,
       transparent
     );
-    box-shadow: 0 1px 0 oklch(1 0 0 / 0.07);
+    opacity: 0.65;
   }
 
-  /* Steel buttons seat into the plate when pressed */
+  /* Legacy seam names from the event screens, restyled. */
+  .perf-seam {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--gold-soft) 10%,
+      var(--gold) 50%,
+      var(--gold-soft) 90%,
+      transparent
+    );
+    opacity: 0.65;
+  }
+  .perf-seam-v {
+    width: 1px;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      var(--gold-soft) 10%,
+      var(--gold) 50%,
+      var(--gold-soft) 90%,
+      transparent
+    );
+    opacity: 0.65;
+  }
+
+  /* ---- Motion ----
+     Gold is a polished material, so this world eases; the old
+     stepped/no-ease grammar belonged to paper dockets. */
+  .stepped {
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .press {
+    transition:
+      transform 120ms cubic-bezier(0.2, 0, 0, 1),
+      box-shadow 120ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .press:active {
+    transform: translateY(2px);
+    box-shadow:
+      inset 0 2px 6px oklch(0 0 0 / 0.6),
+      0 1px 0 oklch(1 0 0 / 0.05);
+  }
+  /* Legacy alias. */
   .plate-press {
     transition:
       transform 120ms cubic-bezier(0.2, 0, 0, 1),
@@ -237,78 +299,100 @@
     transform: translateY(2px);
     box-shadow:
       inset 0 2px 6px oklch(0 0 0 / 0.6),
-      0 1px 0 oklch(1 0 0 / 0.06);
+      0 1px 0 oklch(1 0 0 / 0.05);
   }
 
-  /* The one authored moment: heat sweeping across the hero plate on load.
-     A translated band rather than an animated background-position - the
-     latter leaves a residual warm cast on the plate once it settles. */
-  .ember-sweep {
+  /* The one authored moment: light travelling across gold. */
+  .shine-sweep {
     isolation: isolate;
   }
-  .ember-sweep::after {
+  .shine-sweep::after {
     content: '';
     position: absolute;
     top: -10%;
     bottom: -10%;
     left: 0;
-    width: 55%;
+    width: 42%;
     pointer-events: none;
     background: linear-gradient(
       104deg,
       transparent 0%,
-      oklch(0.72 0.19 45 / 0.2) 42%,
-      oklch(0.84 0.15 62 / 0.3) 52%,
+      oklch(0.9 0.09 90 / 0.16) 40%,
+      oklch(0.97 0.06 95 / 0.3) 52%,
       transparent 100%
     );
     mix-blend-mode: screen;
-    animation: ember-sweep 2200ms cubic-bezier(0.22, 1, 0.36, 1) 240ms both;
+    animation: shine-sweep 2400ms cubic-bezier(0.22, 1, 0.36, 1) 260ms both;
+  }
+
+  /* A press, not a bounce: polished metal decelerates, it does not
+     wobble. Exponential ease-out matches the rest of this world. */
+  .animate-stamp-thunk {
+    animation: stamp-thunk 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-tear-in {
+    animation: tear-in 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-flash-late {
+    animation: flash-late 1100ms ease-in-out infinite;
+  }
+
+  .animate-blink {
+    animation: blink 1200ms ease-in-out infinite;
   }
 }
 
-@keyframes ember-sweep {
+@keyframes shine-sweep {
   from {
-    transform: translateX(-110%);
+    transform: translateX(-120%);
     opacity: 0;
   }
-  22% {
+  20% {
     opacity: 1;
   }
   to {
-    transform: translateX(290%);
+    transform: translateX(320%);
     opacity: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .ember-sweep::after {
-    animation: none;
-    opacity: 0;
-  }
-  .plate-press {
-    transition: none;
   }
 }
 
 @keyframes stamp-thunk {
-  0% { transform: scale(1) rotate(0deg); }
-  35% { transform: scale(0.9) rotate(-2deg); }
-  70% { transform: scale(1.06) rotate(1deg); }
-  100% { transform: scale(1) rotate(0deg); }
+  0% { transform: scale(1); }
+  40% { transform: scale(0.94); }
+  100% { transform: scale(1); }
 }
 
 @keyframes tear-in {
-  0% { transform: translateY(-14%); opacity: 0; }
-  60% { transform: translateY(3%); opacity: 1; }
-  100% { transform: translateY(0%); opacity: 1; }
+  from { transform: translateY(-8px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 @keyframes flash-late {
-  0%, 100% { background-color: var(--stamp-red-dim); }
-  50% { background-color: oklch(0.52 0.19 25 / 0.32); }
+  0%, 100% { background-color: var(--signal-red-soft); }
+  50% { background-color: oklch(0.54 0.19 28 / 0.34); }
 }
 
 @keyframes blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shine-sweep::after {
+    animation: none;
+    opacity: 0;
+  }
+  .press,
+  .plate-press,
+  .stepped {
+    transition: none;
+  }
+  .animate-flash-late,
+  .animate-blink,
+  .animate-stamp-thunk,
+  .animate-tear-in {
+    animation: none;
+  }
 }

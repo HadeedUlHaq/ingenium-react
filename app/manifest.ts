@@ -4,12 +4,12 @@ import { siteConfig } from "@/lib/site";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: siteConfig.legalName,
-    short_name: "Hadeed Smash",
+    short_name: "Iron Burger",
     description: siteConfig.description,
     start_url: "/",
     display: "standalone",
-    background_color: "#f7f3e9",
-    theme_color: "#1c1a17",
+    background_color: "#15130f",
+    theme_color: "#15130f",
     icons: [
       {
         src: "/web-app-manifest-192x192.png",

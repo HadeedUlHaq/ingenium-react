@@ -43,27 +43,27 @@ export function Packages() {
           {PACKAGES.map((pkg) => (
             <li key={pkg.name}>
               <Plate className="flex h-full flex-col px-6 py-8 sm:px-7">
-                <h3 className="engraved font-plate text-2xl leading-tight tracking-wide uppercase sm:text-[1.75rem]">
+                <h3 className="engraved font-display text-2xl leading-tight tracking-wide uppercase sm:text-[1.75rem]">
                   {pkg.name}
                 </h3>
 
                 <dl className="mt-6 flex flex-1 flex-col gap-5">
                   <div>
-                    <dt className="text-[0.68rem] font-semibold tracking-[0.16em] text-steel-mid uppercase">
+                    <dt className="text-[0.68rem] font-semibold tracking-[0.16em] text-chrome-mid uppercase">
                       Best For
                     </dt>
-                    <dd className="mt-1.5 text-base text-steel">{pkg.bestFor}</dd>
+                    <dd className="mt-1.5 text-base text-chrome">{pkg.bestFor}</dd>
                   </div>
 
                   <div>
-                    <dt className="text-[0.68rem] font-semibold tracking-[0.16em] text-steel-mid uppercase">
+                    <dt className="text-[0.68rem] font-semibold tracking-[0.16em] text-chrome-mid uppercase">
                       What&apos;s Included
                     </dt>
                     <dd className="mt-2">
                       <ul className="space-y-2">
                         {pkg.included.map((line) => (
-                          <li key={line} className="flex gap-2.5 text-base leading-snug text-steel">
-                            <span aria-hidden="true" className="mt-2 size-1.5 shrink-0 bg-ember" />
+                          <li key={line} className="flex gap-2.5 text-base leading-snug text-chrome">
+                            <span aria-hidden="true" className="mt-2 size-1.5 shrink-0 bg-signal-red" />
                             {line}
                           </li>
                         ))}
@@ -72,10 +72,10 @@ export function Packages() {
                   </div>
 
                   <div className="mt-auto border-t border-white/10 pt-5">
-                    <dt className="text-[0.68rem] font-semibold tracking-[0.16em] text-steel-mid uppercase">
+                    <dt className="text-[0.68rem] font-semibold tracking-[0.16em] text-chrome-mid uppercase">
                       Capacity
                     </dt>
-                    <dd className="engraved mt-1 font-plate text-2xl tracking-wide uppercase">
+                    <dd className="engraved mt-1 font-display text-2xl tracking-wide uppercase">
                       {pkg.capacity}
                     </dd>
                   </div>
@@ -83,7 +83,7 @@ export function Packages() {
 
                 <a
                   href="#booking"
-                  className="plate-press mt-7 block bg-ember px-6 py-3.5 text-center font-plate text-lg tracking-wide text-white uppercase"
+                  className="press mt-7 block bg-signal-red px-6 py-3.5 text-center font-display text-lg tracking-wide text-white uppercase"
                 >
                   Request Quote
                 </a>

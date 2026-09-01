@@ -65,7 +65,7 @@ export default function OrderTakerPage() {
   return (
     <main className="mx-auto flex min-h-dvh max-w-md flex-col px-5 py-8">
       <header className="mb-4 flex flex-col items-center text-center">
-        <Image src="/logo.png" alt="Hadeed Smash Burgers" width={1254} height={1254} className="h-10 w-10" />
+        <Image src="/iron-burger.png" alt="Iron Burger" width={1254} height={1254} className="h-10 w-10" />
         <h1 className="mt-2 font-stamp text-3xl uppercase">Order Taker</h1>
       </header>
 

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import { Anton, Big_Shoulders, Libre_Franklin, VT323 } from "next/font/google";
+import { Big_Shoulders, Libre_Franklin } from "next/font/google";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -8,49 +8,30 @@ import "./globals.css";
 // the rendered HTML, so the direction contract is emitted as a literal
 // HTML comment via dangerouslySetInnerHTML instead.
 const DIRECTION_CONTRACT = `<!--
-THESIS: every order is one carbon-copy docket at three scales - order
-slip, kitchen card, customer copy - refusing the clean white POS-card
-default this category ships.
-OWN-WORLD: cream paper ground, ink black, carbon blue (cooking), stamp
-red (late), pass green (ready); Anton stamped numerals, VT323
-dot-matrix meta, Libre Franklin body; perforated seams, stepped
-no-ease motion.
-STORY: the order taker prints a ticket in seconds; the kitchen works
-strict FIFO off the rail; the customer's copy flips from yellow
-(cooking) to green (ready) with a stamp thunk, chime, and buzz.
-FIRST VIEWPORT: a torn ticket rail - monumental stamped ticket number
-top-left, name/qty below, full-width stamp action at thumb reach.
-FORM: The Docket Rail, user-locked pick card, seed key 0e1cb27e.
+THESIS: one badge, worn by every surface. The marketing site and the
+event screens are cut from the same brand object - gold bun, chrome
+IRON letters, charcoal core - refusing both the dark-photo-hero
+template caterers ship and the split-personality of a branded site
+bolted onto unbranded tooling.
+OWN-WORLD: charcoal ground (iron-black / charcoal), gold carrying the
+brand (bright / gold / deep, gilded gradient faces), chrome as the
+voice (engraved headlines and numerals), signal red reserved for CTAs
+and heat; sesame studs where fasteners would go; one thin gold rule as
+the only divider. Big Shoulders display over Libre Franklin body.
+STORY: an organizer lands on the badge, reads capacity and halal proof
+as gilded data plates, and books a date; the same badge then runs the
+counter, the grill, and the customer's own screen on event day.
+FIRST VIEWPORT: the badge full-bleed on a gold-rimmed charcoal panel,
+chrome headline beneath, red CTA, three gilded trust plates.
+FORM: The Gold Badge - pinned by the brand logo itself, no roll.
 FINISH: unreviewed and undocumented is unfinished; this build ends
-with the finish review, the verdict, DESIGN.md, and every shipping
-raster carrying its provenance.
-
-PUBLIC SITE (/) - a second surface, its own world:
-THESIS: the catering site is machined from the logo's own material -
-Hadeed means steel - refusing the dark-photo-hero template every
-caterer ships, and needing no food photography that does not exist.
-OWN-WORLD: gunmetal ground, brushed-steel plates fastened with real
-screw heads, engraved headlines, one seared ember accent; Big
-Shoulders machined caps over Libre Franklin body; welded seams as
-the only section divider.
-STORY: an event organizer lands, reads capacity and halal proof as
-stamped data plates, and books a date in one form.
-FIRST VIEWPORT: the plate logo full-bleed on a screwed steel panel,
-engraved headline beneath, ember CTA, three riveted trust badges.
-FORM: The Bolted Steel Plate, delegated pick card, seed key 5e350b57.
+with the finish review, the verdict, and DESIGN.md carrying the token
+tables and the rules that keep them accessible.
 -->`;
 
-const stamp = Anton({
+const display = Big_Shoulders({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-stamp",
-  display: "swap",
-});
-
-const dotMatrix = VT323({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-dotmatrix",
+  variable: "--font-display",
   display: "swap",
 });
 
@@ -60,16 +41,12 @@ const body = Libre_Franklin({
   display: "swap",
 });
 
-const plate = Big_Shoulders({
-  subsets: ["latin"],
-  variable: "--font-plate",
-  display: "swap",
-});
+const TITLE = "Live Smash Burger Catering in Watford | Iron Burger";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Live Smash Burger Catering in Watford | Hadeed Ul Haq",
+    default: TITLE,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -77,15 +54,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_GB",
     siteName: siteConfig.legalName,
-    title: "Live Smash Burger Catering in Watford | Hadeed Ul Haq",
+    title: TITLE,
     description: siteConfig.description,
-    images: [{ url: "/logo-plate.png", width: 2172, height: 724, alt: siteConfig.legalName }],
+    images: [{ url: "/iron-burger.png", width: 1254, height: 1254, alt: siteConfig.legalName }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Live Smash Burger Catering in Watford | Hadeed Ul Haq",
+    title: TITLE,
     description: siteConfig.description,
-    images: ["/logo-plate.png"],
+    images: ["/iron-burger.png"],
   },
   icons: {
     icon: [
@@ -97,7 +74,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#15171a",
+  themeColor: "#15130f",
 };
 
 export default function RootLayout({
@@ -107,9 +84,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${stamp.variable} ${dotMatrix.variable} ${body.variable} ${plate.variable} font-body antialiased`}
-      >
+      <body className={`${display.variable} ${body.variable} font-sans antialiased`}>
         <div
           style={{ display: "none" }}
           suppressHydrationWarning

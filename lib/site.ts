@@ -1,6 +1,6 @@
 export const siteConfig = {
-  name: "Hadeed Ul Haq",
-  legalName: "Hadeed Ul Haq | Live Smash Burgers",
+  name: "Iron Burger",
+  legalName: "Iron Burger",
   url: process.env.NEXT_PUBLIC_SITE_URL?.trim() || "http://localhost:3000",
   locale: "en_GB",
   email: "info@hadeedsmashburgers.co.uk",

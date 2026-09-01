@@ -52,13 +52,13 @@ export default function KitchenDisplayPage() {
     <main className="mx-auto flex min-h-dvh max-w-md flex-col px-4 py-6">
       <header className="mb-4">
         <Image
-          src="/logo-plate.png"
-          alt="Hadeed Smash Burgers"
-          width={2172}
-          height={724}
+          src="/iron-burger.png"
+          alt="Iron Burger"
+          width={1254}
+          height={1254}
           priority
-          sizes="(max-width: 448px) 100vw, 448px"
-          className="h-auto w-full"
+          sizes="120px"
+          className="mx-auto h-auto w-28"
         />
         <div className="mt-3 flex items-center justify-between">
           <h1 className="font-stamp text-2xl uppercase">Kitchen Display</h1>
@@ -91,7 +91,7 @@ export default function KitchenDisplayPage() {
           onClick={() => setTab("active")}
           className={cn(
             "stepped min-h-12 flex-1 font-dotmatrix text-base tracking-[0.15em] uppercase",
-            tab === "active" ? "bg-ink text-paper" : "text-ink-soft",
+            tab === "active" ? "gilded text-iron-black" : "text-ink-soft",
           )}
         >
           Active ({active.length})
@@ -101,7 +101,7 @@ export default function KitchenDisplayPage() {
           onClick={() => setTab("ready")}
           className={cn(
             "stepped min-h-12 flex-1 border-l-2 border-ink font-dotmatrix text-base tracking-[0.15em] uppercase",
-            tab === "ready" ? "bg-pass-green-deep text-paper" : "text-ink-soft",
+            tab === "ready" ? "bg-pass-green text-iron-black" : "text-ink-soft",
           )}
         >
           Ready ({ready.length})

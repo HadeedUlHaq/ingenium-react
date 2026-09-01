@@ -27,7 +27,7 @@ export function Craft() {
       <div className="mx-auto max-w-6xl px-5 lg:px-8">
         <div className="max-w-3xl">
           <SectionHeading>Engineered for Speed. Crafted for Maximum Sear.</SectionHeading>
-          <div className="mt-6 space-y-5 text-base leading-relaxed text-steel-mid sm:text-lg">
+          <div className="mt-6 space-y-5 text-base leading-relaxed text-chrome-mid sm:text-lg">
             <p>
               We believe great burgers shouldn&apos;t be sitting under heat lamps or sitting in
               delivery boxes. We bring a commercial live-cooking setup directly to your venue,
@@ -41,7 +41,7 @@ export function Craft() {
           </div>
         </div>
 
-        <h3 className="engraved mt-14 font-plate text-2xl tracking-wide uppercase">
+        <h3 className="engraved mt-14 font-display text-2xl tracking-wide uppercase">
           Our Three Non-Negotiables
         </h3>
 
@@ -52,13 +52,13 @@ export function Craft() {
                 <DataPlate
                   value={item.spec}
                   label={item.specLabel}
-                  className="self-start !bg-none bg-gunmetal-deep"
+                  className="self-start"
                 />
                 <div>
-                  <h4 className="engraved font-plate text-2xl tracking-wide uppercase">
+                  <h4 className="engraved font-display text-2xl tracking-wide uppercase">
                     {item.title}
                   </h4>
-                  <p className="mt-3 text-base leading-relaxed text-steel-mid">{item.body}</p>
+                  <p className="mt-3 text-base leading-relaxed text-chrome-mid">{item.body}</p>
                 </div>
               </Plate>
             </li>

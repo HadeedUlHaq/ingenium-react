@@ -3,11 +3,17 @@
 import { useState, type ButtonHTMLAttributes, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
+/**
+ * Gold carries the primary action, matching the badge; red is the
+ * site's CTA colour and stays reserved for destructive/urgent here;
+ * green keeps its functional "ready" meaning for the kitchen.
+ * Dark text on gold/green is the strongest pair in the system.
+ */
 const VARIANTS = {
-  primary: "bg-ink text-paper border-ink",
-  outline: "bg-paper text-ink border-ink",
-  danger: "bg-stamp-red text-paper border-stamp-red",
-  ready: "bg-pass-green-deep text-paper border-pass-green-deep",
+  primary: "gilded text-iron-black border-gold-deep",
+  outline: "badge-face text-chrome border-gold/40",
+  danger: "bg-signal-red text-white border-signal-red",
+  ready: "bg-pass-green text-iron-black border-pass-green",
 } as const;
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
