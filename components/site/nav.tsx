@@ -8,14 +8,6 @@ import { cn } from "@/lib/utils";
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   // A menu open behind a scrolled-away page is a trap on phones.
   useEffect(() => {
@@ -26,44 +18,35 @@ export function SiteNav() {
   }, [open]);
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-shadow duration-200",
-        scrolled && "shadow-[0_10px_30px_-16px_oklch(0_0_0/0.9)]",
-      )}
-    >
-      <div
-        className={cn(
-          "badge-face border-b border-white/10 transition-colors duration-200",
-          scrolled ? "bg-iron-black/95 backdrop-blur-sm" : "",
-        )}
-      >
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3 lg:px-8">
-          <a href="#home" className="flex shrink-0 items-center" aria-label="Iron Burger, home">
+    <header className="fixed inset-x-0 top-0 z-50 bg-black">
+      <div className="border-b border-line">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8 lg:h-20">
+          <a href="#home" className="flex items-center gap-3" aria-label="Iron Burger, home">
             <Image
               src="/iron-burger.png"
-              alt="Iron Burger"
+              alt=""
               width={1254}
               height={1254}
               priority
-              sizes="64px"
-              className="h-11 w-auto sm:h-12"
+              sizes="48px"
+              className="h-9 w-9 lg:h-11 lg:w-11"
             />
+            <span className="display text-2xl text-white lg:text-3xl">Iron Burger</span>
           </a>
 
-          <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
+          <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium tracking-[0.1em] text-chrome-mid uppercase transition-colors hover:text-chrome"
+                className="display text-xl text-white/80 transition-colors hover:text-white"
               >
                 {link.label}
               </a>
             ))}
             <a
               href="#booking"
-              className="press badge-face badge-panel px-5 py-2.5 font-display text-base tracking-wide text-signal-red-bright uppercase"
+              className="press display rounded-[2px] bg-white px-5 py-2 text-xl text-black hover:bg-off-white"
             >
               Book Live Catering
             </a>
@@ -75,9 +58,9 @@ export function SiteNav() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="press badge-face badge-panel flex size-11 items-center justify-center text-chrome lg:hidden"
+            className="flex size-11 items-center justify-center text-white lg:hidden"
           >
-            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+            {open ? <X className="size-7" strokeWidth={1.75} /> : <Menu className="size-7" strokeWidth={1.75} />}
           </button>
         </div>
       </div>
@@ -86,14 +69,14 @@ export function SiteNav() {
         <nav
           id="mobile-nav"
           aria-label="Primary"
-          className="badge-face h-[calc(100dvh-4.5rem)] overflow-y-auto border-b border-white/10 px-5 pt-2 pb-8 lg:hidden"
+          className="flex h-[calc(100dvh-4rem)] flex-col overflow-y-auto bg-black px-5 pt-4 pb-8 lg:hidden"
         >
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="block border-b border-white/10 py-4 font-display text-2xl tracking-wide text-chrome uppercase"
+              className="display border-b border-line py-4 text-4xl text-white"
             >
               {link.label}
             </a>
@@ -101,10 +84,11 @@ export function SiteNav() {
           <a
             href="#booking"
             onClick={() => setOpen(false)}
-            className="press mt-6 block bg-signal-red px-5 py-4 text-center font-display text-xl tracking-wide text-white uppercase"
+            className="press display mt-8 block rounded-[2px] bg-white px-5 py-4 text-center text-2xl text-black"
           >
             Book Live Catering
           </a>
+          <p className="mono mt-auto pt-8 text-sm text-grey">Watford &middot; Hertfordshire &middot; Greater London</p>
         </nav>
       ) : null}
     </header>

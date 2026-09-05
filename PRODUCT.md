@@ -41,8 +41,9 @@ Purpose-built for a one-person-scale pop-up: zero login, zero config at the even
 
 ## Brand Commitments
 
-- Name: **Hadeed Smash Burgers** — appears on all three screens.
-- No existing logo, colors, or visual assets; visual identity is open to be established.
+- Name: **Iron Burger** (حديد) — appears on every screen. Email stays info@hadeedsmashburgers.co.uk.
+- Logo: the gold-and-chrome Iron Burger badge (public/iron-burger.png). It stays as the brand mark on every surface.
+- **Standing visual reference (user-pinned, 2026-09-05): bleecker.co.uk.** The site and the event screens follow that counter grammar — black ground, white condensed caps, typewriter-mono meta, square corners, photography as the only colour — executed at that craft level. Future design work refines within this world rather than proposing a new one.
 
 ## Evidence on Hand
 

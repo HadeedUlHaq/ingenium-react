@@ -2,72 +2,75 @@
 @import 'tw-animate-css';
 
 /* ============================================================
-   IRON BURGER — the design system
-   One palette for every surface: the marketing site and the
-   event screens (/order, /kds, /status, /staff).
-   Derived from the brand badge: gold bun, chrome IRON letters,
-   charcoal core, deep-red ground.
-   Every pair below was contrast-checked before use; the rules
-   that keep it accessible live in DESIGN.md.
+   IRON BURGER — the design system ("The Counter")
+   Reference: bleecker.co.uk, executed at full fidelity.
+   One monochrome system for every surface: black ground, white
+   condensed caps, typewriter-mono meta in grey, square corners.
+   Colour comes from photography and from the one brand mark.
+   Every text pair was contrast-checked; rules live in DESIGN.md.
    ============================================================ */
 
 :root {
-  /* --- Ground: the badge's charcoal core --- */
-  --iron-black: oklch(0.15 0.012 60);
-  --charcoal: oklch(0.21 0.01 60);
-  --charcoal-hi: oklch(0.3 0.01 60);
+  /* --- The monochrome core --- */
+  --black: oklch(0 0 0);
+  --black-2: oklch(0.2 0 0);        /* the raised band (#1e1e1e) */
+  --black-3: oklch(0.3 0 0);        /* hover / pressed on black */
+  --white: oklch(1 0 0);
+  --off-white: oklch(0.96 0 0);     /* card ground on light panels */
+  --grey: oklch(0.66 0.004 20);     /* mono meta on black (6.2:1) */
+  --grey-ink: oklch(0.42 0.004 20); /* mono meta on white (7.9:1) */
+  --stone: oklch(0.86 0.01 160);    /* a whisper of grey-green for tags */
+  --line: oklch(1 0 0 / 0.14);      /* hairline on black */
+  --line-dark: oklch(0 0 0 / 0.16); /* hairline on white */
 
-  /* --- Gold: carries the brand (the bun) --- */
-  --gold-bright: oklch(0.85 0.13 88);
-  --gold: oklch(0.74 0.145 84);
-  --gold-deep: oklch(0.52 0.11 72);
-  --gold-soft: oklch(0.74 0.145 84 / 0.18);
-
-  /* --- Chrome: the voice (the IRON letterforms) --- */
-  --chrome: oklch(0.9 0.006 250);
-  --chrome-mid: oklch(0.66 0.008 250);
-
-  /* --- Signal red: CTAs and heat ONLY. L=0.54 keeps white
-         text at 5.57:1; never set gold on it (2.39:1). --- */
-  --signal-red: oklch(0.54 0.19 28);
-  --signal-red-bright: oklch(0.68 0.19 30);
-  --signal-red-soft: oklch(0.54 0.19 28 / 0.16);
-
-  /* --- Functional status colours. These mean something to a
-         customer or a cook, so brand never overrides them. --- */
+  /* --- Functional status colours. They mean something to a
+         customer or a cook, so the theme never overrides them. --- */
   --cooking-yellow: oklch(0.84 0.16 88);
   --cooking-yellow-deep: oklch(0.26 0.07 60);
   --pass-green: oklch(0.6 0.16 150);
   --pass-green-bright: oklch(0.74 0.19 148);
   --pass-green-deep: oklch(0.24 0.08 150);
+  --signal-red: oklch(0.54 0.19 28);
+  --signal-red-bright: oklch(0.68 0.19 30);
+  --signal-red-soft: oklch(0.54 0.19 28 / 0.16);
 
-  /* --- Semantic aliases. The event screens are written
-         against these names, so re-pointing them here re-skins
-         those screens without touching their markup. --- */
-  --paper: var(--charcoal);
-  --paper-dim: var(--iron-black);
-  --ink: var(--chrome);
-  --ink-soft: oklch(0.66 0.008 250);
-  --carbon-blue: var(--gold);
-  --carbon-blue-dim: var(--gold-soft);
+  /* --- Semantic aliases. The event screens and their shared
+         components were written against these names; re-pointing
+         them here re-skins those screens without touching markup. --- */
+  --paper: var(--black);
+  --paper-dim: var(--black-2);
+  --ink: var(--white);
+  --ink-soft: var(--grey);
+  --carbon-blue: var(--white);
+  --carbon-blue-dim: var(--line);
   --stamp-red: var(--signal-red-bright);
   --stamp-red-dim: var(--signal-red-soft);
+  --iron-black: var(--black);
+  --charcoal: var(--black-2);
+  --charcoal-hi: var(--black-3);
+  --chrome: var(--white);
+  --chrome-mid: var(--grey);
+  --gold: var(--white);
+  --gold-bright: var(--white);
+  --gold-deep: var(--grey);
+  --gold-soft: var(--line);
 
-  --background: var(--iron-black);
-  --foreground: var(--chrome);
-  --card: var(--charcoal);
-  --card-foreground: var(--chrome);
-  --border: oklch(0.74 0.145 84 / 0.22);
-  --ring: var(--gold);
-  --radius: 0.25rem;
+  --background: var(--black);
+  --foreground: var(--white);
+  --card: var(--black-2);
+  --card-foreground: var(--white);
+  --border: var(--line);
+  --ring: var(--white);
+  --radius: 0.125rem;
 }
 
 @theme inline {
   --font-sans: var(--font-body), 'Libre Franklin', system-ui, sans-serif;
-  --font-display: var(--font-display), 'Arial Narrow', sans-serif;
-  /* Legacy aliases: the event screens use these class names. */
+  --font-display: var(--font-display), 'Arial Narrow', Impact, sans-serif;
+  --font-mono: var(--font-mono), 'Courier New', monospace;
+  /* Legacy aliases used by the event screens. */
   --font-stamp: var(--font-display), 'Arial Narrow', sans-serif;
-  --font-dotmatrix: var(--font-body), system-ui, sans-serif;
+  --font-dotmatrix: var(--font-mono), 'Courier New', monospace;
   --font-plate: var(--font-display), 'Arial Narrow', sans-serif;
 
   --color-background: var(--background);
@@ -77,25 +80,26 @@
   --color-border: var(--border);
   --color-ring: var(--ring);
 
-  --color-iron-black: var(--iron-black);
-  --color-charcoal: var(--charcoal);
-  --color-charcoal-hi: var(--charcoal-hi);
-  --color-gold: var(--gold);
-  --color-gold-bright: var(--gold-bright);
-  --color-gold-deep: var(--gold-deep);
-  --color-gold-soft: var(--gold-soft);
-  --color-chrome: var(--chrome);
-  --color-chrome-mid: var(--chrome-mid);
-  --color-signal-red: var(--signal-red);
-  --color-signal-red-bright: var(--signal-red-bright);
+  --color-black: var(--black);
+  --color-black-2: var(--black-2);
+  --color-black-3: var(--black-3);
+  --color-white: var(--white);
+  --color-off-white: var(--off-white);
+  --color-grey: var(--grey);
+  --color-grey-ink: var(--grey-ink);
+  --color-stone: var(--stone);
+  --color-line: var(--line);
+  --color-line-dark: var(--line-dark);
 
   --color-cooking-yellow: var(--cooking-yellow);
   --color-cooking-yellow-deep: var(--cooking-yellow-deep);
   --color-pass-green: var(--pass-green);
   --color-pass-green-bright: var(--pass-green-bright);
   --color-pass-green-deep: var(--pass-green-deep);
+  --color-signal-red: var(--signal-red);
+  --color-signal-red-bright: var(--signal-red-bright);
 
-  /* Legacy colour aliases so the event screens keep compiling. */
+  /* Legacy colour aliases so every existing screen keeps compiling. */
   --color-paper: var(--paper);
   --color-paper-dim: var(--paper-dim);
   --color-ink: var(--ink);
@@ -104,10 +108,19 @@
   --color-carbon-blue-dim: var(--carbon-blue-dim);
   --color-stamp-red: var(--stamp-red);
   --color-stamp-red-dim: var(--stamp-red-dim);
+  --color-iron-black: var(--iron-black);
+  --color-charcoal: var(--charcoal);
+  --color-charcoal-hi: var(--charcoal-hi);
+  --color-chrome: var(--chrome);
+  --color-chrome-mid: var(--chrome-mid);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-deep: var(--gold-deep);
+  --color-gold-soft: var(--gold-soft);
 
-  --radius-sm: calc(var(--radius) - 2px);
+  --radius-sm: 0;
   --radius-md: var(--radius);
-  --radius-lg: calc(var(--radius) + 4px);
+  --radius-lg: calc(var(--radius) + 2px);
 }
 
 @layer base {
@@ -116,256 +129,159 @@
   }
   html {
     -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
   }
   body {
     @apply bg-background text-foreground font-sans;
   }
-  /* Browser surfaces carry the brand too. */
+  /* Browser surfaces carry the system too. */
   ::selection {
-    background: var(--gold);
-    color: var(--iron-black);
+    background: var(--white);
+    color: var(--black);
   }
   :focus-visible {
-    outline: 2px solid var(--gold);
-    outline-offset: 2px;
+    outline: 2px solid var(--white);
+    outline-offset: 3px;
   }
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: var(--iron-black);
+    background: var(--black);
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--gold-deep);
-    border: 2px solid var(--iron-black);
-    border-radius: 6px;
+    background: var(--black-3);
+    border: 2px solid var(--black);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--gold);
+    background: var(--grey);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 }
 
 @layer utilities {
-  /* ---- Materials ---- */
+  /* ---- Type roles ---- */
 
-  /* The badge core: charcoal with a raked sheen, like the
-     logo's centre panel behind the IRON letters. */
-  .badge-face {
-    background-color: var(--charcoal);
-    background-image: linear-gradient(
-      165deg,
-      var(--charcoal-hi) 0%,
-      var(--charcoal) 46%,
-      var(--iron-black) 100%
-    );
+  /* The display voice: tall condensed caps, tight leading. */
+  .display {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: 0.01em;
   }
 
-  /* A panel rimmed in gold the way the badge is rimmed. */
-  .badge-panel {
-    position: relative;
-    border: 1px solid var(--gold-soft);
-    box-shadow:
-      inset 0 1px 0 oklch(1 0 0 / 0.07),
-      inset 0 -1px 0 oklch(0 0 0 / 0.55),
-      0 16px 38px -16px oklch(0 0 0 / 0.8);
+  /* The meta voice: typewriter mono, letter-spaced, one size down. */
+  .mono {
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
   }
 
-  /* The bun: a gold gradient face for brand moments. The range stops
-     at --gold rather than --gold-deep because these surfaces carry
-     dark text: gold-deep would put the bottom of every gold button
-     and data plate at 3.49:1. Held here, the worst case is 8.44:1. */
-  .gilded {
-    background-image: linear-gradient(
-      168deg,
-      var(--gold-bright) 0%,
-      oklch(0.79 0.14 86) 52%,
-      var(--gold) 100%
-    );
-  }
-
-  /* The deeper bun gradient, for surfaces that carry NO text. */
-  .gilded-deep {
-    background-image: linear-gradient(
-      168deg,
-      var(--gold-bright) 0%,
-      var(--gold) 44%,
-      var(--gold-deep) 100%
-    );
-  }
-
-  /* Brand lettering is SOLID gold, never a gradient: the gradient's
-     dark end measures 3.15:1 on charcoal (fails), and gradient text
-     is a decorative tell. The logo image carries the real bevel. */
-  .brand-gold {
-    color: var(--gold);
-    text-shadow: 0 1px 0 oklch(0 0 0 / 0.7);
-  }
-
-  /* Chrome headlines, cut rather than printed - the IRON voice. */
+  /* Legacy names from earlier worlds, kept so nothing breaks. */
   .engraved {
-    color: var(--chrome);
-    text-shadow:
-      0 1px 0 oklch(0 0 0 / 0.8),
-      0 -1px 0 oklch(1 0 0 / 0.14);
+    color: var(--white);
   }
-
-  /* Numerals on the event screens: same chrome cut, tabular. */
+  .brand-gold {
+    color: var(--white);
+  }
   .stamp-digits {
     font-family: var(--font-display);
     letter-spacing: 0.01em;
-    color: var(--chrome);
-    text-shadow:
-      0 1px 0 oklch(0 0 0 / 0.8),
-      0 -1px 0 oklch(1 0 0 / 0.14);
+    color: var(--white);
   }
 
-  /* Legacy alias used across the event screens. */
+  /* ---- Surfaces ---- */
+
+  /* A flat panel one step up from black. */
+  .badge-face {
+    background-color: var(--black-2);
+  }
+  /* A hairline-ruled panel. No shadow: this world is flat print. */
+  .badge-panel {
+    border: 1px solid var(--line);
+  }
+  /* Primary fill on black is white; "gilded" is a legacy name. */
+  .gilded {
+    background-color: var(--white);
+  }
+  .gilded-deep {
+    background-color: var(--off-white);
+  }
   .ticket-shadow {
-    box-shadow:
-      inset 0 1px 0 oklch(1 0 0 / 0.07),
-      inset 0 -1px 0 oklch(0 0 0 / 0.55),
-      0 16px 38px -16px oklch(0 0 0 / 0.8);
+    border: 1px solid var(--line);
   }
 
-  /* ---- Dividers ---- */
-
-  /* A thin gold rule: the badge's rim, used as the only
-     section divider on every surface. */
-  .gold-seam {
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      var(--gold-soft) 10%,
-      var(--gold) 50%,
-      var(--gold-soft) 90%,
-      transparent
-    );
-    opacity: 0.65;
+  /* Inside a white panel the global white focus ring would vanish. */
+  .light-panel :focus-visible {
+    outline-color: var(--black);
   }
 
-  /* Legacy seam names from the event screens, restyled. */
+  /* ---- Rules ---- */
+  .gold-seam,
   .perf-seam {
     height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      var(--gold-soft) 10%,
-      var(--gold) 50%,
-      var(--gold-soft) 90%,
-      transparent
-    );
-    opacity: 0.65;
+    background: var(--line);
   }
   .perf-seam-v {
     width: 1px;
-    background: linear-gradient(
-      180deg,
-      transparent,
-      var(--gold-soft) 10%,
-      var(--gold) 50%,
-      var(--gold-soft) 90%,
-      transparent
-    );
-    opacity: 0.65;
+    background: var(--line);
+  }
+
+  /* ---- Photo slots ----
+     Until a real photo lands in public/photos/, the slot holds
+     its exact space and names the file it is waiting for. */
+  .photo-slot-dark {
+    background-color: var(--black-2);
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+  .photo-slot-light {
+    background-color: var(--off-white);
+    box-shadow: inset 0 0 0 1px var(--line-dark);
   }
 
   /* ---- Motion ----
-     Gold is a polished material, so this world eases; the old
-     stepped/no-ease grammar belonged to paper dockets. */
+     This world is print: things appear, they do not glide. */
   .stepped {
     transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   }
-
-  .press {
-    transition:
-      transform 120ms cubic-bezier(0.2, 0, 0, 1),
-      box-shadow 120ms cubic-bezier(0.2, 0, 0, 1);
-  }
-  .press:active {
-    transform: translateY(2px);
-    box-shadow:
-      inset 0 2px 6px oklch(0 0 0 / 0.6),
-      0 1px 0 oklch(1 0 0 / 0.05);
-  }
-  /* Legacy alias. */
+  .press,
   .plate-press {
-    transition:
-      transform 120ms cubic-bezier(0.2, 0, 0, 1),
-      box-shadow 120ms cubic-bezier(0.2, 0, 0, 1);
+    transition: transform 100ms cubic-bezier(0.2, 0, 0, 1), background-color 120ms ease-out, color 120ms ease-out;
   }
+  .press:active,
   .plate-press:active {
-    transform: translateY(2px);
-    box-shadow:
-      inset 0 2px 6px oklch(0 0 0 / 0.6),
-      0 1px 0 oklch(1 0 0 / 0.05);
+    transform: translateY(1px);
   }
-
-  /* The one authored moment: light travelling across gold. */
   .shine-sweep {
     isolation: isolate;
   }
-  .shine-sweep::after {
-    content: '';
-    position: absolute;
-    top: -10%;
-    bottom: -10%;
-    left: 0;
-    width: 42%;
-    pointer-events: none;
-    background: linear-gradient(
-      104deg,
-      transparent 0%,
-      oklch(0.9 0.09 90 / 0.16) 40%,
-      oklch(0.97 0.06 95 / 0.3) 52%,
-      transparent 100%
-    );
-    mix-blend-mode: screen;
-    animation: shine-sweep 2400ms cubic-bezier(0.22, 1, 0.36, 1) 260ms both;
-  }
 
-  /* A press, not a bounce: polished metal decelerates, it does not
-     wobble. Exponential ease-out matches the rest of this world. */
   .animate-stamp-thunk {
-    animation: stamp-thunk 220ms cubic-bezier(0.16, 1, 0.3, 1);
+    animation: stamp-thunk 200ms cubic-bezier(0.16, 1, 0.3, 1);
   }
-
   .animate-tear-in {
-    animation: tear-in 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: tear-in 260ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
-
   .animate-flash-late {
     animation: flash-late 1100ms ease-in-out infinite;
   }
-
   .animate-blink {
     animation: blink 1200ms ease-in-out infinite;
   }
 }
 
-@keyframes shine-sweep {
-  from {
-    transform: translateX(-120%);
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-  }
-  to {
-    transform: translateX(320%);
-    opacity: 0;
-  }
-}
-
 @keyframes stamp-thunk {
   0% { transform: scale(1); }
-  40% { transform: scale(0.94); }
+  40% { transform: scale(0.96); }
   100% { transform: scale(1); }
 }
 
 @keyframes tear-in {
-  from { transform: translateY(-8px); opacity: 0; }
+  from { transform: translateY(-6px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 
@@ -380,10 +296,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .shine-sweep::after {
-    animation: none;
-    opacity: 0;
-  }
   .press,
   .plate-press,
   .stepped {

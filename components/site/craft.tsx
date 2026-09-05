@@ -1,21 +1,22 @@
-import { DataPlate, Plate, SectionHeading } from "@/components/site/plate";
+import { PhotoSlot } from "@/components/site/photo-slot";
+import { Container, SectionHeading } from "@/components/site/plate";
 
 const NON_NEGOTIABLES = [
   {
-    spec: "80/20",
-    specLabel: "Beef blend",
+    slot: "craft-1",
+    brief: "A patty hitting the griddle, the crust just forming.",
     title: "The 80/20 Smash",
     body: "Premium ground beef pressed hard onto high-heat steel to create a deeply caramelized, savory crust that seals in natural juices.",
   },
   {
-    spec: "50/50",
-    specLabel: "Sauce blend",
+    slot: "craft-2",
+    brief: "The house sauce being spooned or drizzled onto a burger.",
     title: "The Signature House Sauce",
     body: "Our custom 50/50 blend of tangy burger sauce and rich chili mayo—delivering a creamy, zesty finish balanced for guests of all ages.",
   },
   {
-    spec: "Live",
-    specLabel: "Cooked on-site",
+    slot: "craft-3",
+    brief: "The stall in action: griddle, steam, and a queue of guests.",
     title: "The Live Experience",
     body: "Hot, fresh food served with real sizzle and aroma, elevating the atmosphere of your event.",
   },
@@ -24,47 +25,42 @@ const NON_NEGOTIABLES = [
 export function Craft() {
   return (
     <section id="about" className="py-16 lg:py-24">
-      <div className="mx-auto max-w-6xl px-5 lg:px-8">
-        <div className="max-w-3xl">
-          <SectionHeading>Engineered for Speed. Crafted for Maximum Sear.</SectionHeading>
-          <div className="mt-6 space-y-5 text-base leading-relaxed text-chrome-mid sm:text-lg">
-            <p>
-              We believe great burgers shouldn&apos;t be sitting under heat lamps or sitting in
-              delivery boxes. We bring a commercial live-cooking setup directly to your venue,
-              smashing fresh 80g beef patties to order right in front of your guests.
-            </p>
-            <p>
-              By combining high-heat searing techniques with our custom Kitchen Display System
-              (KDS), we eliminate long lines while delivering crisp, lace-edged patties, juicy
-              centers, and pillowy toasted brioche every single time.
-            </p>
-          </div>
+      <Container>
+        <SectionHeading sub="Live smash burgers, cooked to order at your venue.">
+          Engineered for Speed. Crafted for Maximum Sear.
+        </SectionHeading>
+
+        <div className="mt-8 grid gap-6 text-base leading-relaxed text-white/85 lg:grid-cols-2 lg:gap-10 lg:text-lg">
+          <p>
+            We believe great burgers shouldn&apos;t be sitting under heat lamps or sitting in
+            delivery boxes. We bring a commercial live-cooking setup directly to your venue,
+            smashing fresh 80g beef patties to order right in front of your guests.
+          </p>
+          <p>
+            By combining high-heat searing techniques with our custom Kitchen Display System
+            (KDS), we eliminate long lines while delivering crisp, lace-edged patties, juicy
+            centers, and pillowy toasted brioche every single time.
+          </p>
         </div>
 
-        <h3 className="engraved mt-14 font-display text-2xl tracking-wide uppercase">
-          Our Three Non-Negotiables
-        </h3>
+        <h3 className="display mt-16 text-3xl text-white sm:text-4xl">Our Three Non-Negotiables</h3>
 
-        <ul className="mt-6 grid gap-4 lg:grid-cols-3">
+        <ul className="mt-6 grid gap-8 sm:grid-cols-3 sm:gap-5">
           {NON_NEGOTIABLES.map((item) => (
             <li key={item.title}>
-              <Plate className="flex h-full flex-col gap-5 px-6 py-8 sm:px-7">
-                <DataPlate
-                  value={item.spec}
-                  label={item.specLabel}
-                  className="self-start"
-                />
-                <div>
-                  <h4 className="engraved font-display text-2xl tracking-wide uppercase">
-                    {item.title}
-                  </h4>
-                  <p className="mt-3 text-base leading-relaxed text-chrome-mid">{item.body}</p>
-                </div>
-              </Plate>
+              <PhotoSlot
+                slot={item.slot}
+                brief={item.brief}
+                alt={item.title}
+                sizes="(max-width: 640px) 100vw, 33vw"
+                className="aspect-[4/3]"
+              />
+              <h4 className="display mt-4 text-3xl text-white">{item.title}</h4>
+              <p className="mono mt-2 text-[0.9rem] leading-relaxed text-grey">{item.body}</p>
             </li>
           ))}
         </ul>
-      </div>
+      </Container>
     </section>
   );
 }

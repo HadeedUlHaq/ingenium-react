@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { CheckCircle2, Loader2, Send } from "lucide-react";
-import { Plate, SectionHeading } from "@/components/site/plate";
+import { CheckCircle2, Loader2 } from "lucide-react";
+import { Container } from "@/components/site/plate";
 import { cn } from "@/lib/utils";
 
 const EVENT_TYPES = [
@@ -15,12 +15,10 @@ const EVENT_TYPES = [
 const BURGER_COUNTS = ["50–100", "100–200", "200–300+"] as const;
 
 const fieldClass =
-  "w-full border border-white/15 bg-iron-black px-4 py-3.5 text-base text-chrome " +
-  "placeholder:text-chrome-mid/70 focus:border-gold focus:outline-none " +
-  "focus-visible:outline-none";
+  "mt-2 w-full rounded-[2px] border border-black bg-white px-4 py-3.5 text-base text-black " +
+  "placeholder:text-grey-ink focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black";
 
-const labelClass =
-  "block text-[0.68rem] font-semibold tracking-[0.16em] text-chrome-mid uppercase";
+const labelClass = "mono block text-[0.72rem] uppercase tracking-[0.14em] text-grey-ink";
 
 export function BookingForm() {
   const [state, setState] = useState<"idle" | "sending" | "sent">("idle");
@@ -69,81 +67,80 @@ export function BookingForm() {
 
   return (
     <section id="booking" className="py-16 lg:py-24">
-      <div className="mx-auto max-w-3xl px-5 lg:px-8">
-        <SectionHeading>Reserve Your Event Date</SectionHeading>
-        <p className="mt-4 text-base leading-relaxed text-chrome-mid sm:text-lg">
-          Complete the form below and we will respond with a tailored proposal and quote within 24
-          hours.
-        </p>
+      <Container className="max-w-3xl">
+        {/* The one white panel on the page: a card handed across the counter. */}
+        <div className="light-panel bg-white px-6 py-8 text-black sm:px-10 sm:py-12">
+          <h2 className="display text-[2.75rem] sm:text-6xl">Reserve Your Event Date</h2>
+          <p className="mono mt-3 max-w-xl text-[0.95rem] leading-relaxed text-grey-ink">
+            Complete the form below and we will respond with a tailored proposal and quote
+            within 24 hours.
+          </p>
 
-        <Plate className="mt-8 px-6 py-8 sm:px-9 sm:py-10">
           {state === "sent" ? (
-            <div className="py-10 text-center">
-              <CheckCircle2 className="mx-auto size-14 text-signal-red-bright" strokeWidth={1.75} />
-              <h3 className="engraved mt-5 font-display text-3xl tracking-wide uppercase">
-                Inquiry Sent
-              </h3>
-              <p className="mx-auto mt-3 max-w-md text-base leading-relaxed text-chrome-mid">
+            <div className="mt-10 border-t border-line-dark py-10 text-center">
+              <CheckCircle2 className="mx-auto size-12 text-black" strokeWidth={1.5} />
+              <h3 className="display mt-5 text-4xl">Inquiry Sent</h3>
+              <p className="mono mx-auto mt-3 max-w-md text-[0.9rem] leading-relaxed text-grey-ink">
                 Thank you. We&apos;ve received your details and will respond with a tailored
                 proposal and quote within 24 hours.
               </p>
               <button
                 type="button"
                 onClick={() => setState("idle")}
-                className="press badge-face badge-panel mt-7 px-6 py-3 font-display text-base tracking-wide text-chrome uppercase"
+                className="press display mt-7 rounded-[2px] border border-black px-6 py-3 text-lg text-black hover:bg-black hover:text-white"
               >
                 Send another inquiry
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} noValidate={false} className="grid gap-5 sm:grid-cols-2">
+            <form onSubmit={handleSubmit} className="mt-8 grid gap-5 border-t border-line-dark pt-8 sm:grid-cols-2">
               <div className="sm:col-span-2">
                 <label htmlFor="fullName" className={labelClass}>
                   Full Name
                 </label>
-                <input id="fullName" name="fullName" required autoComplete="name" className={cn(fieldClass, "mt-2")} />
+                <input id="fullName" name="fullName" required autoComplete="name" className={fieldClass} />
               </div>
 
               <div className="sm:col-span-2">
                 <label htmlFor="organization" className={labelClass}>
                   Organization / Event Name
                 </label>
-                <input id="organization" name="organization" autoComplete="organization" className={cn(fieldClass, "mt-2")} />
+                <input id="organization" name="organization" autoComplete="organization" className={fieldClass} />
               </div>
 
               <div>
                 <label htmlFor="email" className={labelClass}>
                   Email Address
                 </label>
-                <input id="email" name="email" type="email" required autoComplete="email" className={cn(fieldClass, "mt-2")} />
+                <input id="email" name="email" type="email" required autoComplete="email" className={fieldClass} />
               </div>
 
               <div>
                 <label htmlFor="phone" className={labelClass}>
                   Phone / WhatsApp Number
                 </label>
-                <input id="phone" name="phone" type="tel" required autoComplete="tel" className={cn(fieldClass, "mt-2")} />
+                <input id="phone" name="phone" type="tel" required autoComplete="tel" className={fieldClass} />
               </div>
 
               <div>
                 <label htmlFor="eventDate" className={labelClass}>
                   Event Date
                 </label>
-                <input id="eventDate" name="eventDate" type="date" className={cn(fieldClass, "mt-2 [color-scheme:dark]")} />
+                <input id="eventDate" name="eventDate" type="date" className={cn(fieldClass, "[color-scheme:light]")} />
               </div>
 
               <div>
                 <label htmlFor="venue" className={labelClass}>
                   Venue Location &amp; Postcode
                 </label>
-                <input id="venue" name="venue" className={cn(fieldClass, "mt-2")} />
+                <input id="venue" name="venue" className={fieldClass} />
               </div>
 
               <div>
                 <label htmlFor="eventType" className={labelClass}>
                   Event Type
                 </label>
-                <select id="eventType" name="eventType" defaultValue="" className={cn(fieldClass, "mt-2")}>
+                <select id="eventType" name="eventType" defaultValue="" className={fieldClass}>
                   <option value="" disabled>
                     Select…
                   </option>
@@ -159,7 +156,7 @@ export function BookingForm() {
                 <label htmlFor="burgerCount" className={labelClass}>
                   Estimated Burger Count
                 </label>
-                <select id="burgerCount" name="burgerCount" defaultValue="" className={cn(fieldClass, "mt-2")}>
+                <select id="burgerCount" name="burgerCount" defaultValue="" className={fieldClass}>
                   <option value="" disabled>
                     Select…
                   </option>
@@ -174,20 +171,12 @@ export function BookingForm() {
               <fieldset className="sm:col-span-2">
                 <legend className={labelClass}>Venue Setup Details</legend>
                 <div className="mt-3 space-y-3">
-                  <label className="flex items-start gap-3 text-base text-chrome">
-                    <input
-                      type="checkbox"
-                      name="outdoorSpace"
-                      className="mt-0.5 size-5 shrink-0 accent-[var(--signal-red)]"
-                    />
+                  <label className="flex items-start gap-3 text-[0.95rem]">
+                    <input type="checkbox" name="outdoorSpace" className="mt-0.5 size-5 shrink-0 accent-black" />
                     Outdoor space available (minimum 3m x 3m)
                   </label>
-                  <label className="flex items-start gap-3 text-base text-chrome">
-                    <input
-                      type="checkbox"
-                      name="parkingAccess"
-                      className="mt-0.5 size-5 shrink-0 accent-[var(--signal-red)]"
-                    />
+                  <label className="flex items-start gap-3 text-[0.95rem]">
+                    <input type="checkbox" name="parkingAccess" className="mt-0.5 size-5 shrink-0 accent-black" />
                     Parking / loading access available
                   </label>
                 </div>
@@ -197,13 +186,13 @@ export function BookingForm() {
                 <label htmlFor="notes" className={labelClass}>
                   Additional Notes
                 </label>
-                <textarea id="notes" name="notes" rows={4} className={cn(fieldClass, "mt-2 resize-y")} />
+                <textarea id="notes" name="notes" rows={4} className={cn(fieldClass, "resize-y")} />
               </div>
 
               {error ? (
                 <p
                   role="alert"
-                  className="sm:col-span-2 border border-signal-red/50 bg-signal-red/10 px-4 py-3 text-base text-signal-red-bright"
+                  className="mono border border-signal-red px-4 py-3 text-[0.9rem] text-signal-red sm:col-span-2"
                 >
                   {error}
                 </p>
@@ -212,7 +201,7 @@ export function BookingForm() {
               <button
                 type="submit"
                 disabled={state === "sending"}
-                className="press mt-1 flex items-center justify-center gap-2.5 bg-signal-red px-8 py-4 font-display text-xl tracking-wide text-white uppercase disabled:opacity-60 sm:col-span-2"
+                className="press display mt-1 flex items-center justify-center gap-2.5 rounded-[2px] bg-black px-8 py-4 text-2xl text-white hover:bg-black-3 disabled:opacity-60 sm:col-span-2"
               >
                 {state === "sending" ? (
                   <>
@@ -220,16 +209,13 @@ export function BookingForm() {
                     Sending…
                   </>
                 ) : (
-                  <>
-                    <Send className="size-5" aria-hidden="true" />
-                    Send Inquiry
-                  </>
+                  "Send Inquiry"
                 )}
               </button>
             </form>
           )}
-        </Plate>
-      </div>
+        </div>
+      </Container>
     </section>
   );
 }

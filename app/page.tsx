@@ -6,9 +6,10 @@ import { Packages } from "@/components/site/packages";
 import { WhyUs } from "@/components/site/why-us";
 import { BookingForm } from "@/components/site/booking-form";
 import { Faq } from "@/components/site/faq";
+import { Gallery } from "@/components/site/gallery";
 import { FAQS } from "@/lib/faqs";
 import { SiteFooter } from "@/components/site/footer";
-import { Seam } from "@/components/site/plate";
+import { PhotoSlot } from "@/components/site/photo-slot";
 
 // Only facts the brief actually states - no invented ratings, prices, or hours.
 const JSON_LD = {
@@ -39,7 +40,7 @@ const JSON_LD = {
 
 export default function Home() {
   return (
-    <div className="min-h-dvh bg-gunmetal-deep text-steel [scroll-behavior:smooth]">
+    <div className="min-h-dvh bg-black text-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
@@ -47,16 +48,24 @@ export default function Home() {
       <SiteNav />
       <main>
         <Hero />
-        <Seam />
         <Craft />
-        <Seam />
+        <PhotoSlot
+          slot="band-1"
+          brief="A wide shot of the griddle mid-service: steam, sear, tongs."
+          alt="The griddle mid-service"
+          className="aspect-[16/7] sm:aspect-[21/7]"
+        />
         <Packages />
-        <Seam />
         <WhyUs />
-        <Seam />
+        <PhotoSlot
+          slot="band-2"
+          brief="Guests eating at an event, evening light, the stall behind them."
+          alt="Guests at an Iron Burger event"
+          className="aspect-[16/7] sm:aspect-[21/7]"
+        />
         <BookingForm />
-        <Seam />
         <Faq />
+        <Gallery />
       </main>
       <SiteFooter />
     </div>

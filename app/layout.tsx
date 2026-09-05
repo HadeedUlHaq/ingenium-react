@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import { Big_Shoulders, Libre_Franklin } from "next/font/google";
+import { Bebas_Neue, Courier_Prime, Libre_Franklin } from "next/font/google";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -8,30 +8,38 @@ import "./globals.css";
 // the rendered HTML, so the direction contract is emitted as a literal
 // HTML comment via dangerouslySetInnerHTML instead.
 const DIRECTION_CONTRACT = `<!--
-THESIS: one badge, worn by every surface. The marketing site and the
-event screens are cut from the same brand object - gold bun, chrome
-IRON letters, charcoal core - refusing both the dark-photo-hero
-template caterers ship and the split-personality of a branded site
-bolted onto unbranded tooling.
-OWN-WORLD: charcoal ground (iron-black / charcoal), gold carrying the
-brand (bright / gold / deep, gilded gradient faces), chrome as the
-voice (engraved headlines and numerals), signal red reserved for CTAs
-and heat; sesame studs where fasteners would go; one thin gold rule as
-the only divider. Big Shoulders display over Libre Franklin body.
-STORY: an organizer lands on the badge, reads capacity and halal proof
-as gilded data plates, and books a date; the same badge then runs the
-counter, the grill, and the customer's own screen on event day.
-FIRST VIEWPORT: the badge full-bleed on a gold-rimmed charcoal panel,
-chrome headline beneath, red CTA, three gilded trust plates.
-FORM: The Gold Badge - pinned by the brand logo itself, no roll.
+THESIS: a burger counter's own graphic language - the one the best
+London smash-burger brands use - executed straight, at full fidelity,
+across the whole product. It refuses both the badge-themed site that
+preceded it and the warm-cream food-blog default: the UI is monochrome
+so that the food, when the photos land, is the only colour on the page.
+OWN-WORLD: pure black ground with one raised near-black band; white
+condensed display caps at monumental scale (Bebas Neue); typewriter
+mono meta in grey (Courier Prime); Libre Franklin body; square
+corners; hairline rules as the only divider; white panels as the rare
+inversion; full-bleed photo slots that hold their space until filled.
+STORY: an organizer lands on a full-bleed hero, reads the offer as a
+counter menu would print it, sees capacity as ruled figures, and books
+on a white panel that reads like a card handed across the counter.
+FIRST VIEWPORT: full-bleed photo slot, the headline set huge and
+centred over it, black header with the badge and a BOOK link.
+FORM: The Counter - the user pinned bleecker.co.uk as the reference;
+standing-exit canon executed at its craft level, no roll.
 FINISH: unreviewed and undocumented is unfinished; this build ends
-with the finish review, the verdict, and DESIGN.md carrying the token
-tables and the rules that keep them accessible.
+with the finish review, the verdict, and DESIGN.md.
 -->`;
 
-const display = Big_Shoulders({
+const display = Bebas_Neue({
   subsets: ["latin"],
+  weight: "400",
   variable: "--font-display",
+  display: "swap",
+});
+
+const mono = Courier_Prime({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -74,7 +82,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#15130f",
+  themeColor: "#000000",
 };
 
 export default function RootLayout({
@@ -84,7 +92,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${display.variable} ${body.variable} font-sans antialiased`}>
+      <body className={`${display.variable} ${mono.variable} ${body.variable} font-sans antialiased`}>
         <div
           style={{ display: "none" }}
           suppressHydrationWarning

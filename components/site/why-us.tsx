@@ -1,21 +1,21 @@
-import { DataPlate, Plate, SectionHeading } from "@/components/site/plate";
+import { Container, SectionHeading } from "@/components/site/plate";
 
 const REASONS = [
   {
-    spec: "160–175+",
-    specLabel: "Burgers per event",
+    figure: "160–175+",
+    unit: "burgers per event",
     title: "High-Volume Capability",
     body: "Our streamlined assembly process routinely manages 160–175+ burgers per event without compromising speed or consistency.",
   },
   {
-    spec: "3m × 3m",
-    specLabel: "Gazebo footprint",
+    figure: "3m × 3m",
+    unit: "gazebo footprint",
     title: "Self-Contained Setup",
     body: "Compact 3m x 3m gazebo footprint with commercial-grade griddles, refrigeration, and safety barriers.",
   },
   {
-    spec: "Per-head",
-    specLabel: "Or flat rate",
+    figure: "Per-head",
+    unit: "or flat-rate packages",
     title: "Transparent Pricing",
     body: "Clear per-head or flat-rate event packages with automated, itemized invoicing.",
   },
@@ -24,29 +24,25 @@ const REASONS = [
 export function WhyUs() {
   return (
     <section className="py-16 lg:py-24">
-      <div className="mx-auto max-w-6xl px-5 lg:px-8">
-        <SectionHeading>Why Organizers Partner With Us</SectionHeading>
+      <Container>
+        <SectionHeading sub="Capacity, footprint and pricing, in plain figures.">
+          Why Organizers Partner With Us
+        </SectionHeading>
 
-        <ul className="mt-10 grid gap-4 lg:grid-cols-3">
-          {REASONS.map((reason) => (
-            <li key={reason.title}>
-              <Plate className="flex h-full flex-col gap-5 px-6 py-8 sm:px-7">
-                <DataPlate
-                  value={reason.spec}
-                  label={reason.specLabel}
-                  className="self-start"
-                />
-                <div>
-                  <h3 className="engraved font-display text-2xl tracking-wide uppercase">
-                    {reason.title}
-                  </h3>
-                  <p className="mt-3 text-base leading-relaxed text-chrome-mid">{reason.body}</p>
-                </div>
-              </Plate>
+        <ul className="mt-10 grid border-t border-line lg:grid-cols-3">
+          {REASONS.map((r) => (
+            <li
+              key={r.title}
+              className="border-b border-line py-8 lg:border-r lg:border-b-0 lg:pr-8 lg:last:border-r-0 lg:[&:not(:first-child)]:pl-8"
+            >
+              <p className="display text-6xl text-white lg:text-7xl">{r.figure}</p>
+              <p className="mono mt-1 text-sm text-grey">{r.unit}</p>
+              <h3 className="display mt-7 text-3xl text-white">{r.title}</h3>
+              <p className="mt-2 max-w-md text-[0.95rem] leading-relaxed text-white/85">{r.body}</p>
             </li>
           ))}
         </ul>
-      </div>
+      </Container>
     </section>
   );
 }

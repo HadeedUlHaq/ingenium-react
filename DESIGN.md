@@ -1,192 +1,185 @@
-# Iron Burger — Design System
+# Iron Burger — Design System ("The Counter")
 
 <!-- impeccable:design-doc 1 -->
 
-The whole product wears one badge. The marketing site and the event
-screens (`/order`, `/kds`, `/status`, `/staff`, `/inquiries`) are cut from the
-same brand object: **gold bun, chrome IRON letterforms, charcoal core, one
-signal red**. There is no second look.
+**Reference: [bleecker.co.uk](https://www.bleecker.co.uk/)**, pinned by the user on
+2026-09-05 and executed straight, at that craft level. The whole product wears
+it: the marketing site and the event screens (`/order`, `/kds`, `/status`,
+`/staff`, `/inquiries`).
 
-Everything lives in [app/globals.css](app/globals.css) — tokens in `:root`,
-Tailwind bindings in `@theme inline`, materials and motion in
-`@layer utilities`. Change a value there and it changes everywhere.
+The idea is a burger counter's own graphic language. The UI is **monochrome
+so that the food is the only colour on the page**. Until real photographs
+land, every photo slot is a dark panel holding its exact space.
+
+Everything lives in [app/globals.css](app/globals.css): tokens in `:root`,
+Tailwind bindings in `@theme inline`, roles and surfaces in `@layer utilities`.
 
 ---
 
 ## 1. Palette
 
-Every value is OKLCH so lightness is perceptual and contrast is predictable.
-
-### Ground — the badge's charcoal core
-
 | Token | Value | Role |
 |---|---|---|
-| `--iron-black` | `oklch(0.15 0.012 60)` | Page ground, deepest wells, text on gold |
-| `--charcoal` | `oklch(0.21 0.01 60)` | Panel face (`.badge-face`) |
-| `--charcoal-hi` | `oklch(0.30 0.01 60)` | Top edge of the panel's raked gradient |
+| `--black` | `oklch(0 0 0)` | Page ground. Pure black, like the reference. |
+| `--black-2` | `oklch(0.20 0 0)` | The one raised band (packages) and every placeholder panel |
+| `--black-3` | `oklch(0.30 0 0)` | Hover on black buttons; scrollbar thumb |
+| `--white` | `oklch(1 0 0)` | Display type, primary buttons on black, body copy at 85% |
+| `--off-white` | `oklch(0.96 0 0)` | Package cards; hover on white buttons |
+| `--grey` | `oklch(0.66 0.004 20)` | Mono meta on black — 6.74:1 |
+| `--grey-ink` | `oklch(0.42 0.004 20)` | Mono meta on white — 8.48:1 |
+| `--line` | white at 14% | Hairline on black |
+| `--line-dark` | black at 16% | Hairline on white |
+| `--stone` | `oklch(0.86 0.01 160)` | Reserved. A whisper of grey-green for future tags |
 
-### Gold — carries the brand
+There is **no brand accent colour**. The Iron Burger badge (gold and chrome)
+is the single coloured object on any screen, which is exactly why it reads.
 
-| Token | Value | Role |
-|---|---|---|
-| `--gold-bright` | `oklch(0.85 0.13 88)` | Gradient top, highlights, seed caps |
-| `--gold` | `oklch(0.74 0.145 84)` | The brand gold. Text on dark, rims, active states |
-| `--gold-deep` | `oklch(0.52 0.11 72)` | **Non-text only** — deep gradient end, borders, scrollbar |
-| `--gold-soft` | `gold / 0.18` | Panel rims, hairlines, low-alpha fills |
+### Functional status colours — never restyled
 
-### Chrome — the voice
-
-| Token | Value | Role |
-|---|---|---|
-| `--chrome` | `oklch(0.90 0.006 250)` | Headlines, primary body, ticket numerals |
-| `--chrome-mid` | `oklch(0.66 0.008 250)` | Secondary body, labels, meta |
-
-### Signal red — CTAs and heat only
-
-| Token | Value | Role |
-|---|---|---|
-| `--signal-red` | `oklch(0.54 0.19 28)` | CTA fills. L is pinned at 0.54 so white text clears 4.5:1 |
-| `--signal-red-bright` | `oklch(0.68 0.19 30)` | Icons and red text **on dark only** |
-| `--signal-red-soft` | `red / 0.16` | LATE flash ground |
-
-Red is never decorative. If something is red it is either an action or a
-warning.
-
-### Functional status — meaning outranks brand
-
-These say something to a customer or a cook, so the brand never overrides
-them.
-
-| Token | Value | Role |
-|---|---|---|
-| `--cooking-yellow` / `-deep` | `oklch(0.84 0.16 88)` / `oklch(0.26 0.07 60)` | Customer status: PREPARING |
-| `--pass-green` / `-bright` / `-deep` | `oklch(0.6 0.16 150)` / `oklch(0.74 0.19 148)` / `oklch(0.24 0.08 150)` | READY, pass actions |
+| Token | Meaning |
+|---|---|
+| `--cooking-yellow` / `-deep` | Customer status: PREPARING |
+| `--pass-green` / `-bright` / `-deep` | READY; the kitchen's "mark ready" |
+| `--signal-red` / `-bright` / `-soft` | LATE flash on the kitchen display; destructive actions; form errors |
 
 ### Semantic aliases
 
-The event screens were written against an older vocabulary. Those names are
-re-pointed here rather than rewritten in markup, which is what let the whole
-app re-skin without touching its layouts:
+The event screens and `components/ticket/*`, `components/gate/*` were written
+against an older vocabulary. Those names are re-pointed here rather than
+edited in markup, which is what lets the whole app re-skin in one file:
 
-`--paper` → charcoal · `--paper-dim` → iron-black · `--ink` → chrome ·
-`--ink-soft` → chrome-mid · `--carbon-blue` → gold · `--stamp-red` → signal-red-bright
+`--paper`→black · `--paper-dim`→black-2 · `--ink`→white · `--ink-soft`→grey ·
+`--carbon-blue`→white · `--stamp-red`→signal-red-bright ·
+`--iron-black`→black · `--charcoal`→black-2 · `--chrome`→white ·
+`--chrome-mid`→grey · `--gold`/`--gold-bright`→white · `--gold-deep`→grey
+
+Utilities carry the same aliases: `.gilded` is a white fill, `.badge-face` is
+black-2, `.badge-panel` and `.ticket-shadow` are a hairline, `.engraved`,
+`.brand-gold` and `.stamp-digits` are plain white type.
 
 ---
 
-## 2. The rules that keep it accessible
+## 2. Verified contrast
 
-Measured, not estimated. Every pair below was computed before it shipped.
-
-**Verified pairs** (WCAG AA, 4.5:1 for text):
+Every pair was computed before it shipped. Two dips were caught and fixed in
+the same pass: a de-emphasised footer link at 3.66:1 and input placeholders
+at 3.83:1.
 
 | Pair | Ratio |
 |---|---|
-| chrome on iron-black | 14.62:1 |
-| chrome on charcoal | 13.17:1 |
-| chrome-mid on charcoal (secondary body) | 5.71:1 |
-| gold on charcoal | 7.61:1 |
-| iron-black on gold (worst gradient stop) | 8.44:1 |
-| white on signal-red (CTA) | 5.57:1 |
-| signal-red-bright on charcoal | 5.66:1 |
-| iron-black on pass-green | 5.35:1 |
-| cooking-deep on cooking-yellow | 9.58:1 |
+| white on black | 21.0 |
+| white/85 body on black | 14.8 |
+| grey mono on black | 6.74 |
+| grey mono on black-2 | 5.81 |
+| black on white / off-white | 21.0 / 18.7 |
+| grey-ink on white / off-white | 8.48 / 7.55 |
+| signal-red error on white | 5.57 |
+| white on signal-red (danger button) | 5.57 |
+| black on pass-green (ready) | 5.70 |
+| cooking-deep on cooking-yellow | 9.58 |
 
-**Three hard bans**, each from a measured failure:
+Hairlines (`--line`, `--line-dark`) measure ~1.4:1. They are decorative
+dividers, not component boundaries, and are exempt; anything a user must
+perceive to operate (input borders, buttons) uses solid black or white.
 
-1. **Never gold text on red** — 2.39:1.
-2. **Never `--gold-deep` behind text** — 3.15:1 on charcoal. It is a
-   border/gradient-end colour only. This is why `.gilded` stops at `--gold`
-   and the deeper ramp lives in `.gilded-deep`, which carries no text.
-3. **Never gradient text.** Besides being a decorative tell, a gold gradient's
-   dark end fails. Brand lettering is solid `--gold` (`.brand-gold`); the
-   logo image carries the real bevel.
-
-**When adding a colour pair, compute it.** Two live bugs were caught this way
-that no visual check would have surfaced: a selected Ready tab at **1.11:1**
-(dark green on charcoal — invisible), and gold buttons failing along the
-bottom of their own gradient.
+**Rules:** grey is for mono meta only, never for body copy. Body copy on black
+is `white/85`. Nothing under 14px. No gradient text, anywhere.
 
 ---
 
 ## 3. Type
 
-Two faces, loaded in [app/layout.tsx](app/layout.tsx).
+Three faces, loaded in [app/layout.tsx](app/layout.tsx). The reference uses a
+custom condensed face, Neue Haas Grotesk and a daisy-wheel typewriter; these
+are their free equivalents.
 
-| Face | Variable | Use |
+| Face | Variable | Role |
 |---|---|---|
-| **Big Shoulders** | `--font-display` (aliases: `--font-stamp`, `--font-plate`) | Headlines, ticket numerals, buttons, tabs. Condensed and machined, matching the logo's letterforms |
-| **Libre Franklin** | `--font-body` (alias: `--font-dotmatrix`) | Body, labels, form fields |
+| **Bebas Neue** (400 only) | `--font-display` (aliases `--font-stamp`, `--font-plate`) | Every heading, button, nav link, ticket numeral. Always uppercase via `.display`. |
+| **Courier Prime** 400/700 | `--font-mono` (alias `--font-dotmatrix`) | Meta lines, sublines, labels, card excerpts, FAQ answers, footer. Via `.mono`. |
+| **Libre Franklin** | `--font-body` | Long-form body paragraphs only. |
 
-Labels and meta use `uppercase` with `tracking-[0.14em]`–`[0.16em]` at
-`text-[0.68rem]`. Headlines run `text-3xl` → `text-7xl` with
-`leading-[0.92]`–`[0.95]`.
+Scale (desktop → mobile): hero h1 `6.75rem → 3.25rem`; section h2 `4rem →
+2.75rem`; card h3 `2.25rem`; proof figures `4.5rem` (why-us) / `2.25rem` (hero);
+mono meta `0.95rem`, labels `0.72rem` at `tracking-[0.14em]`.
+
+`.display` sets `line-height: 0.95` and `letter-spacing: 0.01em`. Headings
+carry their own weight: the mono subline sits **below** a heading, never above
+it as an eyebrow.
 
 ---
 
-## 4. Materials
+## 4. Surfaces and components
 
-| Class | What it is |
-|---|---|
-| `.badge-face` | Charcoal panel with a raked sheen — the badge's centre behind the IRON letters |
-| `.badge-panel` | The gold rim: hairline gold border, inner bevel, seated drop shadow |
-| `.gilded` | Gold gradient for surfaces **carrying dark text** (bright → gold) |
-| `.gilded-deep` | The full bun ramp (bright → gold-deep) — **no text** |
-| `.engraved` | Chrome headline cut into the surface, not printed on it |
-| `.stamp-digits` | Ticket numerals: same chrome cut, tabular |
-| `.brand-gold` | Solid gold brand lettering |
-| `.gold-seam` / `.perf-seam` | A thin gold rule — the **only** section divider anywhere |
-| `.ticket-shadow` | Legacy alias for the panel's seated shadow |
+Four primitives in [components/site/plate.tsx](components/site/plate.tsx), and
+that is the whole kit: `Container` (max-w-7xl), `SectionHeading` (display h2
++ optional mono `sub`, `tone="light"` on white), `Rule` (a hairline), `Button`
+(`light` white-on-black, `dark` black-on-white, `ghost` outlined).
 
-**Components** ([components/site/plate.tsx](components/site/plate.tsx)):
-`Plate` (gold-rimmed panel), `Sesame` (a bun seed doing a fastener's job —
-tilt varies per corner so four read as scattered, not stamped), `DataPlate`
-(spec numbers on gold with dark text), `Seam`, `SectionHeading`.
+- **Corners are square.** `--radius` is 2px; buttons use `rounded-[2px]`.
+- **No cards on black.** Content sits on the ground, separated by hairlines.
+  The only cards are the three package cards, and they are white on the
+  raised `--black-2` band, as the reference's product cards are.
+- **One white panel per page:** the booking form. It reads as a card handed
+  across the counter. Inside it, `.light-panel` flips the focus ring to black.
+- **Proof as figures.** Capacity, footprint and pricing are set as large
+  display figures with a mono unit line, ruled into columns.
+
+### Photo slots
+
+[components/site/photo-slot.tsx](components/site/photo-slot.tsx) +
+[lib/photos.ts](lib/photos.ts). A slot renders `public/photos/<slot>.{jpg,jpeg,png,webp,avif}`
+if it exists at build time, else a `--black-2` (or `--off-white`) panel with
+the shot brief and the exact filename it is waiting for. Overlaid content
+(the hero headline) pushes the brief to the bottom-left corner. Slot names and
+briefs are in [public/photos/README.txt](public/photos/README.txt). The
+aspect ratio lives on the slot's `className`, so the placeholder is
+pixel-identical to the photo that replaces it. Photos get a bottom scrim
+(`scrim`) only when text sits over them.
 
 ---
 
 ## 5. Motion
 
-Gold is polished, so **this world eases** — there is no stepped or bouncing
-motion. Everything decelerates.
+This world is print. Things appear; they do not glide.
 
-- Standard curve: `cubic-bezier(0.16, 1, 0.3, 1)` (exponential ease-out).
-- `.press` / `.plate-press` — controls seat 2px into the panel on `:active`.
-- `.shine-sweep` — **the one authored moment**: light travels across the hero
-  badge once on load. A translated band, not an animated `background-position`
-  (that leaves a permanent cast on the panel).
-- `.animate-flash-late` — LATE tickets pulse red on the kitchen display.
-- Bounce/elastic easing is banned; it contradicts the material.
-
-Everything is disabled under `prefers-reduced-motion: reduce`.
+- Buttons drop 1px on `:active` (`.press`), nothing else moves on hover except
+  colour.
+- The FAQ plus rotates 45° in 200ms.
+- The footer wordmark is passed through an SVG `feTurbulence` displacement
+  (`#grit`, scale 2.2) so it reads as ink rather than a web font — the one
+  authored moment on the page, and it is static.
+- Kitchen display: `flash-late` pulses `--signal-red-soft`; the live badge
+  blinks.
+- Everything animated is disabled under `prefers-reduced-motion`.
 
 ---
 
 ## 6. Browser surfaces
 
-Themed rather than left at defaults: text selection (gold on iron-black),
-focus rings (2px gold, 2px offset), and scrollbars (gold-deep thumb on an
-iron-black track).
+Selection is white-on-black. Focus rings are 2px white with 3px offset (black
+inside `.light-panel`). Scrollbars are a `--black-3` thumb on a black track.
+`scroll-behavior: smooth` is on, and off under reduced motion.
 
 ---
 
 ## 7. Assets
 
-`public/iron-burger.png` — 1254×1254 RGBA badge, the single brand image.
-Always give `Image` a `sizes` attribute: without one Next fetches the 3840px
-variant (~535KB) for a 64px logo.
-
-Favicons are generated from that badge, matted onto `#15130f` because
-maskable icons get cropped and a transparent PNG shows the OS wallpaper
-through. `favicon.ico` holds 16/32/48 only — the generator silently adds a
-256px entry that costs 264KB of a 285KB file.
+- `public/iron-burger.png` — the badge, 1254×1254 RGBA. Nav (36–44px), footer
+  wordmark (0.85em of the wordmark), event screens. Always pass `sizes`.
+- Favicons and manifest icons are matted on `#15130f` (from the previous
+  world; still correct — dark on dark) and can stay.
+- `public/photos/` — the eleven slots. Real phone photos beat stock.
 
 ---
 
-## 8. Adding to this system
+## 8. Extending this system
 
-1. Reuse a token. Add one only when no existing role fits.
-2. Compute the contrast of any new pair before using it.
-3. Section dividers are `.gold-seam`, never whitespace or a grey rule.
-4. Panels are `Plate`, never a generic card.
-5. Red = action or warning. Gold = brand. Chrome = voice. Green/yellow =
-   order status, and those meanings are not available for decoration.
+1. Reuse a token. There are two greys and two lines; that is deliberate.
+2. Compute the contrast of any new pair. Grey on black-2 is the tightest pass
+   at 5.81:1; do not go lighter than `--black-2` under grey text.
+3. New sections get a `SectionHeading`, a hairline, and content on the ground.
+   Reach for a white panel only when it is a document the visitor fills in.
+4. New imagery goes through `PhotoSlot` with a real brief, never a raw `Image`.
+5. Colour means status. If it is red, yellow or green it is telling a cook or
+   a customer something. Do not decorate with it.

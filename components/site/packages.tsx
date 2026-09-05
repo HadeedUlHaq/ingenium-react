@@ -1,7 +1,10 @@
-import { Plate, SectionHeading } from "@/components/site/plate";
+import { PhotoSlot } from "@/components/site/photo-slot";
+import { Button, Container, SectionHeading } from "@/components/site/plate";
 
 const PACKAGES = [
   {
+    slot: "package-community",
+    brief: "A tray of boxed burgers, top-down.",
     name: "Community & Charity Pop-Ups",
     bestFor: "Mosques, Galas, School Fundraisers",
     included: [
@@ -11,6 +14,8 @@ const PACKAGES = [
     capacity: "100 to 300+ Burgers",
   },
   {
+    slot: "package-private",
+    brief: "A double smash, plated.",
     name: "Private Celebrations",
     bestFor: "Birthdays, Weddings, Anniversaries",
     included: [
@@ -22,6 +27,8 @@ const PACKAGES = [
     capacity: "50 to 150 Guests",
   },
   {
+    slot: "package-corporate",
+    brief: "Clean single-box packaging, stacked.",
     name: "Corporate Events",
     bestFor: "Office Lunches, Staff Days, Brand Activations",
     included: [
@@ -33,37 +40,44 @@ const PACKAGES = [
   },
 ] as const;
 
+const label = "mono text-[0.72rem] uppercase tracking-[0.14em] text-grey-ink";
+
 export function Packages() {
   return (
-    <section id="menu" className="py-16 lg:py-24">
-      <div className="mx-auto max-w-6xl px-5 lg:px-8">
-        <SectionHeading>Catering Packages &amp; Menu</SectionHeading>
+    <section id="menu" className="bg-black-2 py-16 lg:py-24">
+      <Container>
+        <SectionHeading sub="Live service for 50 to 300+ guests. Pick the format that fits your event.">
+          Catering Packages &amp; Menu
+        </SectionHeading>
 
-        <ul className="mt-10 grid gap-4 lg:grid-cols-3">
+        <ul className="mt-10 grid gap-5 lg:grid-cols-3">
           {PACKAGES.map((pkg) => (
-            <li key={pkg.name}>
-              <Plate className="flex h-full flex-col px-6 py-8 sm:px-7">
-                <h3 className="engraved font-display text-2xl leading-tight tracking-wide uppercase sm:text-[1.75rem]">
-                  {pkg.name}
-                </h3>
+            <li key={pkg.name} className="flex flex-col bg-off-white text-black">
+              <PhotoSlot
+                slot={pkg.slot}
+                brief={pkg.brief}
+                alt={pkg.name}
+                tone="light"
+                sizes="(max-width: 1024px) 100vw, 33vw"
+                className="aspect-[4/3]"
+              />
+
+              <div className="flex flex-1 flex-col p-6 sm:p-7">
+                <h3 className="display text-4xl leading-[0.95]">{pkg.name}</h3>
 
                 <dl className="mt-6 flex flex-1 flex-col gap-5">
                   <div>
-                    <dt className="text-[0.68rem] font-semibold tracking-[0.16em] text-chrome-mid uppercase">
-                      Best For
-                    </dt>
-                    <dd className="mt-1.5 text-base text-chrome">{pkg.bestFor}</dd>
+                    <dt className={label}>Best For</dt>
+                    <dd className="mt-1.5 text-[0.95rem]">{pkg.bestFor}</dd>
                   </div>
 
                   <div>
-                    <dt className="text-[0.68rem] font-semibold tracking-[0.16em] text-chrome-mid uppercase">
-                      What&apos;s Included
-                    </dt>
+                    <dt className={label}>What&apos;s Included</dt>
                     <dd className="mt-2">
                       <ul className="space-y-2">
                         {pkg.included.map((line) => (
-                          <li key={line} className="flex gap-2.5 text-base leading-snug text-chrome">
-                            <span aria-hidden="true" className="mt-2 size-1.5 shrink-0 bg-signal-red" />
+                          <li key={line} className="flex gap-2.5 text-[0.95rem] leading-snug">
+                            <span aria-hidden="true" className="mt-[0.55em] size-1.5 shrink-0 bg-black" />
                             {line}
                           </li>
                         ))}
@@ -71,27 +85,20 @@ export function Packages() {
                     </dd>
                   </div>
 
-                  <div className="mt-auto border-t border-white/10 pt-5">
-                    <dt className="text-[0.68rem] font-semibold tracking-[0.16em] text-chrome-mid uppercase">
-                      Capacity
-                    </dt>
-                    <dd className="engraved mt-1 font-display text-2xl tracking-wide uppercase">
-                      {pkg.capacity}
-                    </dd>
+                  <div className="mt-auto border-t border-line-dark pt-5">
+                    <dt className={label}>Capacity</dt>
+                    <dd className="display mt-1 text-3xl">{pkg.capacity}</dd>
                   </div>
                 </dl>
 
-                <a
-                  href="#booking"
-                  className="press mt-7 block bg-signal-red px-6 py-3.5 text-center font-display text-lg tracking-wide text-white uppercase"
-                >
+                <Button href="#booking" tone="dark" className="mt-7 w-full">
                   Request Quote
-                </a>
-              </Plate>
+                </Button>
+              </div>
             </li>
           ))}
         </ul>
-      </div>
+      </Container>
     </section>
   );
 }
