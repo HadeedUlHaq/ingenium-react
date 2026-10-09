@@ -53,7 +53,8 @@ side-by-side photo hero for this section only, following the user's request.
 Assets and matching posters are in `public/videos/`. The edit plan,
 source selections and reproducible local rendering script are retained in
 `output/hero-video/`. White-background cutout images were not selected.
-`HeroVideo` supplies a pause/play control and pauses outside the viewport or
+The mobile hero headline is vertically centered. Per the user's request,
+`HeroVideo` has no visible pause/play control and pauses outside the viewport or
 in a hidden document; reduced-motion and data-saving preferences use the
 poster without loading a video. Failed playback also retains the poster.
 Impeccable guided responsive placement, readable overlays and motion control.

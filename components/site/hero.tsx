@@ -14,7 +14,7 @@ export function Hero() {
     <section id="home" className="pt-16 lg:pt-20">
       <div className="relative isolate flex min-h-[660px] overflow-hidden bg-black md:min-h-[620px] lg:min-h-[700px]">
         <HeroVideo />
-        <Container className="relative z-10 flex items-end pb-12 pt-32 md:items-center md:py-24">
+        <Container className="relative z-10 flex items-center py-12 md:py-24">
           <div className="w-full max-w-xl text-center md:max-w-md md:text-left lg:max-w-xl">
             <h1 className="display max-w-xl text-[2.75rem] text-white sm:text-7xl lg:text-[6rem]">
               Live-Fired Smash Burgers

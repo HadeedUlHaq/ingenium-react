@@ -1,15 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Pause, Play } from "lucide-react";
 import styles from "./hero-video.module.css";
 
 export function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [source, setSource] = useState<string>();
-  const [playing, setPlaying] = useState(false);
   const [failed, setFailed] = useState(false);
-  const [pausedByUser, setPausedByUser] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -21,7 +18,6 @@ export function HeroVideo() {
       connection?: EventTarget & { saveData?: boolean };
     }).connection;
     let inView = false;
-    let disposed = false;
 
     function syncPlayback() {
       if (!video) return;
@@ -33,12 +29,9 @@ export function HeroVideo() {
 
       if (inView && document.visibilityState === "visible") {
         setSource(`/videos/burger-hero-${mobile.matches ? "mobile" : "desktop"}.webm`);
-        if (!pausedByUser && video.readyState >= 2) {
-          void video.play().catch(() => {
-            if (!disposed) setPlaying(false);
-          });
-        } else if (pausedByUser) {
-          video.pause();
+        if (video.readyState >= 2) {
+          // Autoplay may be blocked; keep the poster as the safe fallback.
+          void video.play().catch(() => {});
         }
       } else {
         video.pause();
@@ -57,7 +50,6 @@ export function HeroVideo() {
     connection?.addEventListener("change", syncPlayback);
 
     return () => {
-      disposed = true;
       observer.disconnect();
       video.pause();
       video.removeEventListener("loadeddata", syncPlayback);
@@ -66,7 +58,7 @@ export function HeroVideo() {
       mobile.removeEventListener("change", syncPlayback);
       connection?.removeEventListener("change", syncPlayback);
     };
-  }, [pausedByUser, failed]);
+  }, [failed]);
 
   return (
     <>
@@ -90,31 +82,10 @@ export function HeroVideo() {
         preload={source ? "auto" : "none"}
         aria-hidden="true"
         tabIndex={-1}
-        onPlaying={() => setPlaying(true)}
-        onPause={() => setPlaying(false)}
-        onError={() => { setFailed(true); setPlaying(false); }}
+        onError={() => setFailed(true)}
         className={`absolute inset-0 h-full w-full object-cover ${source && !failed ? "" : "invisible"}`}
       />
       <div className={`${styles.scrim} pointer-events-none absolute inset-0`} aria-hidden="true" />
-      {source && !failed && (
-        <button
-          type="button"
-          onClick={() => {
-            if (playing) {
-              setPausedByUser(true);
-              videoRef.current?.pause();
-            } else {
-              setPausedByUser(false);
-              void videoRef.current?.play().catch(() => setPlaying(false));
-            }
-          }}
-          aria-label={playing ? "Pause background video" : "Play background video"}
-          className="mono absolute right-5 top-5 z-20 inline-flex min-h-11 items-center gap-2 border border-white/40 bg-black/70 px-3 text-sm text-white hover:border-white hover:bg-black sm:right-8 sm:top-8"
-        >
-          {playing ? <Pause size={16} aria-hidden="true" /> : <Play size={16} aria-hidden="true" />}
-          {playing ? "Pause" : "Play"}
-        </button>
-      )}
     </>
   );
 }
