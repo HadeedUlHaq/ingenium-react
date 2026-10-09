@@ -17,7 +17,7 @@ export function SiteFooter() {
 
         <nav aria-label="Footer">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className={linkClass}>
+            <a key={link.href} href={`/${link.href}`} className={linkClass}>
               {link.label}
             </a>
           ))}
@@ -29,6 +29,9 @@ export function SiteFooter() {
           </a>
           <p className="mono py-1.5 text-sm text-grey">{siteConfig.email}</p>
           <p className="mono py-1.5 text-sm text-grey">Watford, WD24</p>
+          <a href="/privacy" className={`${linkClass} mt-2`}>
+            Privacy Policy
+          </a>
           <a href="/staff" className="mono mt-2 block py-1.5 text-xs text-grey uppercase tracking-[0.12em] hover:text-white">
             Staff
           </a>

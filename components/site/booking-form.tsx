@@ -198,6 +198,13 @@ export function BookingForm() {
                 </p>
               ) : null}
 
+              <p className="mono text-xs leading-relaxed text-grey-ink sm:col-span-2">
+                We use your details to respond to your event inquiry. Read our{" "}
+                <a href="/privacy" className="underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black">
+                  privacy policy
+                </a>.
+              </p>
+
               <button
                 type="submit"
                 disabled={state === "sending"}

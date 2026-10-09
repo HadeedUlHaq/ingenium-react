@@ -2,6 +2,7 @@ import { siteConfig } from "@/lib/site";
 import { SiteNav } from "@/components/site/nav";
 import { Hero } from "@/components/site/hero";
 import { Craft } from "@/components/site/craft";
+import { FeatureVideo } from "@/components/site/feature-video";
 import { Packages } from "@/components/site/packages";
 import { WhyUs } from "@/components/site/why-us";
 import { BookingForm } from "@/components/site/booking-form";
@@ -49,6 +50,7 @@ export default function Home() {
       <main>
         <Hero />
         <Craft />
+        <FeatureVideo />
         <PhotoSlot
           slot="griddle-wide"
           brief="A wide shot of the griddle mid-service: steam, sear and a burger press."

@@ -1,0 +1,185 @@
+.section {
+  background: var(--black);
+  color: var(--white);
+  border-block: 1px solid var(--line);
+  padding-block: 64px 48px;
+}
+
+.heading {
+  font-size: clamp(2.75rem, 5vw, 4rem);
+  text-wrap: balance;
+}
+
+.intro {
+  max-width: 65ch;
+  margin-top: 16px;
+  color: var(--grey);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.process {
+  position: relative;
+  margin-top: 56px;
+}
+
+.steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  min-height: 292px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.step:nth-child(even) {
+  padding-top: 100px;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  background: var(--black);
+  color: rgb(255 255 255 / 0.7);
+  animation: step-light 6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  animation-delay: var(--step-delay);
+}
+
+.icon svg {
+  width: 56px;
+  height: 56px;
+  stroke-width: 1.5;
+}
+
+.copy {
+  max-width: 190px;
+  padding: 10px 8px 0;
+  background: var(--black);
+}
+
+.title {
+  color: rgb(255 255 255 / 0.85);
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  text-wrap: balance;
+  animation: step-light 6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  animation-delay: var(--step-delay);
+}
+
+.detail {
+  margin-top: 10px;
+  color: var(--grey);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.desktopPath {
+  position: absolute;
+  inset: 0 0 auto;
+  width: 100%;
+  height: 240px;
+  overflow: visible;
+  fill: none;
+}
+
+.mobilePath {
+  display: none;
+}
+
+.track,
+.draw {
+  stroke: var(--white);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.track {
+  opacity: 0.25;
+}
+
+.draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: trace 6s linear infinite;
+}
+
+.section .draw,
+.section .icon,
+.section .title {
+  animation-play-state: paused;
+}
+
+.section[data-running="true"] .draw,
+.section[data-running="true"] .icon,
+.section[data-running="true"] .title {
+  animation-play-state: running;
+}
+
+.section:not([data-running]) .draw,
+.section:not([data-running]) .icon,
+.section:not([data-running]) .title {
+  animation: none;
+  color: var(--white);
+  stroke-dashoffset: 0;
+}
+
+@keyframes trace {
+  0% { stroke-dashoffset: 1; }
+  66.667%, 100% { stroke-dashoffset: 0; }
+}
+
+@keyframes step-light {
+  0%, 70%, 100% { color: rgb(255 255 255 / 0.7); }
+  8%, 38% { color: var(--white); }
+}
+
+@media (max-width: 767px) {
+  .section { padding-block: 48px; }
+  .process { margin-top: 36px; }
+  .desktopPath { display: none; }
+  .mobilePath {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 64px;
+    height: 512px;
+    fill: none;
+  }
+  .steps { grid-template-columns: 1fr; min-height: 0; }
+  .step,
+  .step:nth-child(even) {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+    min-height: 112px;
+    padding-top: 0;
+    text-align: left;
+  }
+  .step:last-child { min-height: 64px; }
+  .icon { width: 64px; height: 64px; }
+  .icon svg { width: 44px; height: 44px; }
+  .copy { max-width: 100%; padding: 5px 0 20px; }
+  .title { font-size: 1.75rem; }
+  .detail { margin-top: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section .draw,
+  .section .icon,
+  .section .title {
+    animation: none;
+    color: var(--white);
+    stroke-dashoffset: 0;
+  }
+}
