@@ -1,4 +1,4 @@
-import { PhotoSlot } from "@/components/site/photo-slot";
+import { HeroVideo } from "@/components/site/hero-video";
 import { Button, Container } from "@/components/site/plate";
 
 /* The brief's three trust badges, set as figures the way a counter
@@ -12,23 +12,19 @@ const PROOF = [
 export function Hero() {
   return (
     <section id="home" className="pt-16 lg:pt-20">
-      <PhotoSlot
-        slot="hero"
-        brief="The hero shot: one burger, close and cut, cheese mid-drip, straight off the griddle."
-        alt="A smash burger straight off the griddle"
-        priority
-        scrim
-        className="aspect-[4/5] sm:aspect-[16/9] lg:aspect-[21/9] lg:max-h-[82vh]"
-      >
-        <div className="flex h-full items-center justify-center px-5 text-center">
-          <h1 className="display max-w-5xl text-[3.25rem] text-white sm:text-7xl lg:text-[6.75rem]">
-            Live-Fired Smash Burgers
-            <span className="mono mt-4 block text-base normal-case tracking-[0.12em] text-white sm:text-xl">
-              for private &amp; community events
-            </span>
-          </h1>
-        </div>
-      </PhotoSlot>
+      <div className="relative isolate flex min-h-[660px] overflow-hidden bg-black md:min-h-[620px] lg:min-h-[700px]">
+        <HeroVideo />
+        <Container className="relative z-10 flex items-end pb-12 pt-32 md:items-center md:py-24">
+          <div className="w-full max-w-xl text-center md:max-w-md md:text-left lg:max-w-xl">
+            <h1 className="display max-w-xl text-[2.75rem] text-white sm:text-7xl lg:text-[6rem]">
+              Live-Fired Smash Burgers
+              <span className="mono mt-3 block text-base leading-relaxed normal-case tracking-[0.04em] text-white sm:text-xl">
+                for private &amp; community events
+              </span>
+            </h1>
+          </div>
+        </Container>
+      </div>
 
       <Container className="py-10 lg:py-14">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">

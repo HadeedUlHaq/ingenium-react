@@ -3,8 +3,9 @@ import { Button, Container, SectionHeading } from "@/components/site/plate";
 
 const PACKAGES = [
   {
-    slot: "package-community",
-    brief: "A tray of boxed burgers, top-down.",
+    slot: "package-community-griddle",
+    brief: "Thin smash burger patties searing on a steaming dark steel griddle.",
+    alt: "Thin beef patties searing on a dark steel flat-top griddle with rising steam",
     name: "Community & Charity Pop-Ups",
     bestFor: "Mosques, Galas, School Fundraisers",
     included: [
@@ -14,8 +15,9 @@ const PACKAGES = [
     capacity: "100 to 300+ Burgers",
   },
   {
-    slot: "package-private",
-    brief: "A double smash, plated.",
+    slot: "package-private-griddle",
+    brief: "Thin smash patties topped with melted cheese on a steaming dark griddle.",
+    alt: "Thin crisp-edged beef patties topped with melted golden cheese on a dark steel griddle with rising steam",
     name: "Private Celebrations",
     bestFor: "Birthdays, Weddings, Anniversaries",
     included: [
@@ -27,8 +29,9 @@ const PACKAGES = [
     capacity: "50 to 150 Guests",
   },
   {
-    slot: "package-corporate",
-    brief: "Clean single-box packaging, stacked.",
+    slot: "package-corporate-burger",
+    brief: "A smash cheeseburger with crisp edges, pickles and sauce on a dark surface.",
+    alt: "A thin smash cheeseburger with melted cheese, pickles and sauce on a charcoal-black surface",
     name: "Corporate Events",
     bestFor: "Office Lunches, Staff Days, Brand Activations",
     included: [
@@ -56,7 +59,7 @@ export function Packages() {
               <PhotoSlot
                 slot={pkg.slot}
                 brief={pkg.brief}
-                alt={pkg.name}
+                alt={pkg.alt}
                 tone="light"
                 sizes="(max-width: 1024px) 100vw, 33vw"
                 className="aspect-[4/3]"

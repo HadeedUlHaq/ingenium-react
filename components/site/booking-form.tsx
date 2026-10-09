@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { Container } from "@/components/site/plate";
 import { cn } from "@/lib/utils";
@@ -19,42 +19,39 @@ const fieldClass =
   "placeholder:text-grey-ink focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black";
 
 const labelClass = "mono block text-[0.72rem] uppercase tracking-[0.14em] text-grey-ink";
+const FORM_ENDPOINT = "https://formspree.io/f/xkjojjrw";
 
 export function BookingForm() {
+  const submitting = useRef(false);
   const [state, setState] = useState<"idle" | "sending" | "sent">("idle");
   const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (state === "sending") return;
+    if (submitting.current) return;
 
     const form = e.currentTarget;
     const data = new FormData(form);
+    data.set("outdoorSpace", data.has("outdoorSpace") ? "Yes" : "No");
+    data.set("parkingAccess", data.has("parkingAccess") ? "Yes" : "No");
+    submitting.current = true;
     setState("sending");
     setError(null);
 
     try {
-      const res = await fetch("/api/inquiries", {
+      const res = await fetch(FORM_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fullName: data.get("fullName"),
-          organization: data.get("organization"),
-          email: data.get("email"),
-          phone: data.get("phone"),
-          eventDate: data.get("eventDate"),
-          venue: data.get("venue"),
-          eventType: data.get("eventType"),
-          burgerCount: data.get("burgerCount"),
-          outdoorSpace: data.get("outdoorSpace") === "on",
-          parkingAccess: data.get("parkingAccess") === "on",
-          notes: data.get("notes"),
-        }),
+        headers: { Accept: "application/json" },
+        body: data,
       });
 
       if (!res.ok) {
         const payload = await res.json().catch(() => null);
-        throw new Error(payload?.error ?? "Something went wrong. Please try again.");
+        const messages = Array.isArray(payload?.errors)
+          ? payload.errors.flatMap((item: { message?: unknown }) =>
+              typeof item?.message === "string" ? [item.message] : [])
+          : [];
+        throw new Error(messages.join(" ") || "We couldn't send your inquiry. Please try again or email us directly.");
       }
 
       form.reset();
@@ -62,6 +59,8 @@ export function BookingForm() {
     } catch (err) {
       setState("idle");
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      submitting.current = false;
     }
   }
 
@@ -77,7 +76,7 @@ export function BookingForm() {
           </p>
 
           {state === "sent" ? (
-            <div className="mt-10 border-t border-line-dark py-10 text-center">
+            <div role="status" className="mt-10 border-t border-line-dark py-10 text-center">
               <CheckCircle2 className="mx-auto size-12 text-black" strokeWidth={1.5} />
               <h3 className="display mt-5 text-4xl">Inquiry Sent</h3>
               <p className="mono mx-auto mt-3 max-w-md text-[0.9rem] leading-relaxed text-grey-ink">
@@ -93,7 +92,8 @@ export function BookingForm() {
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="mt-8 grid gap-5 border-t border-line-dark pt-8 sm:grid-cols-2">
+            <form action={FORM_ENDPOINT} method="POST" onSubmit={handleSubmit} aria-busy={state === "sending"} className="mt-8 grid gap-5 border-t border-line-dark pt-8 sm:grid-cols-2">
+              <input type="hidden" name="_subject" value="Iron Burger event inquiry" />
               <div className="sm:col-span-2">
                 <label htmlFor="fullName" className={labelClass}>
                   Full Name

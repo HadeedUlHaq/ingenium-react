@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import type { ReactNode } from "react";
 import { photo } from "@/lib/photos";
 import { cn } from "@/lib/utils";
@@ -6,10 +6,14 @@ import { cn } from "@/lib/utils";
 type Props = {
   /** File stem under public/photos/, e.g. "hero" -> public/photos/hero.jpg */
   slot: string;
+  /** Optional portrait crop file stem, used below the 768px breakpoint if present. */
+  mobileSlot?: string;
   /** What the photo should show; printed on the placeholder as a brief. */
   brief: string;
   alt: string;
   className?: string;
+  /** Image-only classes, e.g. "object-[60%_center] md:object-center". */
+  imageClassName?: string;
   sizes?: string;
   priority?: boolean;
   /** Placeholder tone: dark on black sections, light on white panels. */
@@ -29,9 +33,11 @@ type Props = {
  */
 export function PhotoSlot({
   slot,
+  mobileSlot,
   brief,
   alt,
   className,
+  imageClassName,
   sizes = "100vw",
   priority,
   tone = "dark",
@@ -39,12 +45,62 @@ export function PhotoSlot({
   scrim,
 }: Props) {
   const src = photo(slot);
+  const mobileSrc = mobileSlot ? photo(mobileSlot) : null;
   const dark = tone === "dark";
+  const imageClasses = cn("object-cover", imageClassName);
+  const responsiveImage = src && mobileSrc && mobileSrc !== src
+    ? {
+        desktop: getImageProps({
+          src, alt, fill: true, sizes, priority,
+          loading: priority ? "eager" : "lazy",
+          fetchPriority: priority ? "high" : undefined,
+          className: imageClasses,
+        }).props,
+        mobile: getImageProps({ src: mobileSrc, alt, fill: true, sizes }).props,
+      }
+    : null;
 
   return (
-    <div className={cn("relative overflow-hidden", className)}>
+    <div data-photo-slot={slot} className={cn("relative overflow-hidden", className)}>
       {src ? (
-        <Image src={src} alt={alt} fill priority={priority} sizes={sizes} className="object-cover" />
+        responsiveImage ? (
+          <>
+            {/* getImageProps supplies optimized URLs; preload only the matching crop. */}
+            {priority ? (
+              <>
+                <link
+                  rel="preload"
+                  as="image"
+                  href={responsiveImage.mobile.srcSet ? undefined : responsiveImage.mobile.src}
+                  imageSrcSet={responsiveImage.mobile.srcSet}
+                  imageSizes={responsiveImage.mobile.sizes}
+                  media="(width < 768px)"
+                  fetchPriority="high"
+                />
+                <link
+                  rel="preload"
+                  as="image"
+                  href={responsiveImage.desktop.srcSet ? undefined : responsiveImage.desktop.src}
+                  imageSrcSet={responsiveImage.desktop.srcSet}
+                  imageSizes={responsiveImage.desktop.sizes}
+                  media="(min-width: 768px)"
+                  fetchPriority="high"
+                />
+              </>
+            ) : null}
+            <picture>
+              <source
+                media="(width < 768px)"
+                srcSet={responsiveImage.mobile.srcSet ?? responsiveImage.mobile.src}
+                sizes={responsiveImage.mobile.sizes}
+              />
+              {/* One image carries the alt text for both crops; no client source swapping. */}
+              <img {...responsiveImage.desktop} />
+            </picture>
+          </>
+        ) : (
+          <Image src={src} alt={alt} fill priority={priority} sizes={sizes} className={imageClasses} />
+        )
       ) : (
         <div
           role="img"
@@ -53,17 +109,16 @@ export function PhotoSlot({
         >
           <div
             className={cn(
-              "mono text-[0.78rem] leading-relaxed",
+              "mono text-sm leading-relaxed",
               dark ? "text-grey" : "text-grey-ink",
               children
-                ? "absolute bottom-4 left-4 max-w-[16rem] text-left"
+                ? "absolute bottom-4 left-4 right-4 max-w-[16rem] text-left"
                 : "absolute inset-0 flex flex-col items-center justify-center p-6 text-center",
             )}
           >
-            {!children ? <span className="display block text-2xl">Photo</span> : null}
             <span className={cn("block", !children && "mt-2 max-w-sm")}>{brief}</span>
             <span className={cn("block border-t pt-2", children ? "mt-2" : "mt-3", dark ? "border-line" : "border-line-dark")}>
-              public/photos/{slot}.jpg
+              Photo forthcoming
             </span>
           </div>
         </div>

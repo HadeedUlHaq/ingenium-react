@@ -50,18 +50,21 @@ export default function Home() {
         <Hero />
         <Craft />
         <PhotoSlot
-          slot="band-1"
-          brief="A wide shot of the griddle mid-service: steam, sear, tongs."
-          alt="The griddle mid-service"
-          className="aspect-[16/7] sm:aspect-[21/7]"
+          slot="griddle-wide"
+          brief="A wide shot of the griddle mid-service: steam, sear and a burger press."
+          alt="A black-gloved cook pressing thin patties onto a steaming steel griddle"
+          imageClassName="object-[center_65%] sm:object-[center_40%]"
+          className="aspect-[4/3] sm:aspect-[21/7]"
         />
         <Packages />
         <WhyUs />
         <PhotoSlot
-          slot="band-2"
-          brief="Guests eating at an event, evening light, the stall behind them."
-          alt="Guests at an Iron Burger event"
-          className="aspect-[16/7] sm:aspect-[21/7]"
+          slot="live-experience-wide"
+          mobileSlot="live-experience-dark"
+          brief="A wide evening food-truck gathering under warm string lights."
+          alt="Guests at outdoor picnic tables beside warmly lit food trucks under an evening sky"
+          imageClassName="object-[center_65%] md:object-center"
+          className="aspect-[4/3] sm:aspect-[21/7]"
         />
         <BookingForm />
         <Faq />

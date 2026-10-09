@@ -1,5 +1,6 @@
 import "server-only";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import path from "node:path";
 
 const EXTENSIONS = ["jpg", "jpeg", "png", "webp", "avif"] as const;
@@ -16,7 +17,12 @@ export function photo(slot: string): string | null {
   const dir = path.join(process.cwd(), "public", "photos");
   for (const ext of EXTENSIONS) {
     if (existsSync(path.join(dir, `${slot}.${ext}`))) {
-      return `/photos/${slot}.${ext}`;
+      // Replacing an asset must also invalidate Next's optimized-image cache.
+      const version = createHash("sha256")
+        .update(readFileSync(path.join(dir, `${slot}.${ext}`)))
+        .digest("hex")
+        .slice(0, 12);
+      return `/photos/${slot}.${ext}?v=${version}`;
     }
   }
   return null;

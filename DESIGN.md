@@ -14,6 +14,60 @@ land, every photo slot is a dark panel holding its exact space.
 Everything lives in [app/globals.css](app/globals.css): tokens in `:root`,
 Tailwind bindings in `@theme inline`, roles and surfaces in `@layer utilities`.
 
+### Photography update — 7 October 2026
+
+Licensed, representative photography now supplies the food colour. The hero
+uses a photographed thin, ragged-edged smash burger: a portrait alongside
+type on desktop, a 4:3 crop followed by the headline on mobile. Text never
+covers the food. The griddle photograph shows real thin patties being pressed
+onto steel. These are third-party stock images with restrained image-tool
+edits, not documentation of Iron Burger's products or events.
+
+Originals, ingredient limitations and license links are recorded in
+[public/photos/SOURCES.md](public/photos/SOURCES.md). Exact edit prompts and
+source-to-output mappings are in
+[output/image-edits/PLAN.md](output/image-edits/PLAN.md). The selected WebP
+files live under `public/photos/`; the full-resolution edited PNGs remain
+under `output/image-edits/`.
+
+UI/UX Pro Max guided the responsive image sizing, reserved aspect ratios,
+descriptive alt text, lazy loading below the hero and mobile crop review.
+The project's existing monochrome palette and typography remain authoritative.
+`PhotoSlot` accepts `imageClassName` for focal positioning and an optional
+`mobileSlot` for native `<picture>` art direction; an absent mobile asset
+falls back to the primary image. All twelve visible photo areas are filled:
+burger details, sauce context, steel-griddle cooking, takeaway packaging and
+outdoor event atmosphere. These remain representative stock, not evidence
+of the exact house-sauce recipe, every menu ingredient or actual bookings.
+
+### Hero video update — 9 October 2026
+
+The requested hero now uses a locally edited, silent 15-second montage from
+the two videos and three dark photographic stills supplied in the desktop
+folder. Desktop footage is composed to the right of a black text field;
+mobile uses a separate portrait export and a lower contrast scrim. The
+headline overlays the footage; the description, booking links and proof
+figures retain their previous layout below it. This replaces the previous
+side-by-side photo hero for this section only, following the user's request.
+
+Assets and matching posters are in `public/videos/`. The edit plan,
+source selections and reproducible local rendering script are retained in
+`output/hero-video/`. White-background cutout images were not selected.
+`HeroVideo` supplies a pause/play control and pauses outside the viewport or
+in a hidden document; reduced-motion and data-saving preferences use the
+poster without loading a video. Failed playback also retains the poster.
+Impeccable guided responsive placement, readable overlays and motion control.
+
+The original Bebas Neue, Courier Prime and Libre Franklin typography,
+monochrome palette, square controls and non-hero layout remain authoritative.
+The video scrim is scoped to the hero through a CSS module; global styles
+are unchanged. The original headline sizing, mobile alignment, grey
+description and booking-link placement were restored after review.
+The exact original font assets were recovered from the build cache and are
+now self-hosted through `next/font/local`, with the same weights and CSS
+variables. This prevents network restrictions from replacing the site's
+fonts. Font provenance is recorded in `public/fonts/SOURCES.md`.
+
 ---
 
 ## 1. Palette

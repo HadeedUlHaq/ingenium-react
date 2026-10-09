@@ -1,0 +1,15 @@
+.scrim {
+  background: linear-gradient(0deg, rgb(0 0 0 / 0.96) 0%, rgb(0 0 0 / 0.72) 30%, rgb(0 0 0 / 0.12) 65%, rgb(0 0 0 / 0.2) 100%);
+}
+
+@media (min-width: 768px) {
+  .scrim {
+    background: linear-gradient(90deg, #000 0%, rgb(0 0 0 / 0.94) 38%, rgb(0 0 0 / 0.72) 62%, rgb(0 0 0 / 0.18) 100%);
+  }
+}
+
+@media (min-width: 1024px) {
+  .scrim {
+    background: linear-gradient(90deg, #000 0%, rgb(0 0 0 / 0.92) 28%, rgb(0 0 0 / 0.46) 48%, transparent 72%);
+  }
+}

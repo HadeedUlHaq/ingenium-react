@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import { Bebas_Neue, Courier_Prime, Libre_Franklin } from "next/font/google";
+import localFont from "next/font/local";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -29,22 +29,25 @@ FINISH: unreviewed and undocumented is unfinished; this build ends
 with the finish review, the verdict, and DESIGN.md.
 -->`;
 
-const display = Bebas_Neue({
-  subsets: ["latin"],
+const display = localFont({
+  src: "../public/fonts/bebas-neue-latin-400.woff2",
   weight: "400",
   variable: "--font-display",
   display: "swap",
 });
 
-const mono = Courier_Prime({
-  subsets: ["latin"],
-  weight: ["400", "700"],
+const mono = localFont({
+  src: [
+    { path: "../public/fonts/courier-prime-latin-400.woff2", weight: "400", style: "normal" },
+    { path: "../public/fonts/courier-prime-latin-700.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-mono",
   display: "swap",
 });
 
-const body = Libre_Franklin({
-  subsets: ["latin"],
+const body = localFont({
+  src: "../public/fonts/libre-franklin-latin-variable.woff2",
+  weight: "100 900",
   variable: "--font-body",
   display: "swap",
 });

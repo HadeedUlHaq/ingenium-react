@@ -3,20 +3,23 @@ import { Container, SectionHeading } from "@/components/site/plate";
 
 const NON_NEGOTIABLES = [
   {
-    slot: "craft-1",
-    brief: "A patty hitting the griddle, the crust just forming.",
+    slot: "griddle-gloved",
+    brief: "Thin beef patties pressed onto a hot steel griddle.",
+    alt: "A cook wearing a black glove pressing thin beef patties on a dark steel flat-top griddle",
     title: "The 80/20 Smash",
     body: "Premium ground beef pressed hard onto high-heat steel to create a deeply caramelized, savory crust that seals in natural juices.",
   },
   {
-    slot: "craft-2",
-    brief: "The house sauce being spooned or drizzled onto a burger.",
+    slot: "house-sauce-dark",
+    brief: "A spoonful of creamy burger sauce above its bowl on a dark surface.",
+    alt: "A spoonful of creamy orange burger sauce above a metal bowl on a charcoal-black surface",
     title: "The Signature House Sauce",
     body: "Our custom 50/50 blend of tangy burger sauce and rich chili mayo—delivering a creamy, zesty finish balanced for guests of all ages.",
   },
   {
-    slot: "craft-3",
-    brief: "The stall in action: griddle, steam, and a queue of guests.",
+    slot: "live-experience-dark",
+    brief: "Guests gathered around warmly lit food trucks at an evening event.",
+    alt: "Guests at outdoor picnic tables beside warmly lit food trucks under an evening sky",
     title: "The Live Experience",
     body: "Hot, fresh food served with real sizzle and aroma, elevating the atmosphere of your event.",
   },
@@ -51,7 +54,7 @@ export function Craft() {
               <PhotoSlot
                 slot={item.slot}
                 brief={item.brief}
-                alt={item.title}
+                alt={item.alt}
                 sizes="(max-width: 640px) 100vw, 33vw"
                 className="aspect-[4/3]"
               />

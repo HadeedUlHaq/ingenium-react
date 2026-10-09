@@ -1,24 +1,38 @@
-IRON BURGER — PHOTO SLOTS
-=========================
+IRON BURGER - PHOTO SLOTS
+========================
 
-Drop a photo in this folder named after its slot, then commit and deploy.
-The site picks it up automatically — no code changes. Accepted formats:
-.jpg .jpeg .png .webp .avif   (landscape, at least 1600px wide is ideal)
+Current active file stems and locations:
 
-SLOT NAME             WHERE IT SHOWS                      WHAT TO SHOOT
---------------------  ----------------------------------  -----------------------------------------
-hero                  Top of the site, full width         The hero shot: a burger, close, mid-drip
-craft-1               "The 80/20 Smash" tile              Patty hitting the griddle, crust forming
-craft-2               "Signature House Sauce" tile        Sauce being spooned or drizzled
-craft-3               "The Live Experience" tile          The stall in action with a queue / guests
-band-1                Full-width banner mid-page          Wide shot of the griddle, steam and sear
-package-community     Community & Charity card (white)    A tray of boxed burgers, top-down
-package-private       Private Celebrations card (white)   A double smash, plated
-package-corporate     Corporate Events card (white)       Clean single-box packaging, stacked
-band-2                Full-width banner before booking    Guests eating, atmosphere, evening light
-gallery-1             Three-up gallery near the footer    Anything good — the fries, the setup, hands
-gallery-2             Three-up gallery near the footer
-gallery-3             Three-up gallery near the footer
+smash-detail         Original burger photo, retained fallback
+crisp-edge-dark      Dark edited pickle-free burger, first gallery photo only
+griddle              Original griddle photo, retained original
+griddle-gloved       Dark edited photo with black glove, The 80/20 Smash and second gallery photo
+griddle-wide         User-supplied dark edited steam-and-press photo, wide cooking banner only
+craft-2              Original burger-and-sauce photo, retained original
+layered-burger-dark  Dark floating burger layers, third gallery photo
+house-sauce-dark     Edited spoon-and-bowl sauce photo, Signature House Sauce tile only
+craft-3              Previous Live Experience photo, retained original
+live-experience-dark Edited evening food-truck photo, Live Experience tile only
+package-community    Original community burger photo, retained original
+package-community-griddle Dark edited searing patties, Community & Charity package card
+package-private      Original private cheeseburger photo, retained original
+package-private-griddle Dark cheese-topped patties, Private Celebrations package card
+package-corporate    Previous takeaway packaging photo, retained original
+package-corporate-burger Edited dark burger photo, Corporate Events package card only
+band-2               Original event atmosphere photo, retained original
+live-experience-wide Panoramic Live Experience banner before booking; original dark tile crop on mobile
 
-Real phone photos beat stock. The whole design assumes the food supplies
-the colour: every slot is monochrome until you fill it.
+PhotoSlot resolves .jpg .jpeg .png .webp .avif in that order.
+Use one file per stem. WebP is preferred for compressed photography.
+Replacing or adding a photo requires a fresh render/build to resolve it.
+The optional hero-mobile stem overrides the hero below 768px; otherwise
+the main smash-detail image is used. It is not a separate visible slot.
+
+These are representative licensed photographs, not photographs of actual
+Iron Burger events. See SOURCES.md for provenance, licenses, edits and
+ingredient limitations. Replace with your own event/product photos when
+available, and update alt text and focal position to match the subject.
+
+Preserve thin, irregular smash-burger edges: do not substitute thick patties.
+Photo areas reserve their aspect ratios, use responsive sizes and lazy-load
+below the hero. Review mobile 4:3 and desktop crops before replacing.
